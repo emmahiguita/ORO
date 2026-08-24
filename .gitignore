@@ -1,0 +1,55 @@
+# OS / editors
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Flutter / Dart
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+app.*.symbols
+app.*.map.json
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Local machine
+.vscode/
+**/local.properties
+
+# DevEmm Commerce secrets — NEVER commit
+.env
+.env.*
+!.env.example
+backend/config.local.php
+backend/service-account*.json
+backend/*service-account*.json
+secrets/
+android/key.properties
+android/*.jks
+android/*.keystore
+android/app/*.jks
+android/app/*.keystore
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Important: AndroidManifest.xml and lib/core/constant/apikey.dart are
+# intentionally TRACKED. They only contain placeholders/config readers.

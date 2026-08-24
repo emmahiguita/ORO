@@ -1,0 +1,71 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+
+android {
+    namespace = "com.devemm.commerce"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+
+    def localProperties = new java.util.Properties()
+    def localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withInputStream { localProperties.load(it) }
+    }
+    def mapsKey = localProperties.getProperty("GOOGLE_MAPS_API_KEY") ?: System.getenv("GOOGLE_MAPS_API_KEY") ?: ""
+
+    defaultConfig {
+        applicationId = "com.devemm.commerce"
+        minSdkVersion = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        manifestPlaceholders = [GOOGLE_MAPS_API_KEY: mapsKey]
+    }
+
+    signingConfigs {
+        release {
+            def keyPropsFile = rootProject.file("key.properties")
+            if (keyPropsFile.exists()) {
+                def props = new java.util.Properties()
+                keyPropsFile.withInputStream { props.load(it) }
+                keyAlias props["keyAlias"]
+                keyPassword props["keyPassword"]
+                storeFile props["storeFile"] ? file(props["storeFile"]) : null
+                storePassword props["storePassword"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            if (rootProject.file("key.properties").exists()) {
+                signingConfig signingConfigs.release
+            }
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
+}
+
+flutter {
+    source = "../.."
+}
+

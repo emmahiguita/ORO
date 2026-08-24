@@ -1,0 +1,7 @@
+Options -Indexes
+<FilesMatch "^(config\.local\.php|config\.example\.php|composer\.(json|lock)|.*\.sql)$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "(service-account|firebase).*\.json$">
+    Require all denied
+</FilesMatch>

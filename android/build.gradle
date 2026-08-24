@@ -1,0 +1,29 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    subprojects {
+        afterEvaluate {
+            if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
+                def androidExt = extensions.findByType(com.android.build.gradle.BaseExtension)
+                if (androidExt != null && androidExt.namespace == null) {
+                    androidExt.namespace = name
+                }
+            }
+        }
+    }
+}
+
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

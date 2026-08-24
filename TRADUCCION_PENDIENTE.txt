@@ -1,0 +1,886 @@
+Auditoría de posibles textos visibles en inglés.
+NO se realiza ninguna sustitución automática para proteger estados/API.
+
+lib\controller\address\addaddresscontroller.dart:51: Error getting location: $error
+lib\controller\address\addaddresscontroller.dart:79: Place name: $placeName
+lib\controller\address\addaddresscontroller.dart:83: Error getting place name: $e
+lib\controller\address\addaddresscontroller.dart:84: Unknown Location
+lib\controller\address\addmoredetailscontroller.dart:91: Unknown Location
+lib\controller\address\addmoredetailscontroller.dart:128: ${totalTimeMinutes.toInt()} - ${(totalTimeMinutes + 10).toInt()} minutes
+lib\controller\address\addmoredetailscontroller.dart:133: $hours - ${hours + 1} hours
+lib\controller\address\addmoredetailscontroller.dart:135: $hours hours
+lib\controller\address\addmoredetailscontroller.dart:142: $days - ${days + 1} days
+lib\controller\address\addmoredetailscontroller.dart:144: $days days
+lib\controller\address\updateaddresscontroller.dart:121: Please select a location on the map
+lib\controller\address\updateaddresscontroller.dart:142: Unknown Location
+lib\controller\address\updateaddresscontroller.dart:161: Failed to update address
+lib\controller\address\updateaddresscontroller.dart:173: An error occurred while updating address
+lib\controller\address\updateaddresscontroller.dart:220: ${totalTimeMinutes.toInt()} - ${(totalTimeMinutes + 10).toInt()} minutes
+lib\controller\address\updateaddresscontroller.dart:225: $hours - ${hours + 1} hours
+lib\controller\address\updateaddresscontroller.dart:227: $hours hours
+lib\controller\address\updateaddresscontroller.dart:234: $days - ${days + 1} days
+lib\controller\address\updateaddresscontroller.dart:236: $days days
+lib\controller\address\updatemapcontroller.dart:54: Error getting location: $error
+lib\controller\address\updatemapcontroller.dart:77: Unknown Location
+lib\controller\address\updatemapcontroller.dart:80: Unknown Location
+lib\controller\address\updatemapcontroller.dart:109: Please select a location on the map
+lib\controller\address\viewaddreesscontroller.dart:73: 📍 Location Services
+lib\controller\address\viewaddreesscontroller.dart:74: Please enable location services
+lib\controller\address\viewaddreesscontroller.dart:116: 🔒 Permission Needed
+lib\controller\address\viewaddreesscontroller.dart:117: Allow location access for full features
+lib\controller\address\viewaddreesscontroller.dart:159: ⚠️ Permission Blocked
+lib\controller\address\viewaddreesscontroller.dart:160: Enable in app settings to continue
+lib\controller\admin\admindashboardcontroller.dart:74: Picked Up
+lib\controller\admin\admindashboardcontroller.dart:82: Ready for Pickup
+lib\controller\admin\adminhomecontroller.dart:27: Categorías
+lib\controller\admin\adminhomecontroller.dart:31: ; await services.sharedPreferences.clear(); await services.sharedPreferences.setString(
+lib\controller\admin\adminhomecontroller.dart:31: ,lang); await services.sharedPreferences.setString(
+lib\controller\admin\category\addcategorycontroller.dart:41: Please add image
+lib\controller\admin\coupon\addcouponcontroller.dart:71: MMM dd, yyyy HH:mm
+lib\controller\admin\coupon\addcouponcontroller.dart:82: dd MMMM yyyy HH:mm
+lib\controller\admin\coupon\addcouponcontroller.dart:87: yyyy-MM-dd HH:mm:ss
+lib\controller\admin\coupon\admincouponcontroller.dart:113: MMM dd, yyyy HH:mm
+lib\controller\admin\coupon\admincouponcontroller.dart:144: Choose Background Color
+lib\controller\admin\coupon\admincouponcontroller.dart:223: Failed to generate coupon image
+lib\controller\admin\coupon\admincouponcontroller.dart:227: Announcement Failed
+lib\controller\admin\coupon\admincouponcontroller.dart:228: Could not send announcement: ${e.toString()}
+lib\controller\admin\coupon\admincouponcontroller.dart:243: Create Coupon Announcement
+lib\controller\admin\coupon\admincouponcontroller.dart:296: Notification Title
+lib\controller\admin\coupon\admincouponcontroller.dart:297: e.g., Flash Sale - 50% Off!
+lib\controller\admin\coupon\admincouponcontroller.dart:302: Title is required
+lib\controller\admin\coupon\admincouponcontroller.dart:305: Title must be less than 50 characters
+lib\controller\admin\coupon\admincouponcontroller.dart:313: Notification Message
+lib\controller\admin\coupon\admincouponcontroller.dart:314: Describe your amazing offer in detail...
+lib\controller\admin\coupon\admincouponcontroller.dart:320: Message is required
+lib\controller\admin\coupon\admincouponcontroller.dart:323: Message must be less than 200 characters
+lib\controller\admin\coupon\admincouponcontroller.dart:499: Background Color
+lib\controller\admin\coupon\admincouponcontroller.dart:543: Tap to choose color
+lib\controller\admin\coupon\admincouponcontroller.dart:551: Selected: ${backgroundColor.value.toString()}
+lib\controller\admin\coupon\editcouponcontroller.dart:91: MMM dd, yyyy HH:mm
+lib\controller\admin\coupon\editcouponcontroller.dart:100: Discard Changes
+lib\controller\admin\coupon\editcouponcontroller.dart:101: Are you sure you want to discard your changes?
+lib\controller\admin\coupon\editcouponcontroller.dart:103: Keep Editing
+lib\controller\admin\coupon\editcouponcontroller.dart:127: dd MMMM yyyy HH:mm
+lib\controller\admin\coupon\editcouponcontroller.dart:131: yyyy-MM-dd HH:mm:ss
+lib\controller\admin\coupon\editcouponcontroller.dart:141: Save Changes
+lib\controller\admin\coupon\editcouponcontroller.dart:142: Are you sure you want to save these changes to the coupon?
+lib\controller\admin\items\additemcontroller.dart:111: Please select category
+lib\controller\admin\items\additemcontroller.dart:121: Please select image
+lib\controller\admin\items\additemcontroller.dart:178: Select Category
+lib\controller\admin\items\additemcontroller.dart:187: ${dataItem.data.name} : ${dataItem.data.code}
+lib\controller\admin\items\updateitemcontroller.dart:138: Select Category
+lib\controller\admin\items\updateitemcontroller.dart:147: ${dataItem.data.name} : ${dataItem.data.code}
+lib\controller\admin\items\viewitemscontroller.dart:76: ).compareTo(b.itemName ??
+lib\controller\admin\items\viewitemscontroller.dart:79: ).compareTo(a.itemName ??
+lib\controller\admin\items\viewitemscontroller.dart:102: ).compareTo(b.itemName ??
+lib\controller\admin\items\viewitemscontroller.dart:158: Delete Product?
+lib\controller\admin\items\viewitemscontroller.dart:167: $productName
+lib\controller\admin\items\viewitemscontroller.dart:172: Are you sure you want to continue?
+lib\controller\admin\orders\AdminOrderDetailsController.dart:76: Master Card
+lib\controller\admin\orders\AdminOrderDetailsController.dart:78: American Express
+lib\controller\admin\orders\AdminOrderDetailsController.dart:84: Unknown Payment Method
+lib\controller\admin\orders\AdminOrderDetailsController.dart:94: Pick Up
+lib\controller\admin\orders\AdminOrderDetailsController.dart:96: Unknown Order Method
+lib\controller\admin\orders\AdminOrderDetailsController.dart:112: Picked Up
+lib\controller\admin\orders\AdminOrderDetailsController.dart:125: Ready for Pickup
+lib\controller\admin\orders\manageorderscontroller.dart:123: Master Card
+lib\controller\admin\orders\manageorderscontroller.dart:125: American Express
+lib\controller\admin\orders\manageorderscontroller.dart:131: Unknown Payment Method
+lib\controller\admin\orders\manageorderscontroller.dart:141: Pick Up
+lib\controller\admin\orders\manageorderscontroller.dart:143: Unknown Order Method
+lib\controller\admin\orders\manageorderscontroller.dart:189: Picked Up
+lib\controller\admin\orders\manageorderscontroller.dart:202: Ready for Pickup
+lib\controller\admin\settings\createnewadminaccountcontroller.dart:66: warning!!
+lib\controller\admin\settings\createnewadminaccountcontroller.dart:68: the email you entered is already in use please try logging in
+lib\controller\admin\settings\createnewadminaccountcontroller.dart:70: this username is already taken
+lib\controller\admin\settings\createnewadminaccountcontroller.dart:71: the phone number you ve entered already exists with another account
+lib\controller\admin\settings\createnewdeliveryaccountcontroller.dart:65: warning!!
+lib\controller\admin\settings\createnewdeliveryaccountcontroller.dart:67: the email you entered is already in use please try logging in
+lib\controller\admin\settings\createnewdeliveryaccountcontroller.dart:69: this username is already taken
+lib\controller\admin\settings\createnewdeliveryaccountcontroller.dart:70: the phone number you ve entered already exists with another account
+lib\controller\auth\loginController.dart:48: ${response[
+lib\controller\auth\loginController.dart:59: ${data[
+lib\controller\auth\loginController.dart:60: ${data[
+lib\controller\auth\loginController.dart:61: ${data[
+lib\controller\auth\loginController.dart:62: ${data[
+lib\controller\auth\loginController.dart:63: ${data[
+lib\controller\auth\loginController.dart:64: ${data[
+lib\controller\auth\loginController.dart:70: ${data[
+lib\controller\auth\loginController.dart:76: No pudimos iniciar sesión
+lib\controller\auth\loginController.dart:77: Verifica tu usuario y contraseña e inténtalo de nuevo.
+lib\controller\auth\loginController.dart:87: ${data[
+lib\controller\auth\loginController.dart:88: ${data[
+lib\controller\auth\loginController.dart:89: ${data[
+lib\controller\auth\loginController.dart:90: ${data[
+lib\controller\auth\loginController.dart:91: ${data[
+lib\controller\auth\loginController.dart:92: ${data[
+lib\controller\auth\loginController.dart:93: ${data[
+lib\controller\auth\loginController.dart:94: ${data[
+lib\controller\auth\signUpController.dart:49: ${data[
+lib\controller\auth\signUpController.dart:50: ${data[
+lib\controller\auth\signUpController.dart:51: ${data[
+lib\controller\auth\signUpController.dart:52: ${data[
+lib\controller\auth\signUpController.dart:53: ${data[
+lib\controller\auth\signUpController.dart:54: ${data[
+lib\controller\auth\signUpController.dart:55: ${data[
+lib\controller\auth\signUpController.dart:62: ${response[
+lib\controller\auth\signUpController.dart:64: Ese correo ya está registrado.
+lib\controller\auth\signUpController.dart:66: Ese nombre de usuario ya está en uso.
+lib\controller\auth\signUpController.dart:68: Ese número de teléfono ya está registrado.
+lib\controller\auth\signUpController.dart:69: No pudimos crear tu cuenta.
+lib\controller\auth\signUpController.dart:70: Revisa tus datos
+lib\controller\auth\verifyCodeSignUpController.dart:39: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:40: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:41: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:42: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:43: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:44: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:45: ${data[
+lib\controller\auth\verifyCodeSignUpController.dart:58: Código incorrecto
+lib\controller\auth\verifyCodeSignUpController.dart:59: Revisa el código de confirmación e inténtalo nuevamente.
+lib\controller\auth\verifyCodeSignUpController.dart:77: Código reenviado
+lib\controller\auth\verifyCodeSignUpController.dart:78: Revisa tu correo para consultar el nuevo código.
+lib\controller\auth\verifyCodeSignUpController.dart:87: No pudimos reenviar el código
+lib\controller\auth\verifyCodeSignUpController.dart:88: Inténtalo nuevamente en unos minutos.
+lib\controller\cart\cartController.dart:50: Agregado al carrito
+lib\controller\cart\cartController.dart:51: El producto fue agregado correctamente.
+lib\controller\cart\cartController.dart:58: Stock insuficiente
+lib\controller\cart\cartController.dart:58: No hay más unidades disponibles de este producto.
+lib\controller\cart\cartController.dart:89: ${response[
+lib\controller\cart\cartController.dart:118: ${totals[
+lib\controller\cart\cartController.dart:119: ${totals[
+lib\controller\cart\cartController.dart:145: Carrito vacío
+lib\controller\cart\cartController.dart:145: Agrega al menos un producto antes de continuar.
+lib\controller\checkout\checkoutcontroller.dart:53: $rawFee
+lib\controller\checkout\checkoutcontroller.dart:54: ${data[
+lib\controller\checkout\checkoutcontroller.dart:108: ${negative ?
+lib\controller\checkout\checkoutcontroller.dart:116: Falta la dirección
+lib\controller\checkout\checkoutcontroller.dart:116: Selecciona una dirección de entrega para continuar.
+lib\controller\checkout\checkoutcontroller.dart:130: ${couponController.couponList.first.couponId ?? 0}
+lib\controller\checkout\checkoutcontroller.dart:143: Pedido confirmado
+lib\controller\checkout\checkoutcontroller.dart:149: Pedido #${orderId ??
+lib\controller\checkout\checkoutcontroller.dart:149: } creado correctamente.
+lib\controller\checkout\checkoutcontroller.dart:151: Total confirmado: ${formatMoney(num.tryParse(
+lib\controller\checkout\checkoutcontroller.dart:153: El pago se realizará contra entrega o al recoger el pedido.
+lib\controller\checkout\checkoutcontroller.dart:164: ${response[
+lib\controller\checkout\checkoutcontroller.dart:166: Tu carrito está vacío.
+lib\controller\checkout\checkoutcontroller.dart:167: Uno de los productos ya no tiene unidades suficientes.
+lib\controller\checkout\checkoutcontroller.dart:168: El cupón dejó de estar disponible. Revisa el total e inténtalo otra vez.
+lib\controller\checkout\checkoutcontroller.dart:169: La dirección seleccionada ya no es válida.
+lib\controller\checkout\checkoutcontroller.dart:170: El método de pago seleccionado no está habilitado.
+lib\controller\checkout\checkoutcontroller.dart:171: No pudimos completar el pedido. Revisa tu conexión e inténtalo nuevamente.
+lib\controller\checkout\checkoutcontroller.dart:173: Pedido no procesado
+lib\controller\checkout\couponcontroller.dart:40: Cupón aplicado
+lib\controller\checkout\couponcontroller.dart:40: Descuento del $discount% aplicado al pedido.
+lib\controller\checkout\couponcontroller.dart:44: Cupón no válido
+lib\controller\checkout\couponcontroller.dart:44: Revisa el código o verifica que aún esté vigente.
+lib\controller\checkout\couponcontroller.dart:53: $initial
+lib\controller\delivery\acceptedorderscontroller.dart:67: Master Card
+lib\controller\delivery\acceptedorderscontroller.dart:69: American Express
+lib\controller\delivery\acceptedorderscontroller.dart:75: Unknown Payment Method
+lib\controller\delivery\deliveredcontroller.dart:52: Master Card
+lib\controller\delivery\deliveredcontroller.dart:54: American Express
+lib\controller\delivery\deliveredcontroller.dart:60: Unknown Payment Method
+lib\controller\delivery\deliveredcontroller.dart:68: american express
+lib\controller\delivery\deliveredcontroller.dart:69: master card
+lib\controller\delivery\deliveryhomecontroller.dart:92: Error getting unread count: $e
+lib\controller\delivery\deliveryhomecontroller.dart:166: Location Services Disabled
+lib\controller\delivery\deliveryhomecontroller.dart:208: This will open your device settings
+lib\controller\delivery\deliveryhomecontroller.dart:268: Enable Location
+lib\controller\delivery\deliveryhomecontroller.dart:314: Location Permission Required
+lib\controller\delivery\deliveryhomecontroller.dart:406: Skip for Now
+lib\controller\delivery\deliveryhomecontroller.dart:484: Location Access Blocked
+lib\controller\delivery\deliveryhomecontroller.dart:499: Location permission is permanently blocked. To continue making deliveries, you must enable location access in app settings for navigation and order tracking.
+lib\controller\delivery\deliveryhomecontroller.dart:528: How to enable:
+lib\controller\delivery\deliveryhomecontroller.dart:539: App Settings
+lib\controller\delivery\deliveryhomecontroller.dart:539: Allow all the time
+lib\controller\delivery\deliveryhomecontroller.dart:600: Fix Location Settings
+lib\controller\delivery\deliveryrequestscontroller.dart:60: Master Card
+lib\controller\delivery\deliveryrequestscontroller.dart:62: American Express
+lib\controller\delivery\deliveryrequestscontroller.dart:68: Unknown Payment Method
+lib\controller\delivery\deliveryrequestscontroller.dart:102: an error occurred please try again later
+lib\controller\delivery\deliverysettingscontroller.dart:79: ${rows.first[
+lib\controller\favourites\favouritesController.dart:36: Added to Favorites
+lib\controller\favourites\favouritesController.dart:58: Removed from Favorites
+lib\controller\favourites\ViewFavouritesController.dart:60: No se pudo eliminar
+lib\controller\favourites\ViewFavouritesController.dart:60: Inténtalo nuevamente.
+lib\controller\home\homescreenController.dart:92: Error getting unread count: $e
+lib\controller\items\itemsController.dart:224: Added To Cart
+lib\controller\items\itemsController.dart:238: An error occurred while adding the item to your cart.
+lib\controller\items\itemsdetailsController.dart:66: Added To Cart
+lib\controller\items\itemsdetailsController.dart:114: ${data.itemCat}
+lib\controller\items\itemsdetailsController.dart:186: Leave a Review
+lib\controller\items\itemsdetailsController.dart:201: How would you rate your experience?
+lib\controller\items\itemsdetailsController.dart:236: Share more about your experience
+lib\controller\items\itemsdetailsController.dart:262: Please write your review
+lib\controller\items\itemsdetailsController.dart:275: Submit Review
+lib\controller\items\itemsdetailsController.dart:316: Check out ${data.itemName}
+lib\controller\items\itemsdetailsController.dart:321: Could not share the product
+lib\controller\orders\archivedorderscontroller.dart:57: Master Card
+lib\controller\orders\archivedorderscontroller.dart:59: American Express
+lib\controller\orders\archivedorderscontroller.dart:65: Unknown Payment Method
+lib\controller\orders\archivedorderscontroller.dart:75: Pick Up
+lib\controller\orders\archivedorderscontroller.dart:77: Unknown Order Method
+lib\controller\orders\orderdetailscontroller.dart:69: User Picked Up
+lib\controller\orders\orderdetailscontroller.dart:82: Ready for Pickup
+lib\controller\orders\pendingorderscontroller.dart:91: Ready for Pickup
+lib\controller\orders\pendingorderscontroller.dart:93: User Picked Up
+lib\controller\orders\pendingorderscontroller.dart:107: Master Card
+lib\controller\orders\pendingorderscontroller.dart:109: American Express
+lib\controller\orders\pendingorderscontroller.dart:115: Unknown Payment Method
+lib\controller\orders\pendingorderscontroller.dart:125: Pick Up
+lib\controller\orders\pendingorderscontroller.dart:127: Unknown Order Method
+lib\controller\resetpassword\forgotController.dart:37: warning!!
+lib\controller\resetpassword\RestPasswordController.dart:52: , response[
+lib\controller\resetpassword\RestPasswordController.dart:71: warning!!
+lib\controller\resetpassword\RestPasswordController.dart:72: the passwords you entered did not match.
+lib\controller\resetpassword\verifyCodeController.dart:35: warning!!
+lib\controller\resetpassword\verifyCodeController.dart:52: Please check your email for the new code
+lib\controller\resetpassword\verifyCodeController.dart:60: Failed to resend verification code.
+lib\controller\resetpassword\verifyCodeController.dart:61: Something went wrong. Please try again later.
+lib\controller\setting\settingcontroller.dart:49: Contacto no configurado
+lib\controller\setting\settingcontroller.dart:52: Hola, necesito ayuda con mi compra.
+lib\controller\setting\settingcontroller.dart:55: sms:$supportPhone?body=$message
+lib\controller\setting\settingcontroller.dart:59: No pudimos abrir la aplicación
+lib\controller\setting\settingcontroller.dart:59: WhatsApp no está disponible.
+lib\controller\setting\settingcontroller.dart:59: La aplicación de mensajes no está disponible.
+lib\controller\setting\settingcontroller.dart:106: , name:
+lib\controller\setting\settingcontroller.dart:106: , nativeName:
+lib\controller\setting\settingcontroller.dart:106: , flag:
+lib\controller\setting\settingcontroller.dart:107: , name:
+lib\controller\setting\settingcontroller.dart:107: , nativeName:
+lib\controller\setting\settingcontroller.dart:107: , flag:
+lib\controller\setting\settingcontroller.dart:108: , name:
+lib\controller\setting\settingcontroller.dart:108: , nativeName:
+lib\controller\setting\settingcontroller.dart:108: , flag:
+lib\controller\setting\updateaccountinformationcontroller.dart:39: Recortar foto de perfil
+lib\controller\setting\updateaccountinformationcontroller.dart:40: Recortar portada
+lib\controller\setting\updateaccountinformationcontroller.dart:50: Recortar foto de perfil
+lib\controller\setting\updateaccountinformationcontroller.dart:51: Recortar portada
+lib\controller\setting\updateaccountinformationcontroller.dart:76: Confirma tu identidad
+lib\controller\setting\updateaccountinformationcontroller.dart:76: Ingresa tu contraseña actual para cambiar el correo o la contraseña.
+lib\controller\setting\updateaccountinformationcontroller.dart:98: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:98: ] ?? username.text.trim()}
+lib\controller\setting\updateaccountinformationcontroller.dart:99: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:99: ] ?? email.text.trim()}
+lib\controller\setting\updateaccountinformationcontroller.dart:100: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:100: ] ?? phoneNumber.text.trim()}
+lib\controller\setting\updateaccountinformationcontroller.dart:101: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:101: ] ?? oldpfp}
+lib\controller\setting\updateaccountinformationcontroller.dart:102: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:102: ] ?? oldbanner}
+lib\controller\setting\updateaccountinformationcontroller.dart:114: ${data[
+lib\controller\setting\updateaccountinformationcontroller.dart:114: ] ?? email.text.trim()}
+lib\controller\setting\updateaccountinformationcontroller.dart:125: Cambios guardados
+lib\controller\setting\updateaccountinformationcontroller.dart:125: La información de tu cuenta fue actualizada.
+lib\controller\setting\updateaccountinformationcontroller.dart:131: No pudimos guardar los cambios
+lib\controller\setting\updateaccountinformationcontroller.dart:133: La contraseña actual no es correcta.
+lib\controller\setting\updateaccountinformationcontroller.dart:134: Revisa los datos ingresados. El correo, usuario o teléfono pueden estar en uso.
+lib\controller\setting\viewratingcontroller.dart:71: Delete Rating
+lib\controller\setting\viewratingcontroller.dart:78: Are you sure you want to delete this rating? This action cannot be undone.
+lib\controller\setting\viewratingcontroller.dart:103: Something wrong happened
+lib\core\class\curd.dart:22: Bearer $token
+lib\core\class\curd.dart:39: $value
+lib\core\class\curd.dart:101: ${entry.key}
+lib\core\class\curd.dart:101: ${entry.value}
+lib\core\class\handlingdataview.dart:34: Sin datos
+lib\core\constant\imageasset.dart:6: ${route}onboardingimage1.png
+lib\core\constant\imageasset.dart:7: ${route}onboardingimage2.png
+lib\core\constant\imageasset.dart:8: ${route}onboardingimage3.png
+lib\core\constant\imageasset.dart:9: ${route}onboardingimage4.png
+lib\core\constant\imageasset.dart:11: ${route}logo.png
+lib\core\constant\imageasset.dart:12: ${route}authforgotpassword.png
+lib\core\constant\imageasset.dart:14: ${routeLottie}offline.json
+lib\core\constant\imageasset.dart:15: ${routeLottie}404.json
+lib\core\constant\imageasset.dart:16: ${routeLottie}loading.json
+lib\core\constant\imageasset.dart:17: ${routeLottie}nodata.json
+lib\core\constant\imageasset.dart:19: ${route}HomeCard.png
+lib\core\functions\alertexitapp.dart:9: do you really want to exit
+lib\core\functions\imagegeneration.dart:44: Error generating coupon image: $e
+lib\core\functions\imagegeneration.dart:88: ${couponModel.couponDiscount ?? 0}% OFF
+lib\core\functions\imagegeneration.dart:101: Expires: ${controller.formatDisplayDate(couponModel.couponExpirydate)}
+lib\core\functions\imagegeneration.dart:145: Storage permission denied
+lib\core\functions\notificationconfiguration.dart:33: Notification permission granted
+lib\core\functions\notificationconfiguration.dart:41: Notifications Disabled
+lib\core\functions\notificationconfiguration.dart:43: Please enable notifications in settings to receive important updates
+lib\core\functions\notificationconfiguration.dart:44: Open Settings
+lib\core\functions\polyline.dart:28: No route found, falling back to straight line
+lib\core\functions\polyline.dart:56: Error getting polyline: $e
+lib\core\functions\vaildinput.dart:6: Not Vaild UserName
+lib\core\functions\vaildinput.dart:11: Not Vaild Email
+lib\core\functions\vaildinput.dart:16: Not Vaild Password
+lib\core\functions\vaildinput.dart:21: Not Vaild Phone Number
+lib\core\localization\changelocale.dart:25: || saved ==
+lib\core\localization\changelocale.dart:25: || saved ==
+lib\core\localization\translation.dart:8: Cambiar idioma
+lib\core\localization\translation.dart:9: Descubre lo que te representa
+lib\core\localization\translation.dart:10: Explora una selección cuidada de productos y encuentra tu próximo favorito.
+lib\core\localization\translation.dart:11: Compra fácil y segura
+lib\core\localization\translation.dart:12: Un proceso de compra claro, rápido y diseñado para proteger tus datos.
+lib\core\localization\translation.dart:13: Sigue tu pedido
+lib\core\localization\translation.dart:14: Consulta el estado de tu compra y conoce cada etapa de la entrega.
+lib\core\localization\translation.dart:15: Entrega rápida
+lib\core\localization\translation.dart:16: Recibe tus productos de forma confiable, con seguimiento y actualizaciones.
+lib\core\localization\translation.dart:24: Encuentra algo que te represente
+lib\core\localization\translation.dart:25: Buscar productos, marcas o categorías
+lib\core\localization\translation.dart:26: Categorías
+lib\core\localization\translation.dart:27: Compra por estilo
+lib\core\localization\translation.dart:28: Selección destacada
+lib\core\localization\translation.dart:29: Piezas elegidas para ti
+lib\core\localization\translation.dart:30: Explorar colección
+lib\core\localization\translation.dart:32: Abrir carrito
+lib\core\localization\translation.dart:33: Español
+lib\core\localization\translation.dart:34: Inglés
+lib\core\localization\translation.dart:35: Árabe
+lib\core\localization\translation.dart:39: NUEVA COLECCIÓN
+lib\core\localization\translation.dart:40: SELECCIÓN
+lib\core\localization\translation.dart:41: Ver detalles
+lib\core\localization\translation.dart:42: No encontramos productos
+lib\core\localization\translation.dart:46: Change language
+lib\core\localization\translation.dart:47: Discover what represents you
+lib\core\localization\translation.dart:48: Explore a curated selection of products and find your next favorite.
+lib\core\localization\translation.dart:49: Easy and secure shopping
+lib\core\localization\translation.dart:50: A clear, fast checkout designed to protect your information.
+lib\core\localization\translation.dart:51: Track your order
+lib\core\localization\translation.dart:54: Receive your products reliably with tracking and updates.
+lib\core\localization\translation.dart:62: Find something that represents you
+lib\core\localization\translation.dart:63: Search products, brands or categories
+lib\core\localization\translation.dart:65: Shop by style
+lib\core\localization\translation.dart:66: Featured selection
+lib\core\localization\translation.dart:67: Pieces selected for you
+lib\core\localization\translation.dart:68: Explore collection
+lib\core\localization\translation.dart:70: Open cart
+lib\core\localization\translation.dart:77: NEW COLLECTION
+lib\core\localization\translation.dart:79: View details
+lib\core\localization\translation.dart:80: No products found
+lib\core\middleware\myMiddleware.dart:19: || step ==
+lib\core\middleware\myMiddleware.dart:19: || step ==
+lib\core\services\services.dart:92: Bearer $session
+lib\core\services\services.dart:107: Bearer $authToken
+lib\data\datasource\remote\itmes\itemsdata.dart:8: : catId,
+lib\data\datasource\static\static.dart:7: .tr, content:
+lib\data\datasource\static\static.dart:8: .tr, content:
+lib\data\datasource\static\static.dart:9: .tr, content:
+lib\data\datasource\static\static.dart:10: .tr, content:
+lib\main.dart:38: DevEmm Commerce
+lib\main.dart:87: Configuración de producción incompleta
+lib\view\screens\address\addmoredetails.dart:49: This field is required
+lib\view\screens\address\addmoredetails.dart:61: Address name
+lib\view\screens\address\addmoredetails.dart:81: This field is required
+lib\view\screens\address\addmoredetails.dart:93: Building name
+lib\view\screens\address\addmoredetails.dart:116: This field is required
+lib\view\screens\address\addmoredetails.dart:128: Apt. number
+lib\view\screens\address\addmoredetails.dart:147: This field is required
+lib\view\screens\address\addmoredetails.dart:182: This field is required
+lib\view\screens\address\addmoredetails.dart:217: This field is required
+lib\view\screens\address\addmoredetails.dart:254: Way (optional)
+lib\view\screens\address\addmoredetails.dart:280: This field is required
+lib\view\screens\address\addmoredetails.dart:292: Additional directions (optional)
+lib\view\screens\address\addmoredetails.dart:322: Add address
+lib\view\screens\address\updateadress.dart:96: This field is required
+lib\view\screens\address\updateadress.dart:108: Address name
+lib\view\screens\address\updateadress.dart:128: This field is required
+lib\view\screens\address\updateadress.dart:140: Building name
+lib\view\screens\address\updateadress.dart:163: This field is required
+lib\view\screens\address\updateadress.dart:175: Apt. number
+lib\view\screens\address\updateadress.dart:194: This field is required
+lib\view\screens\address\updateadress.dart:229: This field is required
+lib\view\screens\address\updateadress.dart:264: This field is required
+lib\view\screens\address\updateadress.dart:301: Way (optional)
+lib\view\screens\address\updateadress.dart:327: This field is required
+lib\view\screens\address\updateadress.dart:339: Additional directions (optional)
+lib\view\screens\address\updateadress.dart:367: Update Address
+lib\view\screens\address\viewaddress.dart:18: Delevery Address
+lib\view\screens\address\viewaddress.dart:34: Add New Address
+lib\view\screens\address\viewaddress.dart:134: Building: ${controller.addresses[index].addressBuilding!},
+lib\view\screens\address\viewaddress.dart:135: Street: ${controller.addresses[index].addressStreet!},
+lib\view\screens\address\viewaddress.dart:136: Block: ${controller.addresses[index].addressBlock!},
+lib\view\screens\address\viewaddress.dart:137: Floor: ${controller.addresses[index].addressFloor!}.
+lib\view\screens\address\viewaddress.dart:174: Your address book is empty
+lib\view\screens\admin\categories\addcategory.dart:19: Add New Category
+lib\view\screens\admin\categories\addcategory.dart:34: Create New Category
+lib\view\screens\admin\categories\addcategory.dart:36: Fill in the details below to add a new product category
+lib\view\screens\admin\categories\addcategory.dart:43: Please enter category name
+lib\view\screens\admin\categories\addcategory.dart:47: Category Name (English)
+lib\view\screens\admin\categories\addcategory.dart:56: Please enter category name in Arabic
+lib\view\screens\admin\categories\addcategory.dart:60: Category Name (Arabic)
+lib\view\screens\admin\categories\addcategory.dart:76: Please enter category name in Spanish
+lib\view\screens\admin\categories\addcategory.dart:80: Category Name (Spanish)
+lib\view\screens\admin\categories\categories.dart:33: Add New Category
+lib\view\screens\admin\categories\updatecategory.dart:19: Update Category
+lib\view\screens\admin\categories\updatecategory.dart:34: Update Category
+lib\view\screens\admin\categories\updatecategory.dart:36: Update the details below to modify the product category
+lib\view\screens\admin\categories\updatecategory.dart:43: Please enter category name
+lib\view\screens\admin\categories\updatecategory.dart:47: Category Name (English)
+lib\view\screens\admin\categories\updatecategory.dart:56: Please enter category name in Arabic
+lib\view\screens\admin\categories\updatecategory.dart:60: Category Name (Arabic)
+lib\view\screens\admin\categories\updatecategory.dart:76: Please enter category name in Spanish
+lib\view\screens\admin\categories\updatecategory.dart:80: Category Name (Spanish)
+lib\view\screens\admin\coupon\addnewcoupon.dart:21: Add New Coupon
+lib\view\screens\admin\coupon\addnewcoupon.dart:78: Create New Coupon
+lib\view\screens\admin\coupon\addnewcoupon.dart:87: Fill in the details below to create a new discount coupon
+lib\view\screens\admin\coupon\addnewcoupon.dart:101: Coupon Details
+lib\view\screens\admin\coupon\addnewcoupon.dart:110: Coupon Code
+lib\view\screens\admin\coupon\addnewcoupon.dart:111: e.g., SAVE20, NEWUSER
+lib\view\screens\admin\coupon\addnewcoupon.dart:115: Coupon code is required
+lib\view\screens\admin\coupon\addnewcoupon.dart:118: Code must be at least 3 characters
+lib\view\screens\admin\coupon\addnewcoupon.dart:140: Usage Limit
+lib\view\screens\admin\coupon\addnewcoupon.dart:146: Usage limit is required
+lib\view\screens\admin\coupon\addnewcoupon.dart:150: Enter valid number
+lib\view\screens\admin\coupon\addnewcoupon.dart:167: Discount %
+lib\view\screens\admin\coupon\addnewcoupon.dart:173: Discount is required
+lib\view\screens\admin\coupon\addnewcoupon.dart:179: Enter 1-100
+lib\view\screens\admin\coupon\addnewcoupon.dart:201: Expiry Date & Time
+lib\view\screens\admin\coupon\addnewcoupon.dart:202: Select expiry date
+lib\view\screens\admin\coupon\addnewcoupon.dart:210: Expiry date is required
+lib\view\screens\admin\coupon\addnewcoupon.dart:274: Create Coupon
+lib\view\screens\admin\coupon\admincoupon.dart:24: Add Coupon
+lib\view\screens\admin\coupon\admincoupon.dart:25: Add New Coupon
+lib\view\screens\admin\coupon\admincoupon.dart:41: No Coupons Yet
+lib\view\screens\admin\coupon\admincoupon.dart:50: Create your first coupon to get started
+lib\view\screens\admin\coupon\admincoupon.dart:110: ID: ${coupon.couponId}
+lib\view\screens\admin\coupon\admincoupon.dart:162: ${coupon.couponDiscount}% OFF
+lib\view\screens\admin\coupon\admincoupon.dart:176: Remaining Uses
+lib\view\screens\admin\coupon\admincoupon.dart:177: ${coupon.couponCount ?? 0}
+lib\view\screens\admin\coupon\admincoupon.dart:183: Expires On
+lib\view\screens\admin\coupon\editcoupon.dart:21: Edit Coupon
+lib\view\screens\admin\coupon\editcoupon.dart:80: Edit Coupon Details
+lib\view\screens\admin\coupon\editcoupon.dart:89: Update coupon information and settings
+lib\view\screens\admin\coupon\editcoupon.dart:136: Coupon Information
+lib\view\screens\admin\coupon\editcoupon.dart:145: Coupon Code
+lib\view\screens\admin\coupon\editcoupon.dart:146: e.g., SAVE20, NEWUSER
+lib\view\screens\admin\coupon\editcoupon.dart:150: Coupon code is required
+lib\view\screens\admin\coupon\editcoupon.dart:153: Code must be at least 3 characters
+lib\view\screens\admin\coupon\editcoupon.dart:175: Usage Limit
+lib\view\screens\admin\coupon\editcoupon.dart:181: Usage limit is required
+lib\view\screens\admin\coupon\editcoupon.dart:185: Enter valid number
+lib\view\screens\admin\coupon\editcoupon.dart:202: Discount %
+lib\view\screens\admin\coupon\editcoupon.dart:208: Discount is required
+lib\view\screens\admin\coupon\editcoupon.dart:214: Enter 1-100
+lib\view\screens\admin\coupon\editcoupon.dart:236: Expiry Date & Time
+lib\view\screens\admin\coupon\editcoupon.dart:237: Select expiry date
+lib\view\screens\admin\coupon\editcoupon.dart:245: Expiry date is required
+lib\view\screens\admin\coupon\editcoupon.dart:292: Save Changes
+lib\view\screens\admin\dashboardhome.dart:28: Recent Orders
+lib\view\screens\admin\dashboardhome.dart:35: Top Products
+lib\view\screens\admin\items\additem.dart:17: Add New Item
+lib\view\screens\admin\items\additem.dart:30: Basic Information
+lib\view\screens\admin\items\additem.dart:33: Item Name (English)
+lib\view\screens\admin\items\additem.dart:35: Please enter item name
+lib\view\screens\admin\items\additem.dart:39: Item Name (Arabic)
+lib\view\screens\admin\items\additem.dart:41: Please enter item name in arabic
+lib\view\screens\admin\items\additem.dart:46: Item Name (Spanish)
+lib\view\screens\admin\items\additem.dart:48: Please enter item name in spanish
+lib\view\screens\admin\items\additem.dart:54: Description (English)
+lib\view\screens\admin\items\additem.dart:57: Please enter item description
+lib\view\screens\admin\items\additem.dart:61: Description (Arabic)
+lib\view\screens\admin\items\additem.dart:64: Please enter item description in arabic
+lib\view\screens\admin\items\additem.dart:69: Description (Spanish)
+lib\view\screens\admin\items\additem.dart:72: Please enter item description in spanish
+lib\view\screens\admin\items\additem.dart:75: Pricing & Inventory
+lib\view\screens\admin\items\additem.dart:85: Please enter item price
+lib\view\screens\admin\items\additem.dart:92: Discount (%)
+lib\view\screens\admin\items\additem.dart:95: Please enter item discount
+lib\view\screens\admin\items\additem.dart:106: Please enter item quantity
+lib\view\screens\admin\items\additem.dart:108: Additional Information
+lib\view\screens\admin\items\additem.dart:120: Active Item
+lib\view\screens\admin\items\additem.dart:132: Item Image
+lib\view\screens\admin\items\additem.dart:143: Add Item
+lib\view\screens\admin\items\updateitem.dart:19: Update Item
+lib\view\screens\admin\items\updateitem.dart:32: Basic Information
+lib\view\screens\admin\items\updateitem.dart:35: Item Name (English)
+lib\view\screens\admin\items\updateitem.dart:37: Please enter item name
+lib\view\screens\admin\items\updateitem.dart:41: Item Name (Arabic)
+lib\view\screens\admin\items\updateitem.dart:43: Please enter item name in arabic
+lib\view\screens\admin\items\updateitem.dart:48: Item Name (Spanish)
+lib\view\screens\admin\items\updateitem.dart:50: Please enter item name in spanish
+lib\view\screens\admin\items\updateitem.dart:56: Description (English)
+lib\view\screens\admin\items\updateitem.dart:59: Please enter item description
+lib\view\screens\admin\items\updateitem.dart:63: Description (Arabic)
+lib\view\screens\admin\items\updateitem.dart:66: Please enter item description in arabic
+lib\view\screens\admin\items\updateitem.dart:71: Description (Spanish)
+lib\view\screens\admin\items\updateitem.dart:74: Please enter item description in spanish
+lib\view\screens\admin\items\updateitem.dart:77: Pricing & Inventory
+lib\view\screens\admin\items\updateitem.dart:87: Please enter item price
+lib\view\screens\admin\items\updateitem.dart:94: Discount (%)
+lib\view\screens\admin\items\updateitem.dart:97: Please enter item discount
+lib\view\screens\admin\items\updateitem.dart:108: Please enter item quantity
+lib\view\screens\admin\items\updateitem.dart:110: Additional Information
+lib\view\screens\admin\items\updateitem.dart:122: Active Item
+lib\view\screens\admin\items\updateitem.dart:134: Item Image
+lib\view\screens\admin\items\updateitem.dart:150: Update Item
+lib\view\screens\admin\offermessage\editoffer.dart:24: Edit Offer
+lib\view\screens\admin\offermessage\editoffer.dart:60: Save Changes
+lib\view\screens\admin\offermessage\editoffer.dart:61: Save Offer Changes
+lib\view\screens\admin\offermessage\editoffer.dart:74: Offer Details
+lib\view\screens\admin\offermessage\editoffer.dart:78: Offer Title
+lib\view\screens\admin\offermessage\editoffer.dart:79: Enter a compelling offer title
+lib\view\screens\admin\offermessage\editoffer.dart:83: Please enter an offer title
+lib\view\screens\admin\offermessage\editoffer.dart:86: Title must be at least 3 characters
+lib\view\screens\admin\offermessage\editoffer.dart:95: Offer Description
+lib\view\screens\admin\offermessage\editoffer.dart:96: Describe your offer in detail
+lib\view\screens\admin\offermessage\editoffer.dart:101: Please enter offer description
+lib\view\screens\admin\offermessage\editoffer.dart:104: Description must be at least 10 characters
+lib\view\screens\admin\offermessage\editoffer.dart:117: Offer Image
+lib\view\screens\admin\offermessage\editoffer.dart:129: Live Preview
+lib\view\screens\admin\offermessage\editoffer.dart:140: Your offer title will appear here
+lib\view\screens\admin\offermessage\editoffer.dart:143: Your offer description will appear here
+lib\view\screens\admin\offermessage\offer.dart:29: Edit Offer
+lib\view\screens\admin\offermessage\offer.dart:30: Edit Offer Message
+lib\view\screens\admin\orders\orderdetails.dart:23: Detalle del pedido
+lib\view\screens\admin\orders\orderdetails.dart:49: Order Items
+lib\view\screens\admin\orders\orderdetails.dart:62: No description
+lib\view\screens\admin\orders\orderdetails.dart:114: No address available
+lib\view\screens\admin\orders\orderdetails.dart:124: Address Details
+lib\view\screens\admin\orders\orderdetails.dart:144: Additional Information
+lib\view\screens\admin\orders\vieworders.dart:16: Orders Management
+lib\view\screens\auth\login.dart:46: Welcome Back
+lib\view\screens\auth\login.dart:50: login with your username and password or continue with social media
+lib\view\screens\auth\login.dart:61: Enter your username
+lib\view\screens\auth\login.dart:77: Enter your password
+lib\view\screens\auth\login.dart:98: sign up
+lib\view\screens\auth\signUp.dart:25: Sign up
+lib\view\screens\auth\signUp.dart:46: Welcome Back
+lib\view\screens\auth\signUp.dart:50: sign up with your email and password or continue with social media
+lib\view\screens\auth\signUp.dart:61: Enter your username
+lib\view\screens\auth\signUp.dart:71: Enter your email
+lib\view\screens\auth\signUp.dart:79: Phone number
+lib\view\screens\auth\signUp.dart:81: Enter your phone number
+lib\view\screens\auth\signUp.dart:98: Enter your password
+lib\view\screens\auth\signUp.dart:110: already have account?
+lib\view\screens\auth\verifycodesignup.dart:50: Enter verification code
+lib\view\screens\cart\cart.dart:43: ${controller.data[index].itemId}
+lib\view\screens\cart\cart.dart:45: ${controller.data[index].itemId}
+lib\view\screens\cart\cart.dart:58: Your cart is empty 🛒
+lib\view\screens\cart\cart.dart:76: Please verify your account to place an order
+lib\view\screens\cart\cart.dart:77: Place Order
+lib\view\screens\checkout\checkout.dart:22: Finalizar compra
+lib\view\screens\checkout\checkout.dart:32: Tu pedido
+lib\view\screens\checkout\checkout.dart:37: No hay productos para mostrar.
+lib\view\screens\checkout\checkout.dart:48: ${item.countitems ?? 0}
+lib\view\screens\checkout\checkout.dart:66: Dirección de entrega
+lib\view\screens\checkout\checkout.dart:75: Agrega una dirección para recibir tu pedido.
+lib\view\screens\checkout\checkout.dart:79: Dirección
+lib\view\screens\checkout\checkout.dart:108: Pago contra entrega o recogida
+lib\view\screens\checkout\checkout.dart:110: No se solicitarán datos de tarjeta dentro de la aplicación.
+lib\view\screens\checkout\checkout.dart:128: -${controller.couponController.couponList.first.couponDiscount ?? 0}%
+lib\view\screens\checkout\checkout.dart:137: Total estimado
+lib\view\screens\checkout\checkout.dart:139: El servidor recalcula precio, stock, cupón y total antes de confirmar.
+lib\view\screens\checkout\checkout.dart:149: Confirmar pedido
+lib\view\screens\delivery\acceptedorders.dart:19: My Deliveries
+lib\view\screens\delivery\orderdetails.dart:22: Detalle del pedido
+lib\view\screens\delivery\orderdetails.dart:55: Order Items
+lib\view\screens\delivery\orderdetails.dart:68: No description
+lib\view\screens\delivery\orderdetails.dart:127: No address available
+lib\view\screens\delivery\orderdetails.dart:136: Address Details
+lib\view\screens\delivery\orderdetails.dart:156: Additional Information
+lib\view\screens\home\home.dart:80: ${AppLink.homeimage}$promoImage
+lib\view\screens\items\viewrating.dart:21: All Ratings
+lib\view\screens\items\viewrating.dart:63: No reviews yet
+lib\view\screens\orders\archivedorders.dart:21: Archived Orders
+lib\view\screens\orders\archivedorders.dart:32: No Archived Orders
+lib\view\screens\orders\archivedorders.dart:34: You currently have no archived orders. When an order is archived, it will appear here.
+lib\view\screens\orders\archivedorders.dart:95: Order Price:
+lib\view\screens\orders\archivedorders.dart:97: ${controller.archivedOrders[index].orderPrice}
+lib\view\screens\orders\archivedorders.dart:100: Total Price:
+lib\view\screens\orders\archivedorders.dart:102: ${controller.archivedOrders[index].orderTotalprice}
+lib\view\screens\orders\archivedorders.dart:107: Payment Type:
+lib\view\screens\orders\archivedorders.dart:113: Order Type:
+lib\view\screens\orders\archivedorders.dart:136: Detalle del pedido
+lib\view\screens\orders\orderdetails.dart:25: Detalle del pedido
+lib\view\screens\orders\orderdetails.dart:116: ORDER #${controller.orderDetails[0].orderId!}
+lib\view\screens\orders\orderdetails.dart:159: MMM dd, yyyy - hh:mm a
+lib\view\screens\orders\orderdetails.dart:172: Pickup at store
+lib\view\screens\orders\orderdetails.dart:179: Order Items
+lib\view\screens\orders\orderdetails.dart:325: Order Total:
+lib\view\screens\orders\orderdetails.dart:469: Pickup Information
+lib\view\screens\orders\orderdetails.dart:499: Store Pickup
+lib\view\screens\orders\orderdetails.dart:533: Pickup Time
+lib\view\screens\orders\orderdetails.dart:535: Ready for Pickup
+lib\view\screens\orders\orderdetails.dart:538: 123 Main Street, City Center
+lib\view\screens\orders\orderdetails.dart:662: In Progress
+lib\view\screens\orders\orderdetails.dart:719: Need Help?
+lib\view\screens\orders\orderdetails.dart:728: Contact Support
+lib\view\screens\orders\orderdetails.dart:729: Get help with your order
+lib\view\screens\orders\orderdetails.dart:735: Report an Issue
+lib\view\screens\orders\orderdetails.dart:736: Having problems with your order?
+lib\view\screens\orders\pendingorders.dart:96: Order Price:
+lib\view\screens\orders\pendingorders.dart:101: Total Price:
+lib\view\screens\orders\pendingorders.dart:108: Payment Type:
+lib\view\screens\orders\pendingorders.dart:114: Order Type:
+lib\view\screens\orders\pendingorders.dart:149: Detalle del pedido
+lib\view\screens\orders\pendingorders.dart:190: Track Order
+lib\view\screens\orders\pendingorders.dart:203: Cancel Order?
+lib\view\screens\orders\pendingorders.dart:210: Are you sure you want to cancel this order?
+lib\view\screens\orders\pendingorders.dart:231: No, Keep It
+lib\view\screens\orders\pendingorders.dart:261: Yes, Cancel
+lib\view\screens\orders\pendingorders.dart:283: Cancel Order
+lib\view\screens\orders\trackorder.dart:17: Order Tracking
+lib\view\screens\resetpassword\forgotpassword.dart:22: Forgot password
+lib\view\screens\resetpassword\forgotpassword.dart:42: Enter Email Address
+lib\view\screens\resetpassword\forgotpassword.dart:52: Enter your email
+lib\view\screens\resetpassword\resetpassword.dart:21: Rest Password
+lib\view\screens\resetpassword\resetpassword.dart:37: Welcome Back
+lib\view\screens\resetpassword\resetpassword.dart:52: Enter your password
+lib\view\screens\resetpassword\resetpassword.dart:67: Confirm your password
+lib\view\screens\resetpassword\verifycode.dart:51: Enter verification code
+lib\view\screens\search\search.dart:120: ${controller.results.length} items found
+lib\view\screens\search\search.dart:209: ${controller.results[index].itemName}
+lib\view\screens\search\search.dart:211: ${controller.results[index].categoryName}
+lib\view\screens\settings\settings.dart:85: Your Ratings
+lib\view\screens\settings\settings.dart:95: Verify Your Account
+lib\view\screens\settings\settings.dart:97: Complete verification to unlock all features
+lib\view\screens\settings\settings.dart:115: Edit Account Information
+lib\view\screens\settings\settings.dart:128: About Us
+lib\view\screens\settings\settings.dart:136: Contact Us
+lib\view\screens\settings\settings.dart:137: Get help and support
+lib\view\screens\settings\viewallrating.dart:20: My Ratings
+lib\view\widgets\address\searchmap.dart:27: Neither AddAddressControllerImp nor UpdateMapControllerImp is registered
+lib\view\widgets\address\searchmap.dart:39: Search location
+lib\view\widgets\address\searchmap.dart:65: No description
+lib\view\widgets\address\searchmap.dart:98: Error getting place details: $e
+lib\view\widgets\address\searchmap.dart:113: Places API error: ${response.errorMessage}
+lib\view\widgets\address\searchmap.dart:117: Error fetching places: $e
+lib\view\widgets\admin\ActionButtons.dart:111: Done Preparing
+lib\view\widgets\admin\ActionButtons.dart:150: Mark as Picked Up
+lib\view\widgets\admin\AddressInfoCard.dart:47: Dirección de entrega
+lib\view\widgets\admin\AddressInfoCard.dart:61: Building $building
+lib\view\widgets\admin\AddressInfoCard.dart:65: Apartment $apartment
+lib\view\widgets\admin\AddressInfoCard.dart:67: Floor $floor
+lib\view\widgets\admin\AddressInfoCard.dart:71: Block $block
+lib\view\widgets\admin\adminactionbuttonssection.dart:17: Account Management
+lib\view\widgets\admin\adminactionbuttonssection.dart:47: Edit Account Info
+lib\view\widgets\admin\adminactionbuttonssection.dart:48: Update your profile information
+lib\view\widgets\admin\adminlogoutdialogwidget.dart:37: Logout Confirmation
+lib\view\widgets\admin\adminlogoutdialogwidget.dart:81: Cerrar sesión
+lib\view\widgets\admin\adminsettingssection.dart:47: Push Notifications
+lib\view\widgets\admin\adminsettingssection.dart:51: Receive notifications for orders and updates
+lib\view\widgets\admin\buildinforow.dart:29: $label:
+lib\view\widgets\admin\categorycard.dart:65: Edit Category
+lib\view\widgets\admin\categorycard.dart:72: Delete Category
+lib\view\widgets\admin\categorycard.dart:87: Delete Category
+lib\view\widgets\admin\categorycard.dart:101: Are you sure you want to delete this category?
+lib\view\widgets\admin\categorycard.dart:106: This action cannot be undone.
+lib\view\widgets\admin\categorycard.dart:141: Delete Category
+lib\view\widgets\admin\categoryfield.dart:15: Item Category
+lib\view\widgets\admin\categoryfield.dart:20: Please select a category
+lib\view\widgets\admin\DeliveryCreateAccountButtonWidget.dart:69: Creating Account...
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:33: Account Information
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:46: Enter username
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:56: Email Address
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:57: Enter email address
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:68: Phone Number
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:69: Enter phone number
+lib\view\widgets\admin\DeliveryFormSectionWidget.dart:81: Create a secure password
+lib\view\widgets\admin\DeliveryPasswordFieldWidget.dart:83: Password should be at least 8 characters long
+lib\view\widgets\admin\deliveryworkerssection.dart:18: Rendimiento de repartidores
+lib\view\widgets\admin\deliveryworkerssection.dart:20: , worker.numberOfOrders ?? 0, AppLink.pfpimage + (worker.userPfp ??
+lib\view\widgets\admin\deliveryworkerssection.dart:23: Rendimiento de repartidores
+lib\view\widgets\admin\deliveryworkerssection.dart:24: Pedidos completados por cada repartidor
+lib\view\widgets\admin\emptychart.dart:26: No data available
+lib\view\widgets\admin\FilterDropdown.dart:24: All Items
+lib\view\widgets\admin\FilterDropdown.dart:28: Low Stock
+lib\view\widgets\admin\FilterSortRow.dart:86: Low Stock
+lib\view\widgets\admin\FormSectionWidget.dart:33: Account Information
+lib\view\widgets\admin\FormSectionWidget.dart:46: s username
+lib\view\widgets\admin\FormSectionWidget.dart:56: Email Address
+lib\view\widgets\admin\FormSectionWidget.dart:57: Enter official email address
+lib\view\widgets\admin\FormSectionWidget.dart:68: Phone Number
+lib\view\widgets\admin\FormSectionWidget.dart:69: Enter contact phone number
+lib\view\widgets\admin\FormSectionWidget.dart:81: Create a strong password
+lib\view\widgets\admin\FormSectionWidget.dart:90: Confirm Password
+lib\view\widgets\admin\FormSectionWidget.dart:91: Re-enter the password
+lib\view\widgets\admin\FormSectionWidget.dart:94: Passwords do not match
+lib\view\widgets\admin\imagepicker.dart:89: No image selected
+lib\view\widgets\admin\ImagePreview.dart:43: Failed to load image
+lib\view\widgets\admin\infosection.dart:36: About Offer Management
+lib\view\widgets\admin\infosection.dart:63: Edit Offer
+lib\view\widgets\admin\infosection.dart:65: • Changes are reflected immediately
+lib\view\widgets\admin\monthlyrevenuechart.dart:15: Ingresos mensuales
+lib\view\widgets\admin\monthlyrevenuechart.dart:17: Ingresos mensuales
+lib\view\widgets\admin\monthlyrevenuechart.dart:18: Tendencia de ingresos por mes
+lib\view\widgets\admin\offercard.dart:32: No Title
+lib\view\widgets\admin\offercard.dart:33: No Description
+lib\view\widgets\admin\offerloadingstate.dart:17: Current Offer
+lib\view\widgets\admin\offersuccessstate.dart:24: Current Offer
+lib\view\widgets\admin\OrderCard.dart:53: Order #${order.orderId}
+lib\view\widgets\admin\OrderCard.dart:105: No Name
+lib\view\widgets\admin\OrderCard.dart:166: Placed ${Jiffy.parse(order.orderDatetime!).fromNow()}
+lib\view\widgets\admin\OrderCard.dart:182: ${AppLink.pfpimage}${order.userPfp}
+lib\view\widgets\admin\OrderCard.dart:259: }${order.addressName != null && order.addressBymap != null ?
+lib\view\widgets\admin\OrderCard.dart:259: }${order.addressBymap ??
+lib\view\widgets\admin\OrderCard.dart:293: ${order.couponCode!} (-${order.couponDiscount ?? 0})
+lib\view\widgets\admin\orderstatuschart.dart:16: Estado de pedidos
+lib\view\widgets\admin\orderstatuschart.dart:27: Estado de pedidos
+lib\view\widgets\admin\orderstatuschart.dart:28: Distribución actual de pedidos
+lib\view\widgets\admin\OrderSummaryCard.dart:50: Order Date
+lib\view\widgets\admin\OrderSummaryCard.dart:53: dd MMM yyyy, hh:mm a
+lib\view\widgets\admin\OrderSummaryCard.dart:61: Método de pago
+lib\view\widgets\admin\PasswordFieldWidget.dart:88: Use a strong password with at least 8 characters, including uppercase, lowercase, numbers, and symbols
+lib\view\widgets\admin\PermissionsSectionWidget.dart:35: This account will have access to:
+lib\view\widgets\admin\PermissionsSectionWidget.dart:44: Full Dashboard Access
+lib\view\widgets\admin\PermissionsSectionWidget.dart:45: View all analytics and reports
+lib\view\widgets\admin\PermissionsSectionWidget.dart:49: Product Management
+lib\view\widgets\admin\PermissionsSectionWidget.dart:50: Add, edit, and delete products
+lib\view\widgets\admin\PermissionsSectionWidget.dart:54: User Management
+lib\view\widgets\admin\PermissionsSectionWidget.dart:59: Order Management
+lib\view\widgets\admin\PermissionsSectionWidget.dart:60: View and process all orders
+lib\view\widgets\admin\PermissionsSectionWidget.dart:64: System Settings
+lib\view\widgets\admin\PermissionsSectionWidget.dart:65: Configure app settings and preferences
+lib\view\widgets\admin\previewsection.dart:47: Current Coupon Preview
+lib\view\widgets\admin\previewsection.dart:74: COUPON CODE
+lib\view\widgets\admin\previewsection.dart:85: ${controller.discount!.text}% OFF
+lib\view\widgets\admin\previewsection.dart:96: Expires: ${controller.formatDisplayDate(controller.expirydate!.text)}
+lib\view\widgets\admin\ProductCard.dart:38: product-${item.itemId}
+lib\view\widgets\admin\ProductCard.dart:59: Image not available
+lib\view\widgets\admin\ProductCard.dart:105: No Name
+lib\view\widgets\admin\ProductCard.dart:125: No Category
+lib\view\widgets\admin\ProductCard.dart:168: ${item.itemDiscount}% OFF
+lib\view\widgets\admin\ProductCard.dart:185: ${item.itemCount ?? 0}
+lib\view\widgets\admin\ProductCard.dart:327: product-${item.itemId}
+lib\view\widgets\admin\ProductCard.dart:362: No Name
+lib\view\widgets\admin\ProductCard.dart:394: No Category
+lib\view\widgets\admin\ProductCard.dart:447: ${item.itemDiscount}% OFF
+lib\view\widgets\admin\ProductCard.dart:472: Detalle del producto
+lib\view\widgets\admin\ProductCard.dart:482: ${item.itemCount ?? 0} units
+lib\view\widgets\admin\ProductCard.dart:501: English Description
+lib\view\widgets\admin\ProductCard.dart:508: Arabic Description
+lib\view\widgets\admin\ProductCard.dart:515: Spanish Description
+lib\view\widgets\admin\ProductsGrid.dart:19: No se encontraron productos
+lib\view\widgets\admin\recentorders.dart:62: #${order.orderId}
+lib\view\widgets\admin\recentorders.dart:103: View All Orders
+lib\view\widgets\admin\salesovertimechart.dart:15: Ventas en el tiempo
+lib\view\widgets\admin\salesovertimechart.dart:17: Ventas en el tiempo
+lib\view\widgets\admin\salesovertimechart.dart:18: Rendimiento semanal
+lib\view\widgets\admin\savebutton.dart:40: Save Category
+lib\view\widgets\admin\searchbar.dart:26: Search products...
+lib\view\widgets\admin\SecurityWarningWidget.dart:28: Security Notice
+lib\view\widgets\admin\selectimage.dart:21: Category Image
+lib\view\widgets\admin\selectimage.dart:48: Change Image
+lib\view\widgets\admin\selectimage.dart:92: Tap to edit category image
+lib\view\widgets\admin\selectimage.dart:109: Tap to add category image
+lib\view\widgets\admin\simplecharts.dart:108: Sin datos disponibles
+lib\view\widgets\admin\simplecharts.dart:149: ${labels[i]} ($percent%)
+lib\view\widgets\admin\SortDropdown.dart:23: Name (A-Z)
+lib\view\widgets\admin\SortDropdown.dart:24: Name (Z-A)
+lib\view\widgets\admin\SortDropdown.dart:25: Price (Low-High)
+lib\view\widgets\admin\SortDropdown.dart:26: Price (High-Low)
+lib\view\widgets\admin\SortDropdown.dart:27: Stock (Low-High)
+lib\view\widgets\admin\SortDropdown.dart:28: Stock (High-Low)
+lib\view\widgets\admin\SortDropdown.dart:29: Rating (Low-High)
+lib\view\widgets\admin\SortDropdown.dart:31: Rating (High-Low)
+lib\view\widgets\admin\statsrow.dart:38: Total Sales
+lib\view\widgets\admin\statsrow.dart:45: ${controller.dashboardInfo.order}
+lib\view\widgets\admin\statsrow.dart:51: ${controller.dashboardInfo.items}
+lib\view\widgets\admin\statsrow.dart:60: ${controller.dashboardInfo.customer}
+lib\view\widgets\admin\topcategorieschart.dart:16: Categorías más vendidas
+lib\view\widgets\admin\topcategorieschart.dart:27: Categorías más vendidas
+lib\view\widgets\admin\topcategorieschart.dart:28: Rendimiento por categoría de producto
+lib\view\widgets\admin\topproducts.dart:86: ${product.totalSold} sold
+lib\view\widgets\admin\updateaccountappbar.dart:11: Edit Profile
+lib\view\widgets\admin\workeravatar.dart:64: ${worker.numberOfOrders} orders
+lib\view\widgets\auth\resendbutton.dart:22: Resend Code
+lib\view\widgets\auth\restremember.dart:28: Remember me
+lib\view\widgets\auth\restremember.dart:41: Recuperar contraseña
+lib\view\widgets\cart\cartfloatingbutton.dart:44: Amount Price
+lib\view\widgets\cart\cartfloatingbutton.dart:58: Shipping Price
+lib\view\widgets\cart\cartfloatingbutton.dart:76: Total Amount
+lib\view\widgets\cart\cartfloatingbutton.dart:108: Place Order
+lib\view\widgets\checkout\couponsection.dart:21: Enter coupon code
+lib\view\widgets\checkout\deliverytype.dart:118: Pick Up
+lib\view\widgets\checkout\itemview.dart:60: Qty: $itmeQuantity
+lib\view\widgets\delivery\acceptorderbutton.dart:29: Accept Order
+lib\view\widgets\delivery\acceptviewdetailsbutton.dart:13: View Details
+lib\view\widgets\delivery\addresshnfocard.dart:40: Dirección de entrega
+lib\view\widgets\delivery\addresshnfocard.dart:50: Building $building
+lib\view\widgets\delivery\addresshnfocard.dart:53: Apartment $apartment
+lib\view\widgets\delivery\addresshnfocard.dart:55: Floor $floor
+lib\view\widgets\delivery\addresshnfocard.dart:59: Block $block
+lib\view\widgets\delivery\deliveryaccountsection.dart:44: View completed orders
+lib\view\widgets\delivery\deliveryaccountsection.dart:51: Edit Profile
+lib\view\widgets\delivery\deliveryaccountsection.dart:52: Update account information
+lib\view\widgets\delivery\deliverycard.dart:124: Total Amount
+lib\view\widgets\delivery\deliverycard.dart:170: View Order Details
+lib\view\widgets\delivery\deliveryheader.dart:45: Total Completed Deliveries
+lib\view\widgets\delivery\deliverylogoutbutton.dart:36: Cerrar sesión
+lib\view\widgets\delivery\deliverypreferencessection.dart:38: Preferencias de entrega
+lib\view\widgets\delivery\deliverypreferencessection.dart:67: Recibir alertas de nuevos pedidos
+lib\view\widgets\delivery\deliveryprofileheader.dart:126: User Name
+lib\view\widgets\delivery\deliverystatscard.dart:60: Tus estadísticas de entregas
+lib\view\widgets\delivery\deliverystatscard.dart:84: Entregas totales
+lib\view\widgets\delivery\emptydeliverylist.dart:41: No Active Deliveries
+lib\view\widgets\delivery\emptydeliverylist.dart:67: Pull to refresh
+lib\view\widgets\delivery\emptydeliveryrequestsstate.dart:67: Pull to refresh
+lib\view\widgets\delivery\emptystatewidget.dart:26: No Deliveries Yet
+lib\view\widgets\delivery\emptystatewidget.dart:35: Your completed deliveries will appear here
+lib\view\widgets\delivery\navitem.dart:29: $label tab${isActive ?
+lib\view\widgets\delivery\ordercard.dart:19: In Progress
+lib\view\widgets\delivery\ordercard.dart:27: MMM dd, yyyy - hh:mm a
+lib\view\widgets\delivery\ordercardheader.dart:27: Order #$orderId
+lib\view\widgets\delivery\orderrequestheader.dart:27: Order #${order.orderId}
+lib\view\widgets\delivery\orderrequestpricesection.dart:31: Total Amount
+lib\view\widgets\delivery\ordersummarysection.dart:28: Payment Method
+lib\view\widgets\delivery\ordersummarysection.dart:41: Total Amount
+lib\view\widgets\delivery\viewdetailsbutton.dart:34: View Details
+lib\view\widgets\home\categorieslist.dart:90: ${AppLink.categoriesimage}${categoriesmodel.categoryImg}
+lib\view\widgets\home\discountbadge.dart:26: -${discountPercentage.toInt()}%
+lib\view\widgets\home\greeting.dart:41: ${AppLink.pfpimage}$img
+lib\view\widgets\home\greeting.dart:112: ${controller.getUnreadCount()}
+lib\view\widgets\home\itemcardcontent.dart:54: ${AppLink.itemimage}${itemsModel.itemImg}
+lib\view\widgets\items\addreviewbutton.dart:213: Add Review
+lib\view\widgets\items\bottombar.dart:44: ${controller.data.itemId}
+lib\view\widgets\items\bottombar.dart:52: Agregar al carrito
+lib\view\widgets\items\categorypagecontent.dart:35: Loading amazing products...
+lib\view\widgets\items\categorypagecontent.dart:64: No se encontraron productos
+lib\view\widgets\items\categorypagecontent.dart:73: Try refreshing or check back later
+lib\view\widgets\items\categorypagecontent.dart:98: ${categoryData.length} items found
+lib\view\widgets\items\categorypagecontent.dart:126: ${categoryData[index][
+lib\view\widgets\items\customitemslist.dart:125: ${itemsModel.itemDiscount}% OFF
+lib\view\widgets\items\discountbadge.dart:26: $discount% OFF
+lib\view\widgets\items\favouriteslist.dart:22: No Favourites
+lib\view\widgets\items\favouriteslist.dart:112: ${controller.fav[index].itemName}
+lib\view\widgets\items\form.dart:81: What did you like or dislike?
+lib\view\widgets\items\noreviewsoverlay.dart:31: This product has no reviews yet.
+lib\view\widgets\items\productdetailsappbartitle.dart:15: Detalle del producto
+lib\view\widgets\items\quantitycontrols.dart:30: ${controller.counter}
+lib\view\widgets\items\ratingsummary.dart:33: (${controller.allRating.length} reviews)
+lib\view\widgets\items\reviewsectionheader.dart:16: Customer Reviews
+lib\view\widgets\items\specificationscard.dart:32: Product Information
+lib\view\widgets\items\specificationscard.dart:46: In Stock
+lib\view\widgets\items\specificationscard.dart:47: Out of Stock
+lib\view\widgets\items\specificationscard.dart:52: ${controller.data.itemDiscount}%
+lib\view\widgets\main\draggableverificationprompt.dart:338: Account Verification
+lib\view\widgets\main\draggableverificationprompt.dart:381: Complete verification to be able to place orders.
+lib\view\widgets\main\draggableverificationprompt.dart:469: Verify Now
+lib\view\widgets\notification\notificationcontent.dart:25: No title
+lib\view\widgets\notification\notificationcontent.dart:59: No content
+lib\view\widgets\notification\notificationemptystate.dart:37: No notifications yet
+lib\view\widgets\notification\notificationemptystate.dart:46: ll show up here
+lib\view\widgets\orders\empty.dart:113: Place Order
+lib\view\widgets\orders\orderdetailrow.dart:18: $label:
+lib\view\widgets\profile\actionssection.dart:20: Track your current orders
+lib\view\widgets\profile\actionssection.dart:27: Order History
+lib\view\widgets\profile\actionssection.dart:28: View your past orders
+lib\view\widgets\profile\headersection.dart:42: ${AppLink.bannerimage}${controller.banner}
+lib\view\widgets\profile\headersection.dart:111: ${AppLink.pfpimage}${controller.pfp}
+lib\view\widgets\profile\statscard.dart:57: Total Orders
+lib\view\widgets\profile\statscard.dart:66: $orderCount
+lib\view\widgets\settings\accountformsection.dart:24: Información de la cuenta
+lib\view\widgets\settings\accountformsection.dart:28: Correo electrónico
+lib\view\widgets\settings\accountformsection.dart:30: Teléfono
+lib\view\widgets\settings\accountformsection.dart:34: Para cambiar tu correo o contraseña debes confirmar tu contraseña actual.
+lib\view\widgets\settings\accountformsection.dart:36: Contraseña actual
+lib\view\widgets\settings\accountformsection.dart:38: Nueva contraseña (opcional)
+lib\view\widgets\settings\contactdialog.dart:38: Contact Us
+lib\view\widgets\settings\contactdialog.dart:47: How would you like to contact us?
+lib\view\widgets\settings\emptyratingsstate.dart:35: No ratings yet
+lib\view\widgets\settings\emptyratingsstate.dart:44: Start rating items to see them here
+lib\view\widgets\settings\emptyratingsstate.dart:56: Explore Items
+lib\view\widgets\settings\imagepickerdialog.dart:26: Select Image Source
+lib\view\widgets\settings\logoutbutton.dart:45: Cerrar sesión
+lib\view\widgets\settings\notificationtile.dart:37: Receive updates and alerts
+lib\view\widgets\settings\ratingactions.dart:24: View item details
+lib\view\widgets\settings\ratingactions.dart:31: Delete rating
+lib\view\widgets\settings\ratingcomment.dart:32: Your review
+lib\view\widgets\settings\savechangesbutton.dart:29: Save Changes
+lib\view\widgets\settings\userinfosection.dart:66: Your review

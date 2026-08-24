@@ -1,0 +1,12 @@
+{
+  "name": "devemm/commerce-backend",
+  "description": "Dependencias opcionales del backend DevEmm Commerce",
+  "require": {
+    "php": ">=8.2",
+    "google/apiclient": "^2.18",
+    "phpmailer/phpmailer": "^6.9"
+  },
+  "scripts": {
+    "test": "php tests/security_smoke.php"
+  }
+}
