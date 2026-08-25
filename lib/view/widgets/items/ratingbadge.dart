@@ -20,7 +20,7 @@ class RatingBadge extends StatelessWidget {
           const Icon(Icons.star_rounded, color: Colors.amber, size: 16),
           const SizedBox(width: 4),
           Text(
-            double.parse(rating).toStringAsFixed(1),
+            (double.tryParse(rating) ?? 0.0).toStringAsFixed(1),
             style: const TextStyle(
               color: Colors.amber,
               fontWeight: FontWeight.bold,
