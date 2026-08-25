@@ -61,7 +61,10 @@ class OroLottieView extends StatelessWidget {
                 child: Icon(
                   Icons.animation_rounded,
                   size: (width ?? 80) * 0.45,
-                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.4),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primary
+                      .withValues(alpha: 0.4),
                 ),
               ),
             );

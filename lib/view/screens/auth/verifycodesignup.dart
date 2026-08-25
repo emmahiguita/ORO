@@ -46,7 +46,8 @@ class VerifyCodeSignUp extends StatelessWidget {
                       shrinkWrap: true,
                       children: [
                         const SizedBox(height: 10),
-                        const AUTHTText(text: 'Ingresa el código de verificación'),
+                        const AUTHTText(
+                            text: 'Ingresa el código de verificación'),
                         const SizedBox(height: 50),
                         OtpTextField(
                           numberOfFields: 6,

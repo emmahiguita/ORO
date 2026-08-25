@@ -111,7 +111,10 @@ class _OroAnimatedButtonState extends State<OroAnimatedButton>
             borderRadius: r,
             color: widget.isOutlined
                 ? Colors.transparent
-                : (widget.backgroundColor ?? (widget.gradientColors == null ? null : Colors.transparent)),
+                : (widget.backgroundColor ??
+                    (widget.gradientColors == null
+                        ? null
+                        : Colors.transparent)),
             gradient: widget.isOutlined || widget.backgroundColor != null
                 ? null
                 : LinearGradient(

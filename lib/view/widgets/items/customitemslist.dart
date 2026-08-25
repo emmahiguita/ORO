@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/controller/items/itemsController.dart';
 import 'package:oro/core/constant/color.dart';
@@ -23,7 +21,8 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
 
   @override
   Widget build(BuildContext context) {
-    final isDiscounted = itemsModel.itemDiscount! > 0;
+    final isDiscounted = (itemsModel.itemDiscount ?? 0) > 0;
+    final itemId = itemsModel.itemId;
 
     return Material(
       color: Colors.transparent,
@@ -34,11 +33,11 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
+                color: Colors.black.withValues(alpha: 0.06),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
               ),
@@ -50,34 +49,38 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
               Stack(
                 children: [
                   Hero(
-                    tag: itemsModel.itemId!,
-                    child: ClipRRect(
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(20)),
-                      child: Container(
-                        height: 160,
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.grey[50]!,
-                              Colors.grey[100]!,
-                            ],
+                    tag: 'product-${itemsModel.itemId ?? itemsModel.hashCode}',
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(20)),
+                        child: Container(
+                          height: 160,
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.grey.withValues(alpha: 0.05),
+                                Colors.grey.withValues(alpha: 0.1),
+                              ],
+                            ),
                           ),
-                        ),
-                        child: OroProductImage(
-                          imageUrl: itemsModel.itemImg,
-                          productName: databaseTranslation(
-                            itemsModel.itemName!,
-                            itemsModel.itemNameAr!,
-                            itemsModel.itemNameEs!,
+                          child: OroProductImage(
+                            imageUrl: itemsModel.itemImg,
+                            productName: databaseTranslation(
+                              itemsModel.itemName,
+                              itemsModel.itemNameAr,
+                              itemsModel.itemNameEs,
+                            ),
+                            categoryName: itemsModel.categoryName,
+                            fit: BoxFit.contain,
+                            memCacheWidth: 560,
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          categoryName: itemsModel.categoryName,
-                          fit: BoxFit.contain,
-                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                     ),
@@ -136,15 +139,13 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(25),
                             onTap: () {
-                              if (controller.favourites[itemsModel.itemId] ==
-                                  1) {
-                                controller.setFavourites(itemsModel.itemId!, 0);
-                                controller.deleteFavourites(
-                                    itemsModel.itemId!.toString());
+                              if (itemId == null) return;
+                              if (controller.favourites[itemId] == 1) {
+                                controller.setFavourites(itemId, 0);
+                                controller.deleteFavourites(itemId.toString());
                               } else {
-                                controller.setFavourites(itemsModel.itemId!, 1);
-                                controller.addFavourites(
-                                    itemsModel.itemId!.toString());
+                                controller.setFavourites(itemId, 1);
+                                controller.addFavourites(itemId.toString());
                               }
                             },
                             child: Container(
@@ -152,14 +153,12 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                               child: AnimatedSwitcher(
                                 duration: const Duration(milliseconds: 300),
                                 child: Icon(
-                                  controller.favourites[itemsModel.itemId] == 1
+                                  controller.favourites[itemId] == 1
                                       ? Icons.favorite
                                       : Icons.favorite_border,
                                   key: ValueKey(
-                                      controller.favourites[itemsModel.itemId]),
-                                  color: controller
-                                              .favourites[itemsModel.itemId] ==
-                                          1
+                                      controller.favourites[itemId]),
+                                  color: controller.favourites[itemId] == 1
                                       ? Appcolor.deepPink
                                       : Colors.grey[400],
                                   size: 20,
@@ -179,8 +178,8 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      databaseTranslation(itemsModel.itemName!,
-                          itemsModel.itemNameAr!, itemsModel.itemNameEs!),
+                      databaseTranslation(itemsModel.itemName,
+                          itemsModel.itemNameAr, itemsModel.itemNameEs),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -201,7 +200,9 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           RatingBarIndicator(
-                            rating: double.tryParse('${itemsModel.itemAvgRating}') ?? 4.8,
+                            rating: double.tryParse(
+                                    '${itemsModel.itemAvgRating}') ??
+                                4.8,
                             itemBuilder: (context, index) =>
                                 const Icon(Icons.star, color: Colors.amber),
                             itemCount: 5,
@@ -211,7 +212,8 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            (double.tryParse('${itemsModel.itemAvgRating}') ?? 4.8)
+                            (double.tryParse('${itemsModel.itemAvgRating}') ??
+                                    4.8)
                                 .toStringAsFixed(1),
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(

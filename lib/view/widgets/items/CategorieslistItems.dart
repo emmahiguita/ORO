@@ -52,7 +52,7 @@ class Categories extends GetView<ItemscontrollerImp> {
           child: InkWell(
             onTap: () {
               controller.changeCategory(
-                  selected, (categoriesmodel.categoryId!.toString()));
+                  selected, (categoriesmodel.categoryId?.toString() ?? ''));
             },
             borderRadius: BorderRadius.circular(25),
             child: AnimatedContainer(
@@ -87,19 +87,23 @@ class Categories extends GetView<ItemscontrollerImp> {
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 300),
                 style: isSelected
-                    ? Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold)
-                    : Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.grey[700],
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                    ? (Theme.of(context).textTheme.bodyMedium ??
+                            const TextStyle())
+                        .copyWith(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold)
+                    : (Theme.of(context).textTheme.bodyMedium ??
+                            const TextStyle())
+                        .copyWith(
+                            color: Colors.grey[700],
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
                 child: Text(
                   databaseTranslation(
-                      categoriesmodel.categoryName!,
-                      categoriesmodel.categoryNameAr!,
-                      categoriesmodel.categoryNameEs!),
+                      categoriesmodel.categoryName,
+                      categoriesmodel.categoryNameAr,
+                      categoriesmodel.categoryNameEs),
                   textAlign: TextAlign.center,
                 ),
               ),

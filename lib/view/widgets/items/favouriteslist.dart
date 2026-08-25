@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/core/class/handlingdataview.dart';
 import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
@@ -26,7 +24,7 @@ class FavouritesList extends StatelessWidget {
                     Icon(
                       Icons.favorite_border_rounded,
                       size: 64,
-                      color: Appcolor.berry.withValues(alpha: 0.4),
+                      color: Appcolor.forest.withValues(alpha: 0.4),
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -35,7 +33,6 @@ class FavouritesList extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: Appcolor.black,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -68,11 +65,10 @@ class FavouritesList extends StatelessWidget {
                                 opacity: isDeleting ? 0 : 1,
                                 duration: const Duration(milliseconds: 250),
                                 child: Material(
-                                  color: Appcolor
-                                      .white, // Match your container background
+                                  color: Theme.of(context).colorScheme.surface,
                                   child: InkWell(
-                                    splashColor: Colors.pink.withValues(
-                                        alpha: 0.2), // Customize as needed
+                                    splashColor: Appcolor.accentGold
+                                        .withValues(alpha: 0.15),
                                     onTap: () {
                                       controller.goToItemDetails(
                                           controller.fav[index]);
@@ -96,7 +92,6 @@ class FavouritesList extends StatelessWidget {
                                                   child: Text(
                                                       (index + 1).toString(),
                                                       style: const TextStyle(
-                                                          color: Appcolor.black,
                                                           fontFamily: 'Sw',
                                                           fontSize: 20,
                                                           fontWeight:
@@ -105,29 +100,47 @@ class FavouritesList extends StatelessWidget {
                                                 Container(
                                                   margin: const EdgeInsets.only(
                                                       right: 10),
-                                                  height: 92,
-                                                  width: 100,
+                                                  height: 84,
+                                                  width: 84,
                                                   decoration: BoxDecoration(
                                                     color: Appcolor.mimiPink,
                                                     borderRadius:
-                                                        BorderRadius.circular(8),
+                                                        BorderRadius.circular(
+                                                            8),
                                                   ),
                                                   child: Center(
                                                     child: Hero(
-                                                      tag: controller
-                                                          .fav[index].itemId!,
-                                                      child: OroProductImage(
-                                                        imageUrl: controller
-                                                            .fav[index].itemImg,
-                                                        productName: databaseTranslation(
-                                                          controller.fav[index].itemName,
-                                                          controller.fav[index].itemNameAr,
-                                                          controller.fav[index].itemNameEs,
+                                                      tag:
+                                                          'product-${controller.fav[index].itemId}',
+                                                      child: Material(
+                                                        type: MaterialType
+                                                            .transparency,
+                                                        child: OroProductImage(
+                                                          imageUrl: controller
+                                                              .fav[index]
+                                                              .itemImg,
+                                                          productName:
+                                                              databaseTranslation(
+                                                            controller
+                                                                .fav[index]
+                                                                .itemName,
+                                                            controller
+                                                                .fav[index]
+                                                                .itemNameAr,
+                                                            controller
+                                                                .fav[index]
+                                                                .itemNameEs,
+                                                          ),
+                                                          categoryName:
+                                                              controller
+                                                                  .fav[index]
+                                                                  .categoryName,
+                                                          fit: BoxFit.contain,
+                                                          memCacheWidth: 560,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
                                                         ),
-                                                        categoryName: controller
-                                                            .fav[index].categoryName,
-                                                        fit: BoxFit.contain,
-                                                        borderRadius: BorderRadius.circular(8),
                                                       ),
                                                     ),
                                                   ),
@@ -135,18 +148,24 @@ class FavouritesList extends StatelessWidget {
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         databaseTranslation(
-                                                          controller.fav[index].itemName,
-                                                          controller.fav[index].itemNameAr,
-                                                          controller.fav[index].itemNameEs,
+                                                          controller.fav[index]
+                                                              .itemName,
+                                                          controller.fav[index]
+                                                              .itemNameAr,
+                                                          controller.fav[index]
+                                                              .itemNameEs,
                                                         ),
                                                         maxLines: 2,
-                                                        overflow: TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: const TextStyle(
-                                                          fontWeight: FontWeight.w600,
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                           fontSize: 14,
                                                         ),
                                                       ),
@@ -155,8 +174,10 @@ class FavouritesList extends StatelessWidget {
                                                         "\$${(controller.fav[index].itemFinalPrice ?? controller.fav[index].itemPrice ?? 0.0).toStringAsFixed(2)}",
                                                         style: const TextStyle(
                                                           fontFamily: "Sw",
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Appcolor.deepPurple,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Appcolor
+                                                              .deepPurple,
                                                         ),
                                                       ),
                                                       const SizedBox(height: 2),
@@ -167,14 +188,21 @@ class FavouritesList extends StatelessWidget {
                                                             color: Colors.amber,
                                                             size: 16,
                                                           ),
-                                                          const SizedBox(width: 2),
+                                                          const SizedBox(
+                                                              width: 2),
                                                           Text(
-                                                            (double.tryParse('${controller.fav[index].itemAvgRating}') ?? 4.8)
-                                                                .toStringAsFixed(1),
+                                                            (double.tryParse(
+                                                                        '${controller.fav[index].itemAvgRating}') ??
+                                                                    4.8)
+                                                                .toStringAsFixed(
+                                                                    1),
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              fontWeight: FontWeight.w600,
-                                                              color: Colors.grey[700],
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: Colors
+                                                                  .grey[700],
                                                             ),
                                                           ),
                                                         ],

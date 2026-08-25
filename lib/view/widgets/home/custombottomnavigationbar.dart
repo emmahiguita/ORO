@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/home/homescreenController.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/view/widgets/home/bottombarbutton.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -16,16 +16,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return GetBuilder<HomeScreenControllerImp>(
       builder: (controller) {
         return ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: BottomAppBar(
               height: 82,
               elevation: 0,
               notchMargin: 10,
               shape: const CircularNotchedRectangle(),
-              color: (isDark ? const Color(0xFF111114) : Colors.white)
-                  .withValues(alpha: .94),
+              color: (isDark ? OroColors.surfaceDark : OroColors.surface)
+                  .withValues(alpha: .92),
               surfaceTintColor: Colors.transparent,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),

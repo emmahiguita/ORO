@@ -131,88 +131,92 @@ class _OroIntroVideoScreenState extends State<OroIntroVideoScreen>
       ),
       child: Scaffold(
         backgroundColor: const Color(0xFF0B0B0D),
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            // Video or luxury fallback background
-            if (_isInitialized && _videoController != null)
-              Center(
-                child: AspectRatio(
-                  aspectRatio: _videoController!.value.aspectRatio,
-                  child: VideoPlayer(_videoController!),
-                ),
-              )
-            else if (_hasError)
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment(0, -0.2),
-                    radius: 1.2,
-                    colors: [
-                      Color(0xFF2A1526),
-                      Color(0xFF0B0B0D),
-                    ],
+        body: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Video or luxury fallback background
+              if (_isInitialized && _videoController != null)
+                Center(
+                  child: AspectRatio(
+                    aspectRatio: _videoController!.value.aspectRatio,
+                    child: VideoPlayer(_videoController!),
                   ),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Appcolor.berry.withValues(alpha: 0.2),
-                          border: Border.all(
-                            color: const Color(0xFFE5C07B).withValues(alpha: 0.5),
-                            width: 2,
+                )
+              else if (_hasError)
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment(0, -0.2),
+                      radius: 1.2,
+                      colors: [
+                        Color(0xFF2A1526),
+                        Color(0xFF0B0B0D),
+                      ],
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Appcolor.berry.withValues(alpha: 0.2),
+                            border: Border.all(
+                              color: const Color(0xFFE5C07B)
+                                  .withValues(alpha: 0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.play_circle_outline_rounded,
+                            size: 48,
+                            color: Color(0xFFE5C07B),
                           ),
                         ),
-                        child: const Icon(
-                          Icons.play_circle_outline_rounded,
-                          size: 48,
-                          color: Color(0xFFE5C07B),
+                        const SizedBox(height: 24),
+                        const Text(
+                          "ORO",
+                          style: TextStyle(
+                            color: Color(0xFFE5C07B),
+                            fontSize: 32,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 6,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        "ORO",
-                        style: TextStyle(
-                          color: Color(0xFFE5C07B),
-                          fontSize: 32,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 6,
+                        const SizedBox(height: 8),
+                        Text(
+                          "Experiencia de Comercio Premium",
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.7),
+                            fontSize: 14,
+                            letterSpacing: 1.2,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "Experiencia de Comercio Premium",
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.7),
-                          fontSize: 14,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+                )
+              else
+                const Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xFFE5C07B),
+                    strokeWidth: 2,
                   ),
                 ),
-              )
-            else
-              const Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xFFE5C07B),
-                  strokeWidth: 2,
-                ),
-              ),
 
-            // Screen tap to skip/advance
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: _proceedToApp,
-              child: const SizedBox.expand(),
-            ),
-          ],
+              // Screen tap to skip/advance
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _proceedToApp,
+                child: const SizedBox.expand(),
+              ),
+            ],
+          ),
         ),
       ),
     );

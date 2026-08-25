@@ -1,41 +1,44 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class OrdersModel {
   int? orderId;
   int? orderUserid;
   int? orderAddressid;
   int? orderType;
-  int? orderPrice;
-  int? orderPricedelivery;
-  int? orderTotalprice;
+  double? orderPrice;
+  double? orderPricedelivery;
+  double? orderTotalprice;
   int? orderPaymenttype;
   int? orderCoupon;
   int? orderStatus;
   String? orderDatetime;
 
-  OrdersModel(
-      {this.orderId,
-      this.orderUserid,
-      this.orderAddressid,
-      this.orderType,
-      this.orderPrice,
-      this.orderPricedelivery,
-      this.orderTotalprice,
-      this.orderPaymenttype,
-      this.orderCoupon,
-      this.orderStatus,
-      this.orderDatetime});
+  OrdersModel({
+    this.orderId,
+    this.orderUserid,
+    this.orderAddressid,
+    this.orderType,
+    this.orderPrice,
+    this.orderPricedelivery,
+    this.orderTotalprice,
+    this.orderPaymenttype,
+    this.orderCoupon,
+    this.orderStatus,
+    this.orderDatetime,
+  });
 
   OrdersModel.fromJson(Map<String, dynamic> json) {
-    orderId = json['order_id'];
-    orderUserid = json['order_userid'];
-    orderAddressid = json['order_addressid'];
-    orderType = json['order_type'];
-    orderPrice = json['order_price'];
-    orderPricedelivery = json['order_pricedelivery'];
-    orderTotalprice = json['order_totalprice'];
-    orderPaymenttype = json['order_paymenttype'];
-    orderCoupon = json['order_coupon'];
-    orderStatus = (json['order_status'] as num?)?.toInt();
-    orderDatetime = json['order_datetime'];
+    orderId = JsonParser.asInt(json['order_id']);
+    orderUserid = JsonParser.asInt(json['order_userid']);
+    orderAddressid = JsonParser.asInt(json['order_addressid']);
+    orderType = JsonParser.asInt(json['order_type']) ?? 0;
+    orderPrice = JsonParser.asDouble(json['order_price']) ?? 0.0;
+    orderPricedelivery = JsonParser.asDouble(json['order_pricedelivery']) ?? 0.0;
+    orderTotalprice = JsonParser.asDouble(json['order_totalprice']) ?? 0.0;
+    orderPaymenttype = JsonParser.asInt(json['order_paymenttype']) ?? 0;
+    orderCoupon = JsonParser.asInt(json['order_coupon']) ?? 0;
+    orderStatus = JsonParser.asInt(json['order_status']) ?? 0;
+    orderDatetime = JsonParser.asString(json['order_datetime']);
   }
 
   Map<String, dynamic> toJson() {

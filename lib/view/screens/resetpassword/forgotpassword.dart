@@ -39,7 +39,8 @@ class ForgotPassword extends StatelessWidget {
                             height: 200,
                           ),
                           const SizedBox(height: 10),
-                          const AUTHTText(text: 'Ingresa tu correo electrónico'),
+                          const AUTHTText(
+                              text: 'Ingresa tu correo electrónico'),
                           const SizedBox(height: 50),
                           AUTHForm(
                             type: "email",

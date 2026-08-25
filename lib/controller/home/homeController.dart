@@ -5,6 +5,7 @@ import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/functions/handlingdata.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/data/datasource/remote/home/homedata.dart';
+import 'package:oro/data/model/itemsmodel.dart';
 import 'package:oro/view/screens/items/ItemsView.dart';
 import 'package:oro/view/screens/items/itemdetails.dart';
 import 'package:oro/view/screens/search/search.dart';
@@ -23,8 +24,11 @@ class HomeControllerImp extends HomeController {
   final HomeData homeData = HomeData(Get.find());
   final List categories = [];
   final List items = [];
+  final List<ItemsModel> itemsList = [];
   final List mainPage = [];
   TextEditingController? textEditingController;
+
+  static Map? _cachedHomeData;
 
   String? username;
   String? id;
@@ -42,6 +46,10 @@ class HomeControllerImp extends HomeController {
   void onInit() {
     textEditingController = TextEditingController();
     intiialiData();
+    if (_cachedHomeData != null) {
+      _applyData(_cachedHomeData!);
+      statusRequest = StatusRequest.success;
+    }
     getData();
     super.onInit();
   }
@@ -52,25 +60,44 @@ class HomeControllerImp extends HomeController {
     super.onClose();
   }
 
+  void _applyData(Map response) {
+    if (response['categories'] != null && response['categories'] is List) {
+      categories
+        ..clear()
+        ..addAll(response['categories']);
+    }
+    if (response['items'] != null && response['items'] is List) {
+      items.clear();
+      itemsList.clear();
+      for (final raw in response['items']) {
+        items.add(raw);
+        itemsList.add(ItemsModel.fromJson(raw));
+      }
+    }
+    if (response['mainpage'] != null && response['mainpage'] is List) {
+      mainPage
+        ..clear()
+        ..addAll(response['mainpage']);
+    }
+  }
+
   @override
   getData() async {
-    statusRequest = StatusRequest.loding;
-    update();
+    final hasCachedData = itemsList.isNotEmpty;
+    if (!hasCachedData) {
+      statusRequest = StatusRequest.loding;
+      update();
+    }
     final response = await homeData.postData();
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == 'success') {
-        categories
-          ..clear()
-          ..addAll(response['categories']);
-        items
-          ..clear()
-          ..addAll(response['items']);
-        mainPage
-          ..clear()
-          ..addAll(response['mainpage']);
+        _cachedHomeData = response;
+        _applyData(response);
       } else if (response['status'] == 'failure') {
-        statusRequest = StatusRequest.failure;
+        if (!hasCachedData) {
+          statusRequest = StatusRequest.failure;
+        }
       }
     }
     update();

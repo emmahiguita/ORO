@@ -119,8 +119,10 @@ class _FlyAnimationWidgetState extends State<_FlyAnimationWidget>
       math.min(p0.dy, p2.dy) - 120,
     );
 
-    final x = (1 - t) * (1 - t) * p0.dx + 2 * (1 - t) * t * p1.dx + t * t * p2.dx;
-    final y = (1 - t) * (1 - t) * p0.dy + 2 * (1 - t) * t * p1.dy + t * t * p2.dy;
+    final x =
+        (1 - t) * (1 - t) * p0.dx + 2 * (1 - t) * t * p1.dx + t * t * p2.dx;
+    final y =
+        (1 - t) * (1 - t) * p0.dy + 2 * (1 - t) * t * p1.dy + t * t * p2.dy;
 
     return Offset(x, y);
   }
@@ -131,7 +133,8 @@ class _FlyAnimationWidgetState extends State<_FlyAnimationWidget>
       animation: _progress,
       builder: (context, child) {
         final t = _progress.value;
-        final currentPos = _calculateBezier(t, widget.startOffset, widget.endOffset);
+        final currentPos =
+            _calculateBezier(t, widget.startOffset, widget.endOffset);
         final scale = (1.0 - (t * 0.75)).clamp(0.25, 1.0);
         final opacity = (1.0 - (t * 0.4)).clamp(0.0, 1.0);
         final rotation = t * 2 * math.pi;

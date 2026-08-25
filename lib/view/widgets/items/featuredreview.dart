@@ -11,6 +11,20 @@ class FeaturedReview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userPfp = review.userPfp?.toString() ?? '';
+    final userName = review.userName?.toString() ?? 'Usuario';
+    final stars = double.tryParse(review.ratingStars?.toString() ?? '') ?? 5.0;
+    final comment = review.ratingComment?.toString() ?? '';
+    final dateStr = review.ratingDatetime?.toString();
+    String formattedTime = '';
+    if (dateStr != null && dateStr.isNotEmpty) {
+      try {
+        formattedTime = Jiffy.parse(dateStr).fromNow();
+      } catch (_) {
+        formattedTime = '';
+      }
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -23,9 +37,13 @@ class FeaturedReview extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundImage: CachedNetworkImageProvider(
-              AppLink.pfpimage + review.userPfp!,
-            ),
+            backgroundColor: Colors.grey[200],
+            backgroundImage: userPfp.isNotEmpty
+                ? CachedNetworkImageProvider(AppLink.pfpimage + userPfp)
+                : null,
+            child: userPfp.isEmpty
+                ? Icon(Icons.person, color: Colors.grey[400])
+                : null,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -35,15 +53,19 @@ class FeaturedReview extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      review.userName!,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                    Expanded(
+                      child: Text(
+                        userName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     RatingBarIndicator(
-                      rating: double.parse(review.ratingStars!),
+                      rating: stars,
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -53,22 +75,26 @@ class FeaturedReview extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  Jiffy.parse(review.ratingDatetime!).fromNow(),
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 12,
+                if (formattedTime.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    formattedTime,
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  review.ratingComment!,
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    height: 1.4,
+                ],
+                if (comment.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    comment,
+                    style: TextStyle(
+                      color: Colors.grey[800],
+                      height: 1.4,
+                    ),
                   ),
-                ),
+                ],
               ],
             ),
           ),

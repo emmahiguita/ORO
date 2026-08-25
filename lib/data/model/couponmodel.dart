@@ -1,3 +1,5 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class CouponModel {
   int? couponId;
   String? couponCode;
@@ -13,11 +15,11 @@ class CouponModel {
       this.couponExpirydate});
 
   CouponModel.fromJson(Map<String, dynamic> json) {
-    couponId = json['coupon_id'];
-    couponCode = json['coupon_code'];
-    couponCount = json['coupon_count'];
-    couponDiscount = json['coupon_discount'];
-    couponExpirydate = json['coupon_expirydate'];
+    couponId = JsonParser.asInt(json['coupon_id']);
+    couponCode = JsonParser.asString(json['coupon_code']);
+    couponCount = JsonParser.asInt(json['coupon_count']) ?? 0;
+    couponDiscount = JsonParser.asInt(json['coupon_discount']) ?? 0;
+    couponExpirydate = JsonParser.asString(json['coupon_expirydate']);
   }
 
   Map<String, dynamic> toJson() {

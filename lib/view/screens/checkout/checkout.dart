@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/apilink.dart';
 import 'package:oro/controller/checkout/checkoutcontroller.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/view/screens/address/viewaddress.dart';
 import 'package:oro/view/widgets/address/gradientprogressindicator.dart';
 import 'package:oro/view/widgets/checkout/couponsection.dart';
@@ -97,7 +96,7 @@ class Checkout extends StatelessWidget {
                                           ]
                                               .where((e) =>
                                                   e != null &&
-                                                  e!.trim().isNotEmpty)
+                                                  e.trim().isNotEmpty)
                                               .join(', '),
                                           placeName: address.addressBymap ?? '',
                                           icon: Icons.location_on_outlined,

@@ -14,7 +14,6 @@ class PendingOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(PendingOrdersControllerImp());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pedidos en Curso'),
@@ -22,6 +21,7 @@ class PendingOrders extends StatelessWidget {
         centerTitle: true,
       ),
       body: GetBuilder<PendingOrdersControllerImp>(
+        init: PendingOrdersControllerImp(),
         builder: (controller) => controller.statusRequest ==
                     StatusRequest.loding &&
                 controller.pendingOrders.isEmpty
@@ -74,9 +74,15 @@ class PendingOrders extends StatelessWidget {
                                       horizontal: 8, vertical: 4),
                                 ),
                                 Text(
-                                  Jiffy.parse(controller
-                                          .pendingOrders[index].orderDatetime!)
-                                      .fromNow(),
+                                  () {
+                                    final dt = controller.pendingOrders[index].orderDatetime;
+                                    if (dt == null || dt.isEmpty) return '';
+                                    try {
+                                      return Jiffy.parse(dt).fromNow();
+                                    } catch (_) {
+                                      return '';
+                                    }
+                                  }(),
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
@@ -89,31 +95,31 @@ class PendingOrders extends StatelessWidget {
                               isTotal: false,
                               label: 'Delivery Price:',
                               value:
-                                  '${controller.pendingOrders[index].orderPricedelivery}',
+                                  '${controller.pendingOrders[index].orderPricedelivery ?? 0}',
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Price:',
                               value:
-                                  '${controller.pendingOrders[index].orderPrice}',
+                                  '${controller.pendingOrders[index].orderPrice ?? 0}',
                             ),
                             DetailRow(
                               label: 'Total Price:',
                               value:
-                                  '${controller.pendingOrders[index].orderTotalprice}',
+                                  '${controller.pendingOrders[index].orderTotalprice ?? 0}',
                               isTotal: true,
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Payment Type:',
                               value: controller.getPaymentType(controller
-                                  .pendingOrders[index].orderPaymenttype!),
+                                  .pendingOrders[index].orderPaymenttype ?? 0),
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Type:',
                               value: controller.getOrderType(
-                                  controller.pendingOrders[index].orderType!),
+                                  controller.pendingOrders[index].orderType ?? 0),
                             ),
 
                             const SizedBox(height: 12),
@@ -126,9 +132,10 @@ class PendingOrders extends StatelessWidget {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
+                                      final orderId = controller.pendingOrders[index].orderId;
+                                      if (orderId == null) return;
                                       controller.getOrderDetails(
-                                        controller.pendingOrders[index].orderId!
-                                            .toString(),
+                                        orderId.toString(),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
@@ -154,21 +161,21 @@ class PendingOrders extends StatelessWidget {
                                     ),
                                   ),
                                   if (controller.pendingOrders[index]
-                                              .orderStatus! ==
+                                              .orderStatus ==
                                           0 ||
                                       controller.pendingOrders[index]
-                                              .orderStatus! ==
+                                              .orderStatus ==
                                           2)
                                     const SizedBox(width: 12),
                                   if (controller
-                                          .pendingOrders[index].orderStatus! ==
+                                          .pendingOrders[index].orderStatus ==
                                       2)
                                     ElevatedButton(
                                       onPressed: () {
+                                        final orderId = controller.pendingOrders[index].orderId;
+                                        if (orderId == null) return;
                                         controller.goToTrackOrder(
-                                          controller
-                                              .pendingOrders[index].orderId!
-                                              .toString(),
+                                          orderId.toString(),
                                         );
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -195,7 +202,7 @@ class PendingOrders extends StatelessWidget {
                                       ),
                                     ),
                                   if (controller
-                                          .pendingOrders[index].orderStatus! ==
+                                          .pendingOrders[index].orderStatus ==
                                       0)
                                     ElevatedButton(
                                       onPressed: () {
@@ -240,12 +247,14 @@ class PendingOrders extends StatelessWidget {
                                             // Confirm Cancel Button
                                             ElevatedButton(
                                               onPressed: () {
-                                                controller.cancelorder(
-                                                  controller
-                                                      .pendingOrders[index]
-                                                      .orderId!
-                                                      .toString(),
-                                                );
+                                                final orderId = controller
+                                                    .pendingOrders[index]
+                                                    .orderId;
+                                                if (orderId != null) {
+                                                  controller.cancelorder(
+                                                    orderId.toString(),
+                                                  );
+                                                }
                                                 Get.back(); // Close the dialog
                                               },
                                               style: ElevatedButton.styleFrom(

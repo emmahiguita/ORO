@@ -8,6 +8,10 @@ class RatingSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final avgRating = double.tryParse(
+            controller.data.itemAvgRating?.toString() ?? '') ??
+        5.0;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -21,7 +25,7 @@ class RatingSummary extends StatelessWidget {
           const Icon(Icons.star_rounded, color: Colors.amber, size: 32),
           const SizedBox(width: 12),
           Text(
-            double.parse(controller.data.itemAvgRating!).toStringAsFixed(1),
+            avgRating.toStringAsFixed(1),
             style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,

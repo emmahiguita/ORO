@@ -81,7 +81,8 @@ class OroOrderSuccess extends StatelessWidget {
                       Text(
                         'Número de Pedido',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: 0.6),
                         ),
                       ),
                       Text(
@@ -99,7 +100,8 @@ class OroOrderSuccess extends StatelessWidget {
                       Text(
                         'Tiempo estimado',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: 0.6),
                         ),
                       ),
                       Row(
@@ -129,7 +131,8 @@ class OroOrderSuccess extends StatelessWidget {
                         Text(
                           'Total Pagado',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                            color: theme.colorScheme.onSurface
+                                .withValues(alpha: 0.6),
                           ),
                         ),
                         Text(

@@ -13,7 +13,6 @@ class ViewRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(RatingControllerImp());
     return Scaffold(
       backgroundColor: Appcolor.white,
       appBar: AppBar(
@@ -28,6 +27,7 @@ class ViewRating extends StatelessWidget {
         centerTitle: true,
       ),
       body: GetBuilder<RatingControllerImp>(
+        init: RatingControllerImp(),
         builder: (controller) => controller.allRating.isEmpty
             ? Container(
                 margin: const EdgeInsets.only(bottom: 140),
@@ -83,21 +83,41 @@ class ViewRating extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   itemCount: controller.allRating.length,
                   itemBuilder: (context, index) {
+                    final rating = controller.allRating[index];
+                    final userPfp = rating.userPfp?.toString() ?? '';
+                    final userName = rating.userName?.toString() ?? 'Usuario';
+                    final starsStr = rating.ratingStars?.toString() ?? '5';
+                    final stars = double.tryParse(starsStr) ?? 5.0;
+                    final comment = rating.ratingComment?.toString() ?? '';
+                    final dateStr = rating.ratingDatetime?.toString();
+                    String timeAgo = '';
+                    if (dateStr != null && dateStr.isNotEmpty) {
+                      try {
+                        timeAgo = Jiffy.parse(dateStr).fromNow();
+                      } catch (_) {
+                        timeAgo = '';
+                      }
+                    }
+
                     return AnimatedOpacity(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 300),
                       opacity: controller.isFading[index] ? 0.0 : 1.0,
-                      curve: Curves.easeInOut,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
-                        child: Card(
-                          elevation: 1,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withAlpha(5),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          color: const Color.fromARGB(255, 255, 239, 244),
                           child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -106,32 +126,41 @@ class ViewRating extends StatelessWidget {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
-                                      child: CachedNetworkImage(
-                                        imageUrl: AppLink.pfpimage +
-                                            controller
-                                                .allRating[index].userPfp!,
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) =>
-                                            Container(
-                                          width: 40,
-                                          height: 40,
-                                          color: Colors.grey[200],
-                                          child: Icon(Icons.person,
-                                              size: 20,
-                                              color: Colors.grey[400]),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          width: 40,
-                                          height: 40,
-                                          color: Colors.grey[200],
-                                          child: Icon(Icons.person,
-                                              size: 20,
-                                              color: Colors.grey[400]),
-                                        ),
-                                      ),
+                                      child: userPfp.isNotEmpty
+                                          ? CachedNetworkImage(
+                                              imageUrl:
+                                                  AppLink.pfpimage + userPfp,
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  Container(
+                                                width: 40,
+                                                height: 40,
+                                                color: Colors.grey[200],
+                                                child: Icon(Icons.person,
+                                                    size: 20,
+                                                    color: Colors.grey[400]),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Container(
+                                                width: 40,
+                                                height: 40,
+                                                color: Colors.grey[200],
+                                                child: Icon(Icons.person,
+                                                    size: 20,
+                                                    color: Colors.grey[400]),
+                                              ),
+                                            )
+                                          : Container(
+                                              width: 40,
+                                              height: 40,
+                                              color: Colors.grey[200],
+                                              child: Icon(Icons.person,
+                                                  size: 20,
+                                                  color: Colors.grey[400]),
+                                            ),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
@@ -143,8 +172,7 @@ class ViewRating extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  controller.allRating[index]
-                                                      .userName!,
+                                                  userName,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .titleSmall
@@ -158,10 +186,8 @@ class ViewRating extends StatelessWidget {
                                               ),
                                               Row(
                                                 children: [
-                                                  if (controller
-                                                          .allRating[index]
-                                                          .userId!
-                                                          .toString() ==
+                                                  if (rating.userId
+                                                          ?.toString() ==
                                                       controller.id)
                                                     InkWell(
                                                       splashColor: Appcolor
@@ -172,17 +198,14 @@ class ViewRating extends StatelessWidget {
                                                               6),
                                                       onTap: () {
                                                         controller.deleteRating(
-                                                            controller
-                                                                .allRating[
-                                                                    index]
-                                                                .ratingId
-                                                                .toString(),
+                                                            rating.ratingId
+                                                                    ?.toString() ??
+                                                                '',
                                                             index);
                                                       },
                                                       child: Container(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
+                                                            const EdgeInsets.symmetric(
                                                                 horizontal: 6,
                                                                 vertical: 5),
                                                         decoration:
@@ -236,9 +259,7 @@ class ViewRating extends StatelessWidget {
                                                         const SizedBox(
                                                             width: 2),
                                                         Text(
-                                                          controller
-                                                              .allRating[index]
-                                                              .ratingStars!,
+                                                          starsStr,
                                                           style:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -260,21 +281,20 @@ class ViewRating extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 2),
-                                          Text(
-                                            Jiffy.parse(controller
-                                                    .allRating[index]
-                                                    .ratingDatetime!)
-                                                .fromNow(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall
-                                                ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .outline,
-                                                ),
-                                          ),
+                                          if (timeAgo.isNotEmpty) ...[
+                                            const SizedBox(height: 2),
+                                            Text(
+                                              timeAgo,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .outline,
+                                                  ),
+                                            ),
+                                          ],
                                         ],
                                       ),
                                     ),
@@ -283,8 +303,7 @@ class ViewRating extends StatelessWidget {
                                 const SizedBox(height: 8),
                                 Center(
                                   child: RatingBarIndicator(
-                                    rating: double.parse(controller
-                                        .allRating[index].ratingStars!),
+                                    rating: stars,
                                     itemBuilder: (context, index) => const Icon(
                                         Icons.star_rounded,
                                         color: Appcolor.amaranthpink),
@@ -293,16 +312,17 @@ class ViewRating extends StatelessWidget {
                                     unratedColor: Colors.grey[300],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    controller.allRating[index].ratingComment!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(height: 1.4),
+                                if (comment.isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      comment,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(height: 1.4),
+                                    ),
                                   ),
-                                ),
                               ],
                             ),
                           ),

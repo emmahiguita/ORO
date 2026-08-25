@@ -1,3 +1,5 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class RatingModel {
   int? ratingId;
   String? ratingStars;
@@ -17,13 +19,13 @@ class RatingModel {
       this.userPfp});
 
   RatingModel.fromJson(Map<String, dynamic> json) {
-    ratingId = json['rating_id'];
-    ratingStars = json['rating_stars'];
-    ratingComment = json['rating_comment'];
-    ratingDatetime = json['rating_datetime'];
-    userId = json['user_id'];
-    userName = json['user_name'];
-    userPfp = json['user_pfp'];
+    ratingId = JsonParser.asInt(json['rating_id']);
+    ratingStars = JsonParser.asString(json['rating_stars']) ?? '5';
+    ratingComment = JsonParser.asString(json['rating_comment']) ?? '';
+    ratingDatetime = JsonParser.asString(json['rating_datetime']);
+    userId = JsonParser.asInt(json['user_id']);
+    userName = JsonParser.asString(json['user_name']) ?? 'Usuario';
+    userPfp = JsonParser.asString(json['user_pfp']);
   }
 
   Map<String, dynamic> toJson() {

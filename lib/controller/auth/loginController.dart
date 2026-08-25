@@ -100,7 +100,8 @@ class LogincontrollerImp extends LoginController {
         statusRequest = StatusRequest.failure;
         Get.defaultDialog(
           title: 'No pudimos iniciar sesión',
-          middleText: 'Verifica tu usuario o correo y contraseña e inténtalo de nuevo.',
+          middleText:
+              'Verifica tu usuario o correo y contraseña e inténtalo de nuevo.',
         );
       }
     }

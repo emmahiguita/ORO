@@ -16,7 +16,40 @@ class ReviewSection extends StatelessWidget {
     if (controller.ratingStatusRequest == StatusRequest.loding) {
       return const ReviewSectionSkeleton();
     } else if (controller.allRating.isEmpty) {
-      return const SizedBox.shrink();
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.star_border, color: Colors.amber[300], size: 24),
+            const SizedBox(width: 12),
+            Flexible(
+              child: Text(
+                "Este producto aún no tiene reseñas.",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      );
     }
 
     return Container(

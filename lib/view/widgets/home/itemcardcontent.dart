@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/itemsmodel.dart';
@@ -33,7 +31,7 @@ class ItemCardContent extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: 165,
+              height: 140,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -47,20 +45,27 @@ class ItemCardContent extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 165,
+              height: 140,
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(14),
-                child: OroProductImage(
-                  imageUrl: itemsModel.itemImg,
-                  productName: databaseTranslation(
-                    itemsModel.itemName,
-                    itemsModel.itemNameAr,
-                    itemsModel.itemNameEs,
+                child: Hero(
+                  tag: 'product-${itemsModel.itemId ?? itemsModel.hashCode}',
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: OroProductImage(
+                      imageUrl: itemsModel.itemImg,
+                      productName: databaseTranslation(
+                        itemsModel.itemName,
+                        itemsModel.itemNameAr,
+                        itemsModel.itemNameEs,
+                      ),
+                      categoryName: itemsModel.categoryName,
+                      fit: BoxFit.contain,
+                      memCacheWidth: 560,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                   ),
-                  categoryName: itemsModel.categoryName,
-                  fit: BoxFit.contain,
-                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),

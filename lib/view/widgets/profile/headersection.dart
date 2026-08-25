@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:oro/apilink.dart';
 import 'package:oro/controller/profile/profilecontroller.dart';
 import 'package:oro/core/constant/color.dart';
@@ -17,7 +16,7 @@ class HeaderSection extends StatelessWidget {
       children: [
         // Banner Image - Twitter banner aspect ratio (3:1)
         Container(
-          height: MediaQuery.of(Get.context!).size.width /
+          height: MediaQuery.sizeOf(context).width /
               2.5, // Maintains 3:1 aspect ratio
           width: double.infinity,
           decoration: BoxDecoration(
@@ -39,7 +38,7 @@ class HeaderSection extends StatelessWidget {
               bottomRight: Radius.circular(30),
             ),
             child: CachedNetworkImage(
-              imageUrl: "${AppLink.bannerimage}${controller.banner}",
+              imageUrl: "${AppLink.bannerimage}${controller.banner ?? ''}",
               fit: BoxFit.cover,
               placeholder: (context, url) => Container(
                 decoration: BoxDecoration(
@@ -108,7 +107,7 @@ class HeaderSection extends StatelessWidget {
                   ),
                   child: ClipOval(
                     child: CachedNetworkImage(
-                      imageUrl: "${AppLink.pfpimage}${controller.pfp}",
+                      imageUrl: "${AppLink.pfpimage}${controller.pfp ?? ''}",
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
                         color: Colors.grey[300],
@@ -129,7 +128,7 @@ class HeaderSection extends StatelessWidget {
                 ),
 
                 // Verified Badge
-                if (controller.approve!)
+                if (controller.approve == true)
                   Positioned(
                     bottom: 5,
                     right: 5,

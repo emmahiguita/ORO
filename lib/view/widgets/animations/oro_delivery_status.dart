@@ -237,8 +237,7 @@ class OroDeliveryStatus extends StatelessWidget {
                       onPressed: onViewMap,
                       icon: const Icon(Icons.map_outlined, size: 20),
                       style: IconButton.styleFrom(
-                        backgroundColor:
-                            Appcolor.berry.withValues(alpha: 0.12),
+                        backgroundColor: Appcolor.berry.withValues(alpha: 0.12),
                         foregroundColor: Appcolor.berry,
                       ),
                     ),

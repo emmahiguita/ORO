@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/controller/cart/cartController.dart';
 import 'package:oro/core/constant/approutes.dart';
 import 'package:oro/core/constant/color.dart';
@@ -14,7 +13,6 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CartControllerImp());
     return Scaffold(
       backgroundColor: Appcolor.white,
       appBar: AppBar(
@@ -22,6 +20,7 @@ class Cart extends StatelessWidget {
         backgroundColor: Appcolor.white,
       ),
       body: GetBuilder<CartControllerImp>(
+        init: CartControllerImp(),
         builder: (controller) => Stack(
           fit: StackFit.expand,
           children: [

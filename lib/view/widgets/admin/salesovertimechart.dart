@@ -12,8 +12,9 @@ class SalesOverTimeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = controller.dashboardInfo.salesOverWeek;
-    if (data == null || data.isEmpty)
+    if (data == null || data.isEmpty) {
       return const EmptyChart(title: 'Ventas en el tiempo');
+    }
     return ChartContainer(
       title: 'Ventas en el tiempo',
       subtitle: 'Rendimiento semanal',

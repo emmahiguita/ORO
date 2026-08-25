@@ -11,10 +11,10 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => ProfileControllerImp());
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: GetBuilder<ProfileControllerImp>(
+        init: ProfileControllerImp(),
         builder: (controller) => SingleChildScrollView(
           child: Column(
             children: [

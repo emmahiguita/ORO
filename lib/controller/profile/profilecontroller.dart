@@ -49,7 +49,18 @@ class ProfileControllerImp extends ProfileController {
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
-        data = response['data'];
+        final raw = response['data'];
+        if (raw is List) {
+          data = raw;
+        } else if (raw is Map) {
+          data = [raw];
+        } else if (raw is num || raw is String) {
+          data = [
+            {'orders_count': raw}
+          ];
+        } else {
+          data = [];
+        }
       } else if (response["status"] == "failure") {
         statusRequest = StatusRequest.failure;
       }

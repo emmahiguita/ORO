@@ -15,8 +15,9 @@ class DeliveryWorkersSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final workers = controller.dashboardInfo.deliveryWorkers;
-    if (workers == null || workers.isEmpty)
+    if (workers == null || workers.isEmpty) {
       return const EmptyChart(title: 'Rendimiento de repartidores');
+    }
     final workerData = workers
         .map((worker) => DeliveryWorkerData(
               worker.userName ?? '',

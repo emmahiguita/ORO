@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class AppTheme {
   AppTheme._();
@@ -7,31 +7,45 @@ class AppTheme {
   static ThemeData get light {
     const scheme = ColorScheme(
       brightness: Brightness.light,
-      primary: Appcolor.ink,
-      onPrimary: Appcolor.surface,
-      secondary: Appcolor.accentGold,
-      onSecondary: Appcolor.ink,
-      error: Appcolor.danger,
-      onError: Appcolor.surface,
-      surface: Appcolor.surface,
-      onSurface: Appcolor.ink,
+      primary: OroColors.forest,
+      onPrimary: OroColors.surface,
+      primaryContainer: Color(0xFFC7EBD9),
+      onPrimaryContainer: OroColors.forestDark,
+      secondary: OroColors.accentGold,
+      onSecondary: OroColors.ink,
+      secondaryContainer: OroColors.accentGoldSoft,
+      onSecondaryContainer: OroColors.accentGoldDark,
+      error: OroColors.error,
+      onError: OroColors.surface,
+      surface: OroColors.surface,
+      onSurface: OroColors.textPrimaryLight,
+      surfaceContainerHighest: Color(0xFFEBE6DC),
+      outline: OroColors.borderLight,
+      outlineVariant: OroColors.dividerLight,
     );
-    return _base(scheme, Appcolor.canvas);
+    return _base(scheme, OroColors.canvas);
   }
 
   static ThemeData get dark {
     const scheme = ColorScheme(
       brightness: Brightness.dark,
-      primary: Appcolor.accentGold,
-      onPrimary: Appcolor.ink,
-      secondary: Color(0xFFE2C98F),
-      onSecondary: Appcolor.ink,
+      primary: OroColors.accentGold,
+      onPrimary: OroColors.ink,
+      primaryContainer: OroColors.forestDark,
+      onPrimaryContainer: OroColors.accentGoldSoft,
+      secondary: OroColors.accentGoldSoft,
+      onSecondary: OroColors.ink,
+      secondaryContainer: Color(0xFF332914),
+      onSecondaryContainer: OroColors.accentGoldSoft,
       error: Color(0xFFFFB4AB),
       onError: Color(0xFF690005),
-      surface: Color(0xFF151517),
-      onSurface: Color(0xFFF3F0EB),
+      surface: OroColors.surfaceDark,
+      onSurface: OroColors.textPrimaryDark,
+      surfaceContainerHighest: OroColors.surfaceDarkElevated,
+      outline: OroColors.borderDark,
+      outlineVariant: OroColors.dividerDark,
     );
-    return _base(scheme, const Color(0xFF09090A));
+    return _base(scheme, const Color(0xFF090E0C));
   }
 
   static ThemeData _base(ColorScheme scheme, Color background) {
@@ -122,7 +136,9 @@ class AppTheme {
           fontSize: 12,
           height: 1.35,
           fontWeight: FontWeight.w500,
-          color: scheme.onSurface.withValues(alpha: .68),
+          color: isDark
+              ? OroColors.textSecondaryDark
+              : OroColors.textSecondaryLight,
         ),
         labelLarge: TextStyle(
           fontFamily: 'Sw',
@@ -140,39 +156,43 @@ class AppTheme {
           fontFamily: 'Sw',
           fontSize: 11,
           fontWeight: FontWeight.w600,
-          color: scheme.onSurface.withValues(alpha: .68),
+          color: isDark ? OroColors.textMutedDark : OroColors.textMutedLight,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: isDark ? const Color(0xFF1B1B1E) : Appcolor.surface,
+        fillColor: isDark ? OroColors.surfaceDarkElevated : OroColors.surface,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 18, vertical: 17),
         hintStyle: TextStyle(
-          color: scheme.onSurface.withValues(alpha: .48),
+          color: isDark ? OroColors.textMutedDark : OroColors.textMutedLight,
           fontWeight: FontWeight.w500,
         ),
         labelStyle: TextStyle(
-          color: scheme.onSurface.withValues(alpha: .68),
+          color: isDark
+              ? OroColors.textSecondaryDark
+              : OroColors.textSecondaryLight,
           fontWeight: FontWeight.w600,
         ),
-        prefixIconColor: scheme.onSurface.withValues(alpha: .66),
-        suffixIconColor: scheme.onSurface.withValues(alpha: .66),
+        prefixIconColor:
+            isDark ? OroColors.textSecondaryDark : OroColors.textSecondaryLight,
+        suffixIconColor:
+            isDark ? OroColors.textSecondaryDark : OroColors.textSecondaryLight,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
           borderSide: BorderSide(
-            color: scheme.onSurface.withValues(alpha: .10),
+            color: scheme.outline,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
           borderSide: BorderSide(
-            color: scheme.onSurface.withValues(alpha: .09),
+            color: scheme.outline.withValues(alpha: 0.7),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
-          borderSide: BorderSide(color: scheme.secondary, width: 1.4),
+          borderSide: BorderSide(color: scheme.secondary, width: 1.6),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -196,21 +216,21 @@ class AppTheme {
           minimumSize: const Size(48, 54),
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
           foregroundColor: scheme.onSurface,
-          side: BorderSide(color: scheme.onSurface.withValues(alpha: .15)),
+          side: BorderSide(color: scheme.outline),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        elevation: 5,
+        elevation: 4,
         highlightElevation: 2,
         backgroundColor: scheme.primary,
         foregroundColor: scheme.onPrimary,
         shape: const CircleBorder(),
       ),
       dividerTheme: DividerThemeData(
-        color: scheme.onSurface.withValues(alpha: .08),
+        color: scheme.outlineVariant,
         space: 1,
         thickness: 1,
       ),

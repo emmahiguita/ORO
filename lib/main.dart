@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       translations: Translation(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       defaultTransition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 320),
       builder: (context, child) {

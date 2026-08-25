@@ -1,3 +1,5 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class AddressModel {
   int? addressId;
   int? addressUserid;
@@ -31,20 +33,20 @@ class AddressModel {
       this.addressLong});
 
   AddressModel.fromJson(Map<String, dynamic> json) {
-    addressId = json['address_id'];
-    addressUserid = json['address_userid'];
-    addressName = json['address_name'];
-    addressBuilding = json['address_building'];
-    addressApt = json['address_apt'];
-    addressFloor = json['address_floor'];
-    addressStreet = json['address_street'];
-    addressBlock = json['address_block'];
-    addressWay = json['address_way'];
-    addressAdditional = json['address_additional'];
-    addressBymap = json['address_bymap'];
-    addressDeliverytime = json['address_deliverytime'];
-    addressLat = json['address_lat'];
-    addressLong = json['address_long'];
+    addressId = JsonParser.asInt(json['address_id']);
+    addressUserid = JsonParser.asInt(json['address_userid']);
+    addressName = JsonParser.asString(json['address_name']);
+    addressBuilding = JsonParser.asString(json['address_building']);
+    addressApt = JsonParser.asString(json['address_apt']);
+    addressFloor = JsonParser.asString(json['address_floor']);
+    addressStreet = JsonParser.asString(json['address_street']);
+    addressBlock = JsonParser.asString(json['address_block']);
+    addressWay = JsonParser.asString(json['address_way']);
+    addressAdditional = JsonParser.asString(json['address_additional']);
+    addressBymap = JsonParser.asString(json['address_bymap']);
+    addressDeliverytime = JsonParser.asString(json['address_deliverytime']);
+    addressLat = JsonParser.asDouble(json['address_lat']);
+    addressLong = JsonParser.asDouble(json['address_long']);
   }
 
   Map<String, dynamic> toJson() {

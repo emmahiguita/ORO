@@ -24,8 +24,13 @@ class RatingControllerImp extends RatingController {
 
   @override
   void onInit() {
-    allRating = Get.arguments["allRating"];
-    id = services.sharedPreferences.getString("id")!;
+    final rawRatings = Get.arguments is Map ? Get.arguments["allRating"] : null;
+    if (rawRatings is List) {
+      allRating = rawRatings.whereType<RatingModel>().toList();
+    } else {
+      allRating = [];
+    }
+    id = services.sharedPreferences.getString("id") ?? '';
     isFading = List.generate(allRating.length, (_) => true);
     super.onInit();
 

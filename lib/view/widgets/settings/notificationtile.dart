@@ -52,7 +52,7 @@ class NotificationTile extends StatelessWidget {
             size: 20,
           ),
         ),
-        activeColor: Appcolor.deepPurple,
+        activeThumbColor: Appcolor.forest,
       ),
     );
   }

@@ -64,8 +64,10 @@ class OfflineDataProvider {
       'item_name_es': 'iPhone 15 Pro Max 256GB Titanio',
       'item_desc': 'Super Retina XDR OLED 6.7 inch, A17 Pro Chip, 48MP Camera',
       'item_desc_ar': 'شاشة سوبر ريتينا، معالج A17 برو',
-      'item_desc_es': 'Pantalla Super Retina XDR OLED 6.7", Chip A17 Pro, Cámara 48MP',
-      'item_img': 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Pantalla Super Retina XDR OLED 6.7", Chip A17 Pro, Cámara 48MP',
+      'item_img':
+          'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80',
       'item_count': 15,
       'item_active': 1,
       'item_price': 1199.0,
@@ -88,8 +90,10 @@ class OfflineDataProvider {
       'item_name_es': 'Samsung Galaxy S24 Ultra AI',
       'item_desc': 'Dynamic AMOLED 2X, Snapdragon 8 Gen 3, S-Pen included',
       'item_desc_ar': 'شاشة ديناميك أموليد، قلم إس بين',
-      'item_desc_es': 'Pantalla Dynamic AMOLED 2X, Procesador Snapdragon 8 Gen 3 con Galaxy AI y S-Pen',
-      'item_img': 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Pantalla Dynamic AMOLED 2X, Procesador Snapdragon 8 Gen 3 con Galaxy AI y S-Pen',
+      'item_img':
+          'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80',
       'item_count': 12,
       'item_active': 1,
       'item_price': 1299.0,
@@ -110,10 +114,13 @@ class OfflineDataProvider {
       'item_name': 'Sony WH-1000XM5',
       'item_name_ar': 'سماعات سوني',
       'item_name_es': 'Auriculares Sony WH-1000XM5 Cancelación Ruido',
-      'item_desc': 'Industry leading noise canceling wireless headphones with 30hr battery',
+      'item_desc':
+          'Industry leading noise canceling wireless headphones with 30hr battery',
       'item_desc_ar': 'سماعات رأس لاسلكية عازلة للضوضاء',
-      'item_desc_es': 'Cancelación de ruido líder en la industria, sonido de alta resolución y 30h de batería',
-      'item_img': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Cancelación de ruido líder en la industria, sonido de alta resolución y 30h de batería',
+      'item_img':
+          'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80',
       'item_count': 25,
       'item_active': 1,
       'item_price': 399.0,
@@ -134,10 +141,13 @@ class OfflineDataProvider {
       'item_name': 'Nike Air Max 270',
       'item_name_ar': 'حذاء نايك اير ماكس',
       'item_name_es': 'Zapatillas Deportivas Nike Air Max 270',
-      'item_desc': 'Breathable mesh upper with large Max Air unit for all-day comfort',
+      'item_desc':
+          'Breathable mesh upper with large Max Air unit for all-day comfort',
       'item_desc_ar': 'حذاء رياضي مريح',
-      'item_desc_es': 'Malla transpirable con amortiguación Max Air para máxima comodidad diaria',
-      'item_img': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Malla transpirable con amortiguación Max Air para máxima comodidad diaria',
+      'item_img':
+          'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
       'item_count': 30,
       'item_active': 1,
       'item_price': 160.0,
@@ -158,10 +168,13 @@ class OfflineDataProvider {
       'item_name': 'Adidas Ultraboost 22',
       'item_name_ar': 'حذاء اديداس الترا بوست',
       'item_name_es': 'Zapatillas Adidas Ultraboost 22 Running',
-      'item_desc': 'Responsive Boost midsole with Primeknit+ upper for performance running',
+      'item_desc':
+          'Responsive Boost midsole with Primeknit+ upper for performance running',
       'item_desc_ar': 'حذاء ركض عالي الأداء',
-      'item_desc_es': 'Media suela con retorno de energía Boost y tejido envolvente Primeknit+',
-      'item_img': 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Media suela con retorno de energía Boost y tejido envolvente Primeknit+',
+      'item_img':
+          'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80',
       'item_count': 18,
       'item_active': 1,
       'item_price': 190.0,
@@ -182,10 +195,13 @@ class OfflineDataProvider {
       'item_name': 'Philips AirFryer XXL',
       'item_name_ar': 'قلاية هوائية فيليبس',
       'item_name_es': 'Freidora de Aire Philips XXL Smart',
-      'item_desc': 'Twin TurboStar technology removes fat from food, 1.4kg capacity',
+      'item_desc':
+          'Twin TurboStar technology removes fat from food, 1.4kg capacity',
       'item_desc_ar': 'قلاية هوائية صحية',
-      'item_desc_es': 'Tecnología Twin TurboStar para cocción saludable sin aceite, capacidad 1.4kg',
-      'item_img': 'https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Tecnología Twin TurboStar para cocción saludable sin aceite, capacidad 1.4kg',
+      'item_img':
+          'https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80',
       'item_count': 10,
       'item_active': 1,
       'item_price': 249.0,
@@ -206,10 +222,13 @@ class OfflineDataProvider {
       'item_name': 'Dior Sauvage Eau de Parfum',
       'item_name_ar': 'عطر ديور سوفاج',
       'item_name_es': 'Perfume Dior Sauvage Eau de Parfum 100ml',
-      'item_desc': 'Noble and powerful fragrance with fresh bergamot and amber wood notes',
+      'item_desc':
+          'Noble and powerful fragrance with fresh bergamot and amber wood notes',
       'item_desc_ar': 'عطر فاخر',
-      'item_desc_es': 'Fragancia emblemática con notas de bergamota de Calabria y maderas ambarinas',
-      'item_img': 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Fragancia emblemática con notas de bergamota de Calabria y maderas ambarinas',
+      'item_img':
+          'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop&q=80',
       'item_count': 40,
       'item_active': 1,
       'item_price': 145.0,
@@ -232,8 +251,10 @@ class OfflineDataProvider {
       'item_name_es': 'Raqueta de Tenis Profesional Wilson Blade 98',
       'item_desc': 'Precision feel and flexibility for competitive players',
       'item_desc_ar': 'مضرب تنس احترافي',
-      'item_desc_es': 'Sensación de control y precisión profesional con tecnología DirectConnect',
-      'item_img': 'https://images.unsplash.com/photo-1617083934555-56360c710f27?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Sensación de control y precisión profesional con tecnología DirectConnect',
+      'item_img':
+          'https://images.unsplash.com/photo-1617083934555-56360c710f27?w=600&auto=format&fit=crop&q=80',
       'item_count': 8,
       'item_active': 1,
       'item_price': 260.0,
@@ -254,10 +275,13 @@ class OfflineDataProvider {
       'item_name': 'Atomic Habits Book',
       'item_name_ar': 'كتاب العادات الذرية',
       'item_name_es': 'Libro Hábitos Atómicos - James Clear',
-      'item_desc': 'An easy and proven way to build good habits and break bad ones',
+      'item_desc':
+          'An easy and proven way to build good habits and break bad ones',
       'item_desc_ar': 'كتاب تطوير الذات الأكثر مبيعاً',
-      'item_desc_es': 'Bestseller internacional: Un método sencillo y comprobado para desarrollar buenos hábitos',
-      'item_img': 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80',
+      'item_desc_es':
+          'Bestseller internacional: Un método sencillo y comprobado para desarrollar buenos hábitos',
+      'item_img':
+          'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80',
       'item_count': 50,
       'item_active': 1,
       'item_price': 22.0,
@@ -303,9 +327,11 @@ class OfflineDataProvider {
   static Map<String, dynamic> getMockResponse(String linkurl, Map data) {
     // 1. Auth & Login
     if (linkurl.contains('login') || linkurl.contains('auth/login')) {
-      final role = (data['username'] == 'admin' || data['username'] == 'admin@devemm.com')
+      final role = (data['username'] == 'admin' ||
+              data['username'] == 'admin@devemm.com')
           ? 2
-          : (data['username'] == 'delivery' || data['username'] == 'delivery@devemm.com')
+          : (data['username'] == 'delivery' ||
+                  data['username'] == 'delivery@devemm.com')
               ? 1
               : 0;
       return {
@@ -327,7 +353,10 @@ class OfflineDataProvider {
     }
 
     if (linkurl.contains('signup') || linkurl.contains('auth/signup')) {
-      return {'status': 'success', 'message': 'Cuenta demo creada exitosamente.'};
+      return {
+        'status': 'success',
+        'message': 'Cuenta demo creada exitosamente.'
+      };
     }
 
     // 2. Home data
@@ -350,9 +379,11 @@ class OfflineDataProvider {
             'mainpage_title': 'Colección ORO 2026',
             'mainpage_title_ar': 'مجموعة أورو 2026',
             'mainpage_title_es': 'Colección ORO 2026',
-            'mainpage_body': 'Catálogo offline interactivo. Puedes añadir artículos a tu carrito, favoritos y probar la app 100% funcional.',
+            'mainpage_body':
+                'Catálogo offline interactivo. Puedes añadir artículos a tu carrito, favoritos y probar la app 100% funcional.',
             'mainpage_body_ar': 'تسوق بلا إنترنت',
-            'mainpage_body_es': 'Catálogo offline interactivo. Puedes añadir artículos a tu carrito, favoritos y probar la app 100% funcional.',
+            'mainpage_body_es':
+                'Catálogo offline interactivo. Puedes añadir artículos a tu carrito, favoritos y probar la app 100% funcional.',
           }
         ],
       };
@@ -449,7 +480,8 @@ class OfflineDataProvider {
       return {'status': 'success'};
     }
 
-    if (linkurl.contains('favourites/view') || linkurl == AppLink.favouritesView) {
+    if (linkurl.contains('favourites/view') ||
+        linkurl == AppLink.favouritesView) {
       final favs = mockItems
           .where((i) => _favoritesSet.contains(i['item_id'] as int))
           .map((i) => {...i, 'favorite': 1})
@@ -515,7 +547,8 @@ class OfflineDataProvider {
       };
     }
 
-    if (linkurl.contains('orders/vieworder') || linkurl.contains('orderdetails')) {
+    if (linkurl.contains('orders/vieworder') ||
+        linkurl.contains('orderdetails')) {
       return {
         'status': 'success',
         'data': [
@@ -534,21 +567,24 @@ class OfflineDataProvider {
     }
 
     // 7. Notifications
-    if (linkurl.contains('notification/viewnotification') || linkurl == AppLink.viewNotification) {
+    if (linkurl.contains('notification/viewnotification') ||
+        linkurl == AppLink.viewNotification) {
       return {
         'status': 'success',
         'data': [
           {
             'notification_id': 1,
             'notification_title': '¡Pedido #1042 en camino!',
-            'notification_body': 'Tu pedido ha sido asignado a un repartidor y llegará en aproximadamente 25 minutos.',
+            'notification_body':
+                'Tu pedido ha sido asignado a un repartidor y llegará en aproximadamente 25 minutos.',
             'notification_datetime': '2026-08-23 18:35:00',
             'is_read': 0,
           },
           {
             'notification_id': 2,
             'notification_title': 'Colección ORO Verano 2026',
-            'notification_body': 'Hasta 25% de descuento en Calzado deportivo y Moda esta semana.',
+            'notification_body':
+                'Hasta 25% de descuento en Calzado deportivo y Moda esta semana.',
             'notification_datetime': '2026-08-22 10:00:00',
             'is_read': 1,
           },
@@ -591,19 +627,23 @@ class OfflineDataProvider {
       };
     }
 
-    if (linkurl.contains('address/add') || linkurl.contains('address/edit') || linkurl.contains('address/delete')) {
+    if (linkurl.contains('address/add') ||
+        linkurl.contains('address/edit') ||
+        linkurl.contains('address/delete')) {
       return {'status': 'success'};
     }
 
     // 9. Ratings & Profile
-    if (linkurl.contains('rating/viewrating') || linkurl.contains('rating/get')) {
+    if (linkurl.contains('rating/viewrating') ||
+        linkurl.contains('rating/get')) {
       return {
         'status': 'success',
         'data': [
           {
             'rating_id': 1,
             'rating_stars': 5.0,
-            'rating_comment': 'Excelente calidad de construcción y sonido premium. Muy recomendado.',
+            'rating_comment':
+                'Excelente calidad de construcción y sonido premium. Muy recomendado.',
             'rating_datetime': '2026-08-20 16:45:00',
             'user_name': 'Carlos M.',
             'user_pfp': 'default.png',
@@ -611,7 +651,8 @@ class OfflineDataProvider {
           {
             'rating_id': 2,
             'rating_stars': 4.5,
-            'rating_comment': 'Entrega rápida y producto 100% original con empaque impecable.',
+            'rating_comment':
+                'Entrega rápida y producto 100% original con empaque impecable.',
             'rating_datetime': '2026-08-19 11:20:00',
             'user_name': 'Laura G.',
             'user_pfp': 'default.png',
@@ -625,7 +666,8 @@ class OfflineDataProvider {
     }
 
     // 10. Admin dashboard
-    if (linkurl.contains('admin/dashboard') || linkurl == AppLink.dashboardInfo) {
+    if (linkurl.contains('admin/dashboard') ||
+        linkurl == AppLink.dashboardInfo) {
       return {
         'status': 'success',
         'total_sales': 48500.0,
@@ -687,7 +729,8 @@ class OfflineDataProvider {
     }
 
     // 11. Delivery requests
-    if (linkurl.contains('delivery/requests') || linkurl.contains('delivery/viewaccepted')) {
+    if (linkurl.contains('delivery/requests') ||
+        linkurl.contains('delivery/viewaccepted')) {
       return {
         'status': 'success',
         'data': [

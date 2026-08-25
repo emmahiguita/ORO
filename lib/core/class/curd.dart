@@ -13,6 +13,7 @@ import 'package:oro/core/services/services.dart';
 
 class Curd {
   static const _timeout = Duration(seconds: 4);
+  static final http.Client _client = http.Client();
 
   Map<String, String> _headers({bool json = false}) {
     final headers = <String, String>{};
@@ -35,9 +36,9 @@ class Curd {
     }
     try {
       if (!await checkinternet()) {
-        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        return const Left(StatusRequest.offlinefailure);
       }
-      final response = await http
+      final response = await _client
           .post(
             Uri.parse(linkurl),
             body: data.map((key, value) => MapEntry('$key', '$value')),
@@ -49,19 +50,19 @@ class Curd {
         return const Left(StatusRequest.failure);
       }
       if (response.statusCode != 200 && response.statusCode != 201) {
-        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        return const Left(StatusRequest.serverfailure);
       }
       final decoded = jsonDecode(response.body);
       if (decoded is! Map) {
-        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        return const Left(StatusRequest.serverfailure);
       }
       return Right(Map<String, dynamic>.from(decoded));
     } on SocketException {
-      return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      return const Left(StatusRequest.offlinefailure);
     } on FormatException {
-      return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      return const Left(StatusRequest.serverfailure);
     } catch (_) {
-      return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      return const Left(StatusRequest.serverfailure);
     }
   }
 
@@ -123,19 +124,19 @@ class Curd {
         return const Left(StatusRequest.failure);
       }
       if (response.statusCode != 200 && response.statusCode != 201) {
-        return Right(OfflineDataProvider.getMockResponse(url, data));
+        return const Left(StatusRequest.serverfailure);
       }
       final decoded = jsonDecode(response.body);
       if (decoded is! Map) {
-        return Right(OfflineDataProvider.getMockResponse(url, data));
+        return const Left(StatusRequest.serverfailure);
       }
       return Right(Map<String, dynamic>.from(decoded));
     } on SocketException {
-      return Right(OfflineDataProvider.getMockResponse(url, data));
+      return const Left(StatusRequest.offlinefailure);
     } on FormatException {
-      return Right(OfflineDataProvider.getMockResponse(url, data));
+      return const Left(StatusRequest.serverfailure);
     } catch (_) {
-      return Right(OfflineDataProvider.getMockResponse(url, data));
+      return const Left(StatusRequest.serverfailure);
     }
   }
 

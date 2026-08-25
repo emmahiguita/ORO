@@ -12,8 +12,9 @@ class MonthlyRevenueChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = controller.dashboardInfo.salesOverMonth;
-    if (data == null || data.isEmpty)
+    if (data == null || data.isEmpty) {
       return const EmptyChart(title: 'Ingresos mensuales');
+    }
     return ChartContainer(
       title: 'Ingresos mensuales',
       subtitle: 'Tendencia de ingresos por mes',

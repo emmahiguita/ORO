@@ -8,6 +8,7 @@ import 'package:oro/core/class/curd.dart';
 import 'package:oro/core/functions/vaildinput.dart';
 import 'package:oro/core/localization/changelocale.dart';
 import 'package:oro/core/localization/translation.dart';
+import 'package:oro/core/services/offline_data_provider.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/core/theme/app_theme.dart';
 import 'package:oro/view/screens/auth/login.dart';
@@ -79,6 +80,7 @@ void main() {
 
     test('Curd retorna catálogo y categorías en modo offline sin backend',
         () async {
+      OfflineDataProvider.isOfflineMode = true;
       final curd = Get.find<Curd>();
       final result = await curd.postData(AppLink.home, {});
       expect(result.isRight(), isTrue);
@@ -90,6 +92,7 @@ void main() {
           expect(r['items'], isNotEmpty);
         },
       );
+      OfflineDataProvider.isOfflineMode = false;
     });
   });
 }

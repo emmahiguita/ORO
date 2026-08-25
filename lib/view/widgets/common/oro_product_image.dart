@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:oro/apilink.dart';
-import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class OroProductImage extends StatelessWidget {
   final String? imageUrl;
@@ -11,6 +11,8 @@ class OroProductImage extends StatelessWidget {
   final double? height;
   final BoxFit fit;
   final BorderRadius? borderRadius;
+  final int? memCacheWidth;
+  final int? memCacheHeight;
 
   const OroProductImage({
     super.key,
@@ -21,6 +23,8 @@ class OroProductImage extends StatelessWidget {
     this.height,
     this.fit = BoxFit.cover,
     this.borderRadius,
+    this.memCacheWidth = 560,
+    this.memCacheHeight,
   });
 
   String _formatUrl(String? raw) {
@@ -31,16 +35,24 @@ class OroProductImage extends StatelessWidget {
 
   IconData _getCategoryIcon(String? category) {
     final cat = (category ?? '').toLowerCase();
-    if (cat.contains('elect') || cat.contains('phone') || cat.contains('audio')) {
+    if (cat.contains('elect') ||
+        cat.contains('phone') ||
+        cat.contains('audio')) {
       return Icons.devices_other_rounded;
     }
-    if (cat.contains('fash') || cat.contains('moda') || cat.contains('calzado')) {
+    if (cat.contains('fash') ||
+        cat.contains('moda') ||
+        cat.contains('calzado')) {
       return Icons.checkroom_rounded;
     }
-    if (cat.contains('home') || cat.contains('hogar') || cat.contains('cocina')) {
+    if (cat.contains('home') ||
+        cat.contains('hogar') ||
+        cat.contains('cocina')) {
       return Icons.home_rounded;
     }
-    if (cat.contains('beauty') || cat.contains('belleza') || cat.contains('perfume')) {
+    if (cat.contains('beauty') ||
+        cat.contains('belleza') ||
+        cat.contains('perfume')) {
       return Icons.spa_rounded;
     }
     if (cat.contains('sport') || cat.contains('deporte')) {
@@ -55,7 +67,7 @@ class OroProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formatted = _formatUrl(imageUrl);
-    final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     Widget imageContent;
 
@@ -65,22 +77,28 @@ class OroProductImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        memCacheWidth: memCacheWidth,
+        memCacheHeight: memCacheHeight,
+        fadeInDuration: const Duration(milliseconds: 100),
+        fadeOutDuration: Duration.zero,
+        filterQuality: FilterQuality.medium,
         placeholder: (context, url) => Container(
           width: width,
           height: height,
-          color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+          color:
+              isDark ? OroColors.surfaceDarkElevated : const Color(0xFFEBE6DC),
           child: const Center(
             child: SizedBox(
-              width: 22,
-              height: 22,
+              width: 20,
+              height: 20,
               child: CircularProgressIndicator(strokeWidth: 2),
             ),
           ),
         ),
-        errorWidget: (context, url, error) => _buildFallback(theme),
+        errorWidget: (context, url, error) => _buildFallback(context),
       );
     } else {
-      imageContent = _buildFallback(theme);
+      imageContent = _buildFallback(context);
     }
 
     if (borderRadius != null) {
@@ -93,7 +111,8 @@ class OroProductImage extends StatelessWidget {
     return imageContent;
   }
 
-  Widget _buildFallback(ThemeData theme) {
+  Widget _buildFallback(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final icon = _getCategoryIcon(categoryName ?? productName);
     final name = (productName ?? 'ORO Exclusive').trim();
 
@@ -101,14 +120,7 @@ class OroProductImage extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Appcolor.berry.withValues(alpha: 0.08),
-            Appcolor.rosePompadour.withValues(alpha: 0.15),
-          ],
-        ),
+        color: isDark ? OroColors.surfaceDarkElevated : const Color(0xFFF3EFE6),
       ),
       child: Stack(
         alignment: Alignment.center,
@@ -118,25 +130,22 @@ class OroProductImage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: isDark ? OroColors.surfaceDark : Colors.white,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Appcolor.berry.withValues(alpha: 0.08),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                  border: Border.all(
+                    color:
+                        isDark ? OroColors.borderDark : OroColors.borderLight,
+                  ),
                 ),
                 child: Icon(
                   icon,
-                  size: 32,
-                  color: Appcolor.berry,
+                  size: 28,
+                  color: OroColors.forest,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
@@ -144,9 +153,12 @@ class OroProductImage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelSmall?.copyWith(
+                  style: TextStyle(
+                    fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: Appcolor.inkSoft,
+                    color: isDark
+                        ? OroColors.textPrimaryDark
+                        : OroColors.textPrimaryLight,
                   ),
                 ),
               ),
@@ -156,9 +168,9 @@ class OroProductImage extends StatelessWidget {
             bottom: 6,
             right: 6,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
               decoration: BoxDecoration(
-                color: Appcolor.accentGold.withValues(alpha: 0.85),
+                color: OroColors.accentGold,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: const Text(

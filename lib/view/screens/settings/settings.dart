@@ -15,12 +15,12 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingControllerImp controller = Get.put(SettingControllerImp());
-
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Appcolor.white,
-        body: CustomScrollView(
+    return GetBuilder<SettingControllerImp>(
+      init: SettingControllerImp(),
+      builder: (controller) => SafeArea(
+        child: Scaffold(
+          backgroundColor: Appcolor.white,
+          body: CustomScrollView(
           slivers: [
             // App Bar
             const SliverAppBar(
@@ -91,7 +91,7 @@ class Settings extends StatelessWidget {
 
                       const SizedBox(height: 10),
 
-                      if (!controller.isApprove!) ...[
+                      if (controller.isApprove != true) ...[
                         SettingsTile(
                           title: "Verifica tu cuenta",
                           subtitle:
@@ -175,6 +175,6 @@ class Settings extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

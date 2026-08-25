@@ -55,7 +55,8 @@ class SignUp extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Appcolor.berry.withValues(alpha: 0.12),
+                                      color: Appcolor.berry
+                                          .withValues(alpha: 0.12),
                                       blurRadius: 16,
                                       offset: const Offset(0, 4),
                                     ),

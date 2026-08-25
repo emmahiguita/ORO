@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/controller/items/itemsController.dart';
 import 'package:oro/core/constant/color.dart';
-import 'package:oro/data/model/itemsmodel.dart';
+import 'package:oro/core/design/oro_breakpoints.dart';
 import 'package:oro/view/widgets/items/customitemslist.dart';
 
 class CategoryPageContent extends GetView<ItemscontrollerImp> {
@@ -21,9 +21,12 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
   Widget build(BuildContext context) {
     return GetBuilder<ItemscontrollerImp>(
       builder: (controller) {
+        if (categoryIndex >= controller.categories.length) {
+          return const SizedBox.shrink();
+        }
         final categoryId =
             controller.categories[categoryIndex]['category_id'].toString();
-        final categoryData = controller.getCategoryData(categoryId);
+        final categoryModels = controller.getCategoryItemsModels(categoryId);
         final isLoading = controller.isCategoryLoading(categoryId);
 
         if (isLoading) {
@@ -47,10 +50,11 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
           );
         }
 
-        if (categoryData.isEmpty) {
+        if (categoryModels.isEmpty) {
           return RefreshIndicator(
             onRefresh: () => controller.refreshCategory(categoryId),
             child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 0.3),
                 Center(
@@ -75,6 +79,7 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
                             Theme.of(context).textTheme.headlineSmall?.copyWith(
                                   color: Colors.grey[600],
                                   fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                 ),
                       ),
                       const SizedBox(height: 8),
@@ -92,56 +97,54 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
           );
         }
 
-        return RefreshIndicator(
-          onRefresh: () => controller.refreshCategory(categoryId),
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: Container(
-                  key: ValueKey(categoryData.length),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                  child: Text(
-                    '${categoryData.length} productos disponibles',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final columns = OroBreakpoints.gridColumns(constraints.maxWidth);
+
+            return RefreshIndicator(
+              onRefresh: () => controller.refreshCategory(categoryId),
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
                 ),
-              ),
-              const SizedBox(height: 16),
-              MasonryGridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                itemCount: categoryData.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  favouritesController
-                          .favourites[categoryData[index]["item_id"]] =
-                      categoryData[index]["favourite"];
-                  return AnimatedContainer(
-                    duration: Duration(milliseconds: 200 + (index * 50)),
-                    curve: Curves.easeOutBack,
-                    child: CustomItemsList(
-                      loading: controller
-                          .isLoadingItem(categoryData[index]["item_id"]),
-                      onTap: () {
-                        controller
-                            .addToCart("${categoryData[index]["item_id"]}");
-                      },
-                      itemsModel: ItemsModel.fromJson(categoryData[index]),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                      child: Text(
+                        '${categoryModels.length} productos disponibles',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
                     ),
-                  );
-                },
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
+                    sliver: SliverMasonryGrid.count(
+                      crossAxisCount: columns,
+                      mainAxisSpacing: 14,
+                      crossAxisSpacing: 14,
+                      itemBuilder: (context, index) {
+                        final item = categoryModels[index];
+                        return CustomItemsList(
+                          loading: controller.isLoadingItem(item.itemId ?? -1),
+                          onTap: () {
+                            if (item.itemId != null) {
+                              controller.addToCart("${item.itemId}");
+                            }
+                          },
+                          itemsModel: item,
+                        );
+                      },
+                      childCount: categoryModels.length,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 80),
-            ],
-          ),
+            );
+          },
         );
       },
     );

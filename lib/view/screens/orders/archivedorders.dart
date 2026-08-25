@@ -15,7 +15,6 @@ class ArchivedOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ArchivedOrdersControllerImp());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Historial de Pedidos'),
@@ -23,6 +22,7 @@ class ArchivedOrders extends StatelessWidget {
         centerTitle: true,
       ),
       body: GetBuilder<ArchivedOrdersControllerImp>(
+        init: ArchivedOrdersControllerImp(),
         builder: (controller) => controller.statusRequest ==
                     StatusRequest.loding &&
                 controller.archivedOrders.isEmpty
@@ -73,9 +73,15 @@ class ArchivedOrders extends StatelessWidget {
                                       horizontal: 8, vertical: 4),
                                 ),
                                 Text(
-                                  Jiffy.parse(controller
-                                          .archivedOrders[index].orderDatetime!)
-                                      .fromNow(),
+                                  () {
+                                    final dt = controller.archivedOrders[index].orderDatetime;
+                                    if (dt == null || dt.isEmpty) return '';
+                                    try {
+                                      return Jiffy.parse(dt).fromNow();
+                                    } catch (_) {
+                                      return '';
+                                    }
+                                  }(),
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
@@ -88,31 +94,31 @@ class ArchivedOrders extends StatelessWidget {
                               isTotal: false,
                               label: 'Delivery Price:',
                               value:
-                                  '${controller.archivedOrders[index].orderPricedelivery}',
+                                  '${controller.archivedOrders[index].orderPricedelivery ?? 0}',
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Price:',
                               value:
-                                  '${controller.archivedOrders[index].orderPrice}',
+                                  '${controller.archivedOrders[index].orderPrice ?? 0}',
                             ),
                             DetailRow(
                               label: 'Total Price:',
                               value:
-                                  '${controller.archivedOrders[index].orderTotalprice}',
+                                  '${controller.archivedOrders[index].orderTotalprice ?? 0}',
                               isTotal: true,
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Payment Type:',
                               value: controller.getPaymentType(controller
-                                  .archivedOrders[index].orderPaymenttype!),
+                                  .archivedOrders[index].orderPaymenttype ?? 0),
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Type:',
                               value: controller.getOrderType(
-                                  controller.archivedOrders[index].orderType!),
+                                  controller.archivedOrders[index].orderType ?? 0),
                             ),
 
                             const SizedBox(height: 12),
@@ -122,9 +128,9 @@ class ArchivedOrders extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  controller.getOrderDetails(controller
-                                      .archivedOrders[index].orderId
-                                      .toString());
+                                  final orderId = controller.archivedOrders[index].orderId;
+                                  if (orderId == null) return;
+                                  controller.getOrderDetails(orderId.toString());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Appcolor.amaranthpink,

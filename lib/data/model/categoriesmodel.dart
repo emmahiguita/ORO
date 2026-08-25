@@ -1,3 +1,5 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class CategoriesModel {
   int? categoryId;
   String? categoryName;
@@ -15,12 +17,12 @@ class CategoriesModel {
       this.categoryDate});
 
   CategoriesModel.fromJson(Map<String, dynamic> json) {
-    categoryId = json['category_id'];
-    categoryName = json['category_name'];
-    categoryNameAr = json['category_name_ar'];
-    categoryNameEs = json['category_name_es'];
-    categoryImg = json['category_img'];
-    categoryDate = json['category_date'];
+    categoryId = JsonParser.asInt(json['category_id']);
+    categoryName = JsonParser.asString(json['category_name']);
+    categoryNameAr = JsonParser.asString(json['category_name_ar']);
+    categoryNameEs = JsonParser.asString(json['category_name_es']);
+    categoryImg = JsonParser.asString(json['category_img']);
+    categoryDate = JsonParser.asString(json['category_date']);
   }
 
   Map<String, dynamic> toJson() {

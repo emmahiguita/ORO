@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeScreenControllerImp());
     return GetBuilder<HomeScreenControllerImp>(
       builder: (controller) {
         return Scaffold(
@@ -18,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: Tooltip(
             message: 'open_cart'.tr,
             child: FloatingActionButton(
-              elevation: 8,
+              elevation: 6,
               onPressed: () {
                 Get.to(
                   () => const Cart(),
@@ -37,24 +36,10 @@ class HomeScreen extends StatelessWidget {
             onPopInvokedWithResult: (didPop, result) {
               alertExitApp();
             },
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 280),
-              switchInCurve: Curves.easeOutCubic,
-              switchOutCurve: Curves.easeInCubic,
-              transitionBuilder: (child, animation) {
-                final offset = Tween<Offset>(
-                  begin: const Offset(.025, 0),
-                  end: Offset.zero,
-                ).animate(animation);
-                return FadeTransition(
-                  opacity: animation,
-                  child: SlideTransition(position: offset, child: child),
-                );
-              },
-              child: KeyedSubtree(
-                key: ValueKey(controller.currentpage),
-                child: controller.listpages.elementAt(controller.currentpage),
-              ),
+            child: PageView(
+              controller: controller.pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: controller.listpages,
             ),
           ),
         );

@@ -29,13 +29,14 @@ class FavoriteButton extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(25),
             onTap: () {
-              if (favController.favourites[controller.data.itemId] == 1) {
-                favController.setFavourites(controller.data.itemId!, 0);
-                favController
-                    .deleteFavourites(controller.data.itemId!.toString());
+              final itemId = controller.data.itemId;
+              if (itemId == null) return;
+              if (favController.favourites[itemId] == 1) {
+                favController.setFavourites(itemId, 0);
+                favController.deleteFavourites(itemId.toString());
               } else {
-                favController.setFavourites(controller.data.itemId!, 1);
-                favController.addFavourites(controller.data.itemId!.toString());
+                favController.setFavourites(itemId, 1);
+                favController.addFavourites(itemId.toString());
               }
             },
             child: Container(

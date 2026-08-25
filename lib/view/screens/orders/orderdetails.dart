@@ -17,8 +17,6 @@ class OrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(OrderDetailsControllerImp());
-
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -33,7 +31,9 @@ class OrderDetails extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: GetBuilder<OrderDetailsControllerImp>(builder: (controller) {
+      body: GetBuilder<OrderDetailsControllerImp>(
+        init: OrderDetailsControllerImp(),
+        builder: (controller) {
         if (controller.orderDetails.isEmpty) {
           return const Center(
               child: CircularProgressIndicator(
@@ -43,7 +43,7 @@ class OrderDetails extends StatelessWidget {
 
         final int orderType = controller.orderDetails[0].orderType ?? 0;
         final List<Map<String, dynamic>> steps = controller.getSteps(orderType);
-        final int currentStatus = controller.orderDetails[0].orderStatus!;
+        final int currentStatus = controller.orderDetails[0].orderStatus ?? 0;
         final isDelivery = orderType == 0;
         final isCancelled = currentStatus == -1;
         final isArchived = currentStatus == 6;
@@ -92,6 +92,16 @@ class OrderDetails extends StatelessWidget {
           );
         }
 
+        final orderDateStr = controller.orderDetails[0].orderDatetime ?? '';
+        String formattedDate = '';
+        String formattedTimeAgo = '';
+        if (orderDateStr.isNotEmpty) {
+          try {
+            formattedDate = Jiffy.parse(orderDateStr).format(pattern: 'MMM dd, yyyy - hh:mm a');
+            formattedTimeAgo = Jiffy.parse(orderDateStr).fromNow();
+          } catch (_) {}
+        }
+
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -112,7 +122,7 @@ class OrderDetails extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "ORDER #${controller.orderDetails[0].orderId!}",
+                            "ORDER #${controller.orderDetails[0].orderId ?? ''}",
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -125,24 +135,24 @@ class OrderDetails extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: controller
                                   .getStatusColor(
-                                      controller.orderDetails[0].orderStatus!,
+                                      currentStatus,
                                       orderType)
                                   .withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: controller.getStatusColor(
-                                    controller.orderDetails[0].orderStatus!,
+                                    currentStatus,
                                     orderType),
                                 width: 1,
                               ),
                             ),
                             child: Text(
                               controller.getStatusText(
-                                  controller.orderDetails[0].orderStatus!,
+                                  currentStatus,
                                   orderType),
                               style: TextStyle(
                                   color: controller.getStatusColor(
-                                      controller.orderDetails[0].orderStatus!,
+                                      currentStatus,
                                       orderType),
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12),
@@ -151,15 +161,12 @@ class OrderDetails extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      InfoRow(
-                        icon: Icons.calendar_today,
-                        title: Jiffy.parse(
-                                controller.orderDetails[0].orderDatetime!)
-                            .format(pattern: 'MMM dd, yyyy - hh:mm a'),
-                        subtitle: Jiffy.parse(
-                                controller.orderDetails[0].orderDatetime!)
-                            .fromNow(),
-                      ),
+                      if (formattedDate.isNotEmpty)
+                        InfoRow(
+                          icon: Icons.calendar_today,
+                          title: formattedDate,
+                          subtitle: formattedTimeAgo,
+                        ),
                       const SizedBox(height: 12),
                       InfoRow(
                         icon: orderType == 0
@@ -167,7 +174,7 @@ class OrderDetails extends StatelessWidget {
                             : Icons.store,
                         title: orderType == 0 ? 'Delivery' : 'Pickup',
                         subtitle: orderType == 0
-                            ? '${controller.orderDetails[0].orderPricedelivery}\$'
+                            ? '${controller.orderDetails[0].orderPricedelivery ?? 0}\$'
                             : 'Pickup at store',
                       ),
                     ],
@@ -196,123 +203,130 @@ class OrderDetails extends StatelessWidget {
                           color: Colors.grey[200],
                           thickness: 1,
                         ),
-                        itemBuilder: (context, index) => Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.1),
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
-                                  )
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  AppLink.itemimage +
-                                      controller.orderDetails[index].itemImg!,
-                                  width: 80,
-                                  height: 80,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) =>
-                                      Container(
+                        itemBuilder: (context, index) {
+                          final item = controller.orderDetails[index];
+                          final itemImg = item.itemImg ?? '';
+                          final itemName = item.itemName ?? '';
+                          final itemDesc = item.itemDesc ?? '';
+
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(alpha: 0.1),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    )
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    AppLink.itemimage + itemImg,
                                     width: 80,
                                     height: 80,
-                                    color: Colors.grey[100],
-                                    child: Icon(
-                                      Icons.fastfood,
-                                      color: Colors.grey[400],
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) =>
+                                        Container(
+                                      width: 80,
+                                      height: 80,
+                                      color: Colors.grey[100],
+                                      child: Icon(
+                                        Icons.fastfood,
+                                        color: Colors.grey[400],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    controller.orderDetails[index].itemName!,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      itemName,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    controller.orderDetails[index].itemDesc!,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Colors.grey[600],
-                                      height: 1.4,
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      itemDesc,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.grey[600],
+                                        height: 1.4,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color: Appcolor.amaranthpink
-                                              .withValues(alpha: 0.1),
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          border: Border.all(
+                                    const SizedBox(height: 10),
+                                    Wrap(
+                                      spacing: 8,
+                                      runSpacing: 8,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
                                             color: Appcolor.amaranthpink
-                                                .withValues(alpha: 0.3),
-                                            width: 1,
+                                                .withValues(alpha: 0.1),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            border: Border.all(
+                                              color: Appcolor.amaranthpink
+                                                  .withValues(alpha: 0.3),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            controller.orderDetails[index]
+                                                    .categoryName ??
+                                                '',
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                              color: Appcolor.amaranthpink,
+                                            ),
                                           ),
                                         ),
-                                        child: Text(
-                                          controller.orderDetails[index]
-                                              .categoryName!,
-                                          style: const TextStyle(
-                                            fontSize: 12,
+                                      ],
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Price:",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey[600],
                                             fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${controller.orderDetails[index].itemFinalPrice}\$",
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                             color: Appcolor.amaranthpink,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Price:",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey[600],
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${controller.orderDetails[index].itemFinalPrice}\$",
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Appcolor.amaranthpink,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          );
+                        },
                       ),
                       const SizedBox(height: 16),
                       Divider(height: 1, color: Colors.grey[200]),

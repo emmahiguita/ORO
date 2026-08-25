@@ -55,9 +55,9 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   addCart(itemId) async {
     statusRequest = StatusRequest.loding;
     dynamic response;
+    final userId = services.sharedPreferences.getString("id") ?? '';
     for (int i = 0; i < counter; i++) {
-      response = await cartData.cartAdd(
-          services.sharedPreferences.getString("id")!, itemId);
+      response = await cartData.cartAdd(userId, itemId);
     }
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
@@ -99,10 +99,17 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   }
 
   @override
+  void onClose() {
+    comment?.dispose();
+    super.onClose();
+  }
+
+  @override
   addRating(itemid, stars, comment) async {
     statusRequest = StatusRequest.loding;
+    final userId = services.sharedPreferences.getString("id") ?? '';
     var response = await ratingData.addRating(
-      services.sharedPreferences.getString("id")!,
+      userId,
       itemid,
       stars,
       comment,
@@ -110,8 +117,12 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
-        Get.find<ItemscontrollerImp>().statusRequest = StatusRequest.loding;
-        Get.find<ItemscontrollerImp>().getData("${data.itemCat}");
+        if (Get.isRegistered<ItemscontrollerImp>()) {
+          final itemsCtrl = Get.find<ItemscontrollerImp>();
+          itemsCtrl.statusRequest = StatusRequest.loding;
+          itemsCtrl.getData("${data.itemCat}");
+        }
+        await getRating();
         Get.back();
       } else if (response["status"] == "failure") {
         statusRequest = StatusRequest.failure;
@@ -124,13 +135,19 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   getRating() async {
     ratingStatusRequest = StatusRequest.loding;
     allRating.clear();
-    var response = await ratingData.getRating(data.itemId.toString());
+    final itemIdStr = data?.itemId?.toString() ?? '';
+    if (itemIdStr.isEmpty) {
+      ratingStatusRequest = StatusRequest.failure;
+      update();
+      return;
+    }
+    var response = await ratingData.getRating(itemIdStr);
     ratingStatusRequest = handlingdata(response);
     if (ratingStatusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
-        List data = response['data'];
+        List listData = response['data'] ?? [];
         allRating.addAll(
-          data.map(
+          listData.map(
             (e) => RatingModel.fromJson(e),
           ),
         );
@@ -143,9 +160,16 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
 
   @override
   getIsOrdered() async {
+    final userId = services.sharedPreferences.getString("id") ?? '';
+    final itemIdStr = data?.itemId?.toString() ?? '';
+    if (userId.isEmpty || itemIdStr.isEmpty) {
+      isOrdered = false;
+      update();
+      return;
+    }
     var response = await ratingData.isOrdered(
-      services.sharedPreferences.getString("id")!,
-      data.itemId.toString(),
+      userId,
+      itemIdStr,
     );
     if (response["status"] == "success") {
       isOrdered = true;

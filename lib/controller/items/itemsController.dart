@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/constant/approutes.dart';
 import 'package:oro/core/constant/color.dart';
@@ -36,12 +37,12 @@ class ItemscontrollerImp extends ItemsController {
   late ScrollController categoryScrollController;
 
   final Map<String, List> categoryDataCache = {};
+  final Map<String, List<ItemsModel>> categoryItemsModelCache = {};
   final Map<String, StatusRequest> categoryStatusCache = {};
 
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController();
     categoryScrollController = ScrollController();
     initiateData();
   }
@@ -82,9 +83,22 @@ class ItemscontrollerImp extends ItemsController {
 
     if (status == StatusRequest.success) {
       if (response["status"] == "success") {
-        List categoryData = response['data'];
+        List categoryData = response['data'] ?? [];
+        List<ItemsModel> models =
+            categoryData.map((e) => ItemsModel.fromJson(e)).toList();
+
         categoryDataCache[catId] = List.from(categoryData);
+        categoryItemsModelCache[catId] = models;
         categoryStatusCache[catId] = StatusRequest.success;
+
+        if (Get.isRegistered<FavouritesControllerImp>()) {
+          final fav = Get.find<FavouritesControllerImp>();
+          for (final m in models) {
+            if (m.itemId != null && m.favourite != null) {
+              fav.favourites[m.itemId!] = m.favourite!;
+            }
+          }
+        }
 
         if (this.catId == catId) {
           data = List.from(categoryData);
@@ -92,6 +106,7 @@ class ItemscontrollerImp extends ItemsController {
         }
       } else if (response["status"] == "failure") {
         categoryStatusCache[catId] = StatusRequest.failure;
+        categoryItemsModelCache[catId] = [];
         if (this.catId == catId) {
           statusRequest = StatusRequest.failure;
         }
@@ -107,14 +122,20 @@ class ItemscontrollerImp extends ItemsController {
 
   @override
   initiateData() {
-    categories = Get.arguments['categories'];
-    selected = Get.arguments['selected'];
-    catId = Get.arguments['catId'];
+    if (Get.arguments != null) {
+      categories = Get.arguments['categories'] ?? [];
+      selected = Get.arguments['selected'];
+      catId = Get.arguments['catId'];
+    }
 
     pageController = PageController(initialPage: selected ?? 0);
 
-    _loadCategoryData(catId!);
-    _preloadAdjacentCategories();
+    if (catId != null) {
+      _loadCategoryData(catId!);
+      Future.delayed(const Duration(milliseconds: 300), () {
+        _preloadAdjacentCategories();
+      });
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToSelectedCategory();
@@ -173,12 +194,17 @@ class ItemscontrollerImp extends ItemsController {
     return categoryDataCache[categoryId] ?? [];
   }
 
+  List<ItemsModel> getCategoryItemsModels(String categoryId) {
+    return categoryItemsModelCache[categoryId] ?? [];
+  }
+
   bool isCategoryLoading(String categoryId) {
     return categoryStatusCache[categoryId] == StatusRequest.loding;
   }
 
   Future<void> refreshCategory(String categoryId) async {
     categoryDataCache.remove(categoryId);
+    categoryItemsModelCache.remove(categoryId);
     categoryStatusCache.remove(categoryId);
     await _loadCategoryData(categoryId);
   }

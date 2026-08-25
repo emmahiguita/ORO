@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
-/// Paleta editorial premium.
+/// Paleta editorial premium 2026.
 ///
 /// Los aliases antiguos se conservan para no romper widgets existentes mientras
-/// la aplicación migra gradualmente al nuevo sistema visual.
+/// la aplicación migra gradualmente al nuevo sistema visual OroColors.
 class Appcolor {
   // --- Design tokens principales ---
-  static const Color ink = Color(0xFF0B0B0D);
-  static const Color inkSoft = Color(0xFF17171A);
-  static const Color canvas = Color(0xFFF7F5F2);
-  static const Color surface = Color(0xFFFFFFFF);
+  static const Color ink = OroColors.ink;
+  static const Color inkSoft = OroColors.inkSoft;
+  static const Color canvas = OroColors.canvas;
+  static const Color surface = OroColors.surface;
+  static const Color surfaceDark = OroColors.surfaceDark;
   static const Color surfaceWarm = Color(0xFFF0ECE6);
   static const Color stone = Color(0xFF817B73);
   static const Color stoneLight = Color(0xFFD9D4CD);
-  static const Color accentGold = Color(0xFFC6A15B);
-  static const Color accentGoldSoft = Color(0xFFF1E4C9);
+  static const Color accentGold = OroColors.accentGold;
+  static const Color accentGoldSoft = OroColors.accentGoldSoft;
   static const Color oxblood = Color(0xFF6C2735);
-  static const Color forest = Color(0xFF29443A);
+  static const Color forest = OroColors.forest;
+  static const Color forestLight = OroColors.forestLight;
   static const Color navy = Color(0xFF26364A);
   static const Color camel = Color(0xFF9A7048);
   static const Color plum = Color(0xFF60415E);
   static const Color clay = Color(0xFFA4604D);
   static const Color sage = Color(0xFF71806A);
   static const Color bronze = Color(0xFF806448);
-  static const Color success = Color(0xFF2E6A4B);
-  static const Color danger = Color(0xFFB3261E);
+  static const Color success = OroColors.success;
+  static const Color danger = OroColors.error;
 
   // --- Compatibilidad con el código original ---
   static const Color rosePompadour = accentGold;
@@ -57,7 +60,7 @@ class Appcolor {
   static const Color skyBlue = Color(0xFF5E7891);
   static const Color blueGray = Color(0xFF66727A);
   static const Color deepPink = oxblood;
-  static const Color shadowPink = Color(0x1FC6A15B);
+  static const Color shadowPink = Color(0x1FC89B3C);
   static const Color whitePink = canvas;
   static const Color lightPink = surfaceWarm;
   static const Color berry = oxblood;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/functions/databasetranslation.dart';

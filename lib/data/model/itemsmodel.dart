@@ -1,3 +1,5 @@
+import 'package:oro/core/functions/json_parser.dart';
+
 class ItemsModel {
   int? itemId;
   String? itemName;
@@ -50,28 +52,28 @@ class ItemsModel {
   });
 
   ItemsModel.fromJson(Map<String, dynamic> json) {
-    itemId = json['item_id'];
-    itemName = json['item_name'];
-    itemNameAr = json['item_name_ar'];
-    itemNameEs = json['item_name_es'];
-    itemDesc = json['item_desc'];
-    itemDescAr = json['item_desc_ar'];
-    itemDescEs = json['item_desc_es'];
-    itemImg = json['item_img'];
-    itemCount = json['item_count'];
-    itemActive = json['item_active'];
-    itemPrice = (json['item_price'] as num?)?.toDouble();
-    itemDiscount = json['item_discount'];
-    itemDate = json['item_date'];
-    itemCat = json['item_cat'];
-    categoryId = json['category_id'];
-    categoryName = json['category_name'];
-    categoryNameAr = json['category_name_ar'];
-    categoryNameEs = json['category_name_es'];
-    categoryImg = json['category_img'];
-    favourite = (json['favourite'] ?? json['favorite']) as int?;
-    itemFinalPrice = (json['item_final_price'] as num?)?.toDouble();
-    itemAvgRating = json['item_avg_rating']?.toString();
+    itemId = JsonParser.asInt(json['item_id']);
+    itemName = JsonParser.asString(json['item_name']);
+    itemNameAr = JsonParser.asString(json['item_name_ar']);
+    itemNameEs = JsonParser.asString(json['item_name_es']);
+    itemDesc = JsonParser.asString(json['item_desc']);
+    itemDescAr = JsonParser.asString(json['item_desc_ar']);
+    itemDescEs = JsonParser.asString(json['item_desc_es']);
+    itemImg = JsonParser.asString(json['item_img']);
+    itemCount = JsonParser.asInt(json['item_count']) ?? 0;
+    itemActive = JsonParser.asInt(json['item_active']) ?? 1;
+    itemPrice = JsonParser.asDouble(json['item_price']);
+    itemDiscount = JsonParser.asInt(json['item_discount']) ?? 0;
+    itemDate = JsonParser.asString(json['item_date']);
+    itemCat = JsonParser.asInt(json['item_cat']);
+    categoryId = JsonParser.asInt(json['category_id']);
+    categoryName = JsonParser.asString(json['category_name']);
+    categoryNameAr = JsonParser.asString(json['category_name_ar']);
+    categoryNameEs = JsonParser.asString(json['category_name_es']);
+    categoryImg = JsonParser.asString(json['category_img']);
+    favourite = JsonParser.asInt(json['favourite'] ?? json['favorite']) ?? 0;
+    itemFinalPrice = JsonParser.asDouble(json['item_final_price']) ?? itemPrice;
+    itemAvgRating = JsonParser.asString(json['item_avg_rating']) ?? '5.0';
   }
 
   Map<String, dynamic> toJson() {

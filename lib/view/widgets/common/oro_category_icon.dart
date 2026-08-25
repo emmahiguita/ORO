@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/core/constant/color.dart';
 
 class OroCategoryIcon extends StatelessWidget {
@@ -17,22 +16,36 @@ class OroCategoryIcon extends StatelessWidget {
 
   static IconData getCategoryIcon(String? name) {
     final cat = (name ?? '').toLowerCase();
-    if (cat.contains('elect') || cat.contains('phone') || cat.contains('tech')) {
+    if (cat.contains('elect') ||
+        cat.contains('phone') ||
+        cat.contains('tech')) {
       return Icons.devices_other_rounded;
     }
-    if (cat.contains('fash') || cat.contains('moda') || cat.contains('calzado') || cat.contains('ropa')) {
+    if (cat.contains('fash') ||
+        cat.contains('moda') ||
+        cat.contains('calzado') ||
+        cat.contains('ropa')) {
       return Icons.checkroom_rounded;
     }
-    if (cat.contains('home') || cat.contains('hogar') || cat.contains('cocina')) {
+    if (cat.contains('home') ||
+        cat.contains('hogar') ||
+        cat.contains('cocina')) {
       return Icons.home_rounded;
     }
-    if (cat.contains('beauty') || cat.contains('belleza') || cat.contains('cuidado') || cat.contains('perfume')) {
+    if (cat.contains('beauty') ||
+        cat.contains('belleza') ||
+        cat.contains('cuidado') ||
+        cat.contains('perfume')) {
       return Icons.spa_rounded;
     }
-    if (cat.contains('sport') || cat.contains('deporte') || cat.contains('fitness')) {
+    if (cat.contains('sport') ||
+        cat.contains('deporte') ||
+        cat.contains('fitness')) {
       return Icons.sports_tennis_rounded;
     }
-    if (cat.contains('book') || cat.contains('libro') || cat.contains('lectura')) {
+    if (cat.contains('book') ||
+        cat.contains('libro') ||
+        cat.contains('lectura')) {
       return Icons.auto_stories_rounded;
     }
     return Icons.category_rounded;

@@ -51,7 +51,7 @@ class AdminSettingsSection extends StatelessWidget {
                 "Receive notifications for orders and updates",
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
-              activeColor: Appcolor.berry,
+              activeThumbColor: Appcolor.forest,
               contentPadding: EdgeInsets.zero,
             ),
           ),
