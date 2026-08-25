@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:oro/core/constant/approutes.dart';
-import 'package:oro/core/middleware/myMiddleware.dart';
 import 'package:oro/view/screens/OnBoarding.dart';
 import 'package:oro/view/screens/intro/oro_intro_video_screen.dart';
 import 'package:oro/view/screens/admin/adminhome.dart';
@@ -26,7 +25,6 @@ List<GetPage<dynamic>>? route = [
   GetPage(
     name: "/",
     page: () => const OroIntroVideoScreen(),
-    middlewares: [MyMiddleware()],
     transition: Transition.fadeIn,
     transitionDuration: const Duration(milliseconds: 300),
   ),
