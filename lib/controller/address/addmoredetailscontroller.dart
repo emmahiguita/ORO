@@ -79,7 +79,7 @@ class AddMoreDetailsControllerImp extends AddMoreDetailsController {
       statusRequest = StatusRequest.loding;
       update();
       var response = await addressData.addAddress(
-        services.sharedPreferences.getString("id")!,
+        services.userId,
         addressName!.text,
         buildingName!.text,
         aptNumber!.text,

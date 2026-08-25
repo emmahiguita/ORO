@@ -21,14 +21,21 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 5),
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: theme.colorScheme.onSurface
+              .withValues(alpha: isDark ? 0.12 : 0.06),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -37,13 +44,14 @@ class SettingsTile extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: ListTile(
-          splashColor: Appcolor.amaranthpink,
+          splashColor: Appcolor.amaranthpink.withValues(alpha: 0.1),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           leading: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: iconColor.withValues(alpha: 0.1),
+              color: iconColor.withValues(alpha: isDark ? 0.2 : 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
@@ -58,10 +66,8 @@ class SettingsTile extends StatelessWidget {
                 child: Text(
                   title,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -75,7 +81,7 @@ class SettingsTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Text(
-                    "Required",
+                    "Requerido",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -89,21 +95,16 @@ class SettingsTile extends StatelessWidget {
           subtitle: subtitle != null
               ? Text(
                   subtitle!,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
                   ),
                 )
               : null,
           trailing: Icon(
-            Icons.chevron_right,
-            color: Colors.grey[400],
-            size: 20,
+            Icons.chevron_right_rounded,
+            color: isDark ? Colors.grey[500] : Colors.grey[400],
           ),
           onTap: onTap,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
         ),
       ),
     );

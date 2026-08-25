@@ -25,10 +25,11 @@ class FavouritesControllerImp extends FavouritesController {
   }
 
   @override
+  @override
   addFavourites(String itemId) async {
     statusRequest = StatusRequest.loding;
-    var response = await favouritesData.favouritesAdd(
-        services.sharedPreferences.getString("id")!, itemId);
+    var response =
+        await favouritesData.favouritesAdd(services.userId, itemId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
@@ -48,10 +49,9 @@ class FavouritesControllerImp extends FavouritesController {
   @override
   deleteFavourites(String itemId) async {
     statusRequest = StatusRequest.loding;
-    var response = await favouritesData.favouritesDelete(
-        services.sharedPreferences.getString("id")!, itemId);
+    var response =
+        await favouritesData.favouritesDelete(services.userId, itemId);
     statusRequest = handlingdata(response);
-    print(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
         Get.snackbar(

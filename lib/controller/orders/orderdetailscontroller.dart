@@ -29,7 +29,7 @@ class OrderDetailsControllerImp extends OrderDetailsController {
     statusRequest = StatusRequest.loding;
     orderDetails.clear();
     var response = await orderData.getOrderDetails(
-        services.sharedPreferences.getString("id")!, orderid!);
+        services.userId, orderid?.toString() ?? "");
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

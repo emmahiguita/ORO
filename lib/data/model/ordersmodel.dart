@@ -41,6 +41,55 @@ class OrdersModel {
     orderDatetime = JsonParser.asString(json['order_datetime']);
   }
 
+  String get orderTypeTitle {
+    switch (orderType) {
+      case 0:
+        return 'Envío a domicilio';
+      case 1:
+        return 'Retiro en tienda';
+      default:
+        return 'Método desconocido';
+    }
+  }
+
+  String get paymentTypeTitle {
+    switch (orderPaymenttype) {
+      case 0:
+        return 'Tarjeta Visa';
+      case 1:
+        return 'Mastercard';
+      case 2:
+        return 'American Express';
+      case 3:
+        return 'PayPal';
+      case 4:
+        return 'Efectivo';
+      default:
+        return 'Pago contra entrega';
+    }
+  }
+
+  String get statusTitle {
+    switch (orderStatus) {
+      case 0:
+        return 'Pendiente de aprobación';
+      case 1:
+        return 'En preparación';
+      case 2:
+        return 'En camino';
+      case 3:
+        return 'Entregado';
+      case 4:
+        return 'Listo para retirar';
+      case 5:
+        return 'Retirado por el cliente';
+      case -1:
+        return 'Cancelado';
+      default:
+        return 'En proceso';
+    }
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['order_id'] = orderId;

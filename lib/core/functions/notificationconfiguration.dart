@@ -56,14 +56,22 @@ notificationListen() {
   FirebaseMessaging.onMessage.listen(
     (event) {
       Services services = Get.find();
-      String key = services.sharedPreferences.getString("key")!;
+      String key = services.sharedPreferences.getString("key") ?? "0";
       if (key == "0") {
-        Get.find<HomeScreenControllerImp>().getNotificationsCount();
+        if (Get.isRegistered<HomeScreenControllerImp>()) {
+          Get.find<HomeScreenControllerImp>().getNotificationsCount();
+        }
       } else if (key == "1") {
-        Get.find<DeliveryHomeControllerImp>().getNotificationsCount();
-        Get.find<DeliveryRequestsControllerImp>().getUndeliveredOrders();
+        if (Get.isRegistered<DeliveryHomeControllerImp>()) {
+          Get.find<DeliveryHomeControllerImp>().getNotificationsCount();
+        }
+        if (Get.isRegistered<DeliveryRequestsControllerImp>()) {
+          Get.find<DeliveryRequestsControllerImp>().getUndeliveredOrders();
+        }
       } else if (key == "2") {
-        Get.find<AdminHomeControllerImp>().getNotificationsCount();
+        if (Get.isRegistered<AdminHomeControllerImp>()) {
+          Get.find<AdminHomeControllerImp>().getNotificationsCount();
+        }
       }
       final imageUrl = event.notification?.android?.imageUrl ??
           event.notification?.apple?.imageUrl;

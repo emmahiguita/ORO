@@ -81,8 +81,8 @@ class DeliveryRequestsControllerImp extends DeliveryRequestsController {
   acceptorder(userid, orderid) async {
     loading = true;
     update();
-    var response = await deliveryData.acceptOrder(
-        userid, orderid, services.sharedPreferences.getString("id")!);
+    var response =
+        await deliveryData.acceptOrder(userid, orderid, services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       getUndeliveredOrders();

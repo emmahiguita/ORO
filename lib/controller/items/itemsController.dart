@@ -77,8 +77,7 @@ class ItemscontrollerImp extends ItemsController {
       update();
     }
 
-    var response = await itemsdata.postData(
-        catId, services.sharedPreferences.getString("id")!);
+    var response = await itemsdata.postData(catId, services.userId);
     var status = handlingdata(response);
 
     if (status == StatusRequest.success) {
@@ -233,15 +232,14 @@ class ItemscontrollerImp extends ItemsController {
 
   @override
   addToCart(itemId) async {
-    final id = int.parse(itemId);
+    final id = int.tryParse(itemId.toString()) ?? 0;
     loadingItemIds.add(id);
     statusRequestAdd = StatusRequest.loding;
     update();
 
     try {
       dynamic response;
-      response = await cartData.cartAdd(
-          services.sharedPreferences.getString("id")!, itemId);
+      response = await cartData.cartAdd(services.userId, itemId.toString());
       statusRequestAdd = handlingdata(response);
 
       if (statusRequestAdd == StatusRequest.success) {

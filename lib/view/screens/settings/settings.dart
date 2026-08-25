@@ -15,44 +15,50 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return GetBuilder<SettingControllerImp>(
       init: SettingControllerImp(),
       builder: (controller) => SafeArea(
         child: Scaffold(
-          backgroundColor: Appcolor.white,
+          backgroundColor: theme.scaffoldBackgroundColor,
           body: CustomScrollView(
-          slivers: [
-            // App Bar
-            const SliverAppBar(
-              expandedHeight: 120,
-              floating: false,
-              pinned: true,
-              backgroundColor: Appcolor.white,
-              elevation: 0,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  'Ajustes',
-                  style: TextStyle(
-                    color: Appcolor.berry,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              // App Bar
+              SliverAppBar(
+                expandedHeight: 100,
+                floating: false,
+                pinned: true,
+                backgroundColor: theme.scaffoldBackgroundColor,
+                elevation: 0,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: Text(
+                    'Ajustes',
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Appcolor.berry,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
                   ),
+                  centerTitle: true,
                 ),
-                centerTitle: true,
               ),
-            ),
 
-            // Settings Content
-            SliverToBoxAdapter(
-              child: Container(
-                margin: const EdgeInsets.only(top: 20),
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(245, 245, 245, 245),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+              // Settings Content
+              SliverToBoxAdapter(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.03)
+                        : const Color.fromARGB(245, 245, 245, 245),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
                   ),
-                ),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(

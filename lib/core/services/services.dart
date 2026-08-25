@@ -18,6 +18,10 @@ class Services extends GetxService {
   String? authToken;
   StreamSubscription<String>? _tokenRefreshSubscription;
 
+  String get userId => sharedPreferences.getString("id") ?? "1";
+  String? get currentUserId => sharedPreferences.getString("id");
+  bool get isLoggedIn => sharedPreferences.getString("id") != null;
+
   Future<Services> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
     OfflineDataProvider.isOfflineMode =

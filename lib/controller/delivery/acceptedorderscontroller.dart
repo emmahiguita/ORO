@@ -33,8 +33,8 @@ class AcceptedOrdersControllerImp extends AcceptedOrdersController {
     statusRequest = StatusRequest.loding;
     update();
     acceptedOrders.clear();
-    var response = await deliveryData
-        .getAcceptedOrders(services.sharedPreferences.getString("id")!);
+    var response =
+        await deliveryData.getAcceptedOrders(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

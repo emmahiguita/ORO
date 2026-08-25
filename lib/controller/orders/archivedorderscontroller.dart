@@ -24,8 +24,7 @@ class ArchivedOrdersControllerImp extends ArchivedOrdersController {
   getArchivedOrders() async {
     statusRequest = StatusRequest.loding;
     archivedOrders.clear();
-    var response = await orderData
-        .getArchivedOrders(services.sharedPreferences.getString("id")!);
+    var response = await orderData.getArchivedOrders(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

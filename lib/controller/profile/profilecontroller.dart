@@ -44,8 +44,8 @@ class ProfileControllerImp extends ProfileController {
     data.clear();
     statusRequest = StatusRequest.loding;
     update();
-    var response = await profileData
-        .getCountOrders(services.sharedPreferences.getString("id")!);
+    var response =
+        await profileData.getCountOrders(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

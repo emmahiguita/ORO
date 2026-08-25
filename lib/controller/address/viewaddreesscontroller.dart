@@ -27,8 +27,7 @@ class ViewAddressControllerImp extends ViewAddressController {
   @override
   getUserAddresses() async {
     statusRequest = StatusRequest.loding;
-    var response = await addressData
-        .getAddress(services.sharedPreferences.getString("id")!);
+    var response = await addressData.getAddress(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

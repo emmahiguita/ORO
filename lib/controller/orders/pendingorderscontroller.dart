@@ -30,8 +30,7 @@ class PendingOrdersControllerImp extends PendingOrdersController {
   getPendingOrders() async {
     statusRequest = StatusRequest.loding;
     pendingOrders.clear();
-    var response = await orderData
-        .getPendingOrders(services.sharedPreferences.getString("id")!);
+    var response = await orderData.getPendingOrders(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

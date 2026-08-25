@@ -69,8 +69,8 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
   getNotificationsCount() async {
     statusRequestNotification = StatusRequest.loding;
     data.clear();
-    var response = await notificationData
-        .getNotificationCount(services.sharedPreferences.getString("id")!);
+    var response =
+        await notificationData.getNotificationCount(services.userId);
     statusRequestNotification = handlingdata(response);
     if (statusRequestNotification == StatusRequest.success) {
       if (response["status"] == "success") {
