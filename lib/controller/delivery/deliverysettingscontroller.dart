@@ -86,8 +86,9 @@ class DeliverySettingsControllerImp extends DeliverySettingsController {
         response is Map &&
         response['status'] == 'success') {
       final rows = response['data'];
-      if (rows is List && rows.isNotEmpty)
+      if (rows is List && rows.isNotEmpty) {
         deliveredCount = int.tryParse('${rows.first['count_total']}') ?? 0;
+      }
     }
     update();
   }

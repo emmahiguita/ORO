@@ -52,10 +52,10 @@ class _GradientProgressIndicatorState extends State<GradientProgressIndicator>
 class GradientArcPainter extends CustomPainter {
   final double arcRotation;
   final double gradientRotation;
-  final double StrokeWidth;
+  final double strokeWidth;
 
   GradientArcPainter(
-    this.StrokeWidth, {
+    this.strokeWidth, {
     required this.arcRotation,
     required this.gradientRotation,
   });
@@ -69,7 +69,7 @@ class GradientArcPainter extends CustomPainter {
 
     final paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = StrokeWidth
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..shader = SweepGradient(
         startAngle: 0,

@@ -168,7 +168,7 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                 ),
               ),
               const SizedBox(width: 12),
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Location Services Disabled',
                   style: TextStyle(
@@ -202,19 +202,19 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                     color: Appcolor.rosePompadour.withValues(alpha: 0.2),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.info_outline,
                       color: Appcolor.rosePompadour,
                       size: 16,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'This will open your device settings',
                         style: TextStyle(
-                          color: Appcolor.textColor.withValues(alpha: 0.7),
+                          color: Appcolor.textColor,
                           fontSize: 12,
                         ),
                       ),
@@ -316,7 +316,7 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                 ),
               ),
               const SizedBox(width: 12),
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Location Permission Required',
                   style: TextStyle(
@@ -349,19 +349,19 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                 ),
                 child: Column(
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Icon(
                           Icons.check_circle_outline,
                           color: Appcolor.amaranthpink,
                           size: 16,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             'Navigate to delivery addresses',
                             style: TextStyle(
-                              color: Appcolor.textColor.withValues(alpha: 0.7),
+                              color: Appcolor.textColor,
                               fontSize: 12,
                             ),
                           ),
@@ -371,7 +371,7 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                     const SizedBox(height: 6),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_circle_outline,
                           color: Appcolor.amaranthpink,
                           size: 16,
@@ -486,7 +486,7 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                 ),
               ),
               const SizedBox(width: 12),
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Location Access Blocked',
                   style: TextStyle(
@@ -523,14 +523,14 @@ class DeliveryHomeControllerImp extends DeliveryHomeController {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Icon(
                           Icons.info_outline,
                           color: Colors.orange,
                           size: 16,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           'How to enable:',
                           style: TextStyle(

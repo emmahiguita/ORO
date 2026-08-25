@@ -31,7 +31,7 @@ abstract class ItemsDetailsController extends GetxController {
 
 class ItemsDetailsControllerImp extends ItemsDetailsController {
   int counter = 1;
-  var data;
+  dynamic data;
   late StatusRequest statusRequest;
   CartData cartData = CartData(Get.find());
   Services services = Get.find();

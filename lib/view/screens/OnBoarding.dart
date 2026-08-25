@@ -20,19 +20,19 @@ class OnBoarding extends GetView<Localecontroller> {
       body: PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, result) => alertExitApp(),
-        child: SafeArea(
+        child: const SafeArea(
           top: false,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 18),
+            padding: EdgeInsets.fromLTRB(20, 8, 20, 18),
             child: Column(
               children: [
-                const Expanded(flex: 5, child: OBSlider()),
-                const SizedBox(height: 10),
-                const OBDots(),
-                const SizedBox(height: 24),
-                const OBButton(),
-                const SizedBox(height: 8),
-                const OBSkip(),
+                Expanded(flex: 5, child: OBSlider()),
+                SizedBox(height: 10),
+                OBDots(),
+                SizedBox(height: 24),
+                OBButton(),
+                SizedBox(height: 8),
+                OBSkip(),
               ],
             ),
           ),

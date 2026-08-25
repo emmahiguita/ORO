@@ -20,7 +20,7 @@ void main() async {
     systemNavigationBarColor: Appcolor.ink,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
-  await InitialServices();
+  await initialServices();
   if (kReleaseMode && !AppLink.isProductionUrlSafe) {
     runApp(const ConfigurationErrorApp());
     return;

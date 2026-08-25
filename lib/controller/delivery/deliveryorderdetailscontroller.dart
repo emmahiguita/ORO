@@ -21,10 +21,10 @@ class DeliveryOrderDetailsControllerImp extends DeliveryOrderDetailsController {
 
   @override
   getOrderDetails() async {
+    if (orderid == null || orderid!.isEmpty) return;
     statusRequest = StatusRequest.loding;
     orderDetails.clear();
     var response = await deliveryData.getOrderDetails(orderid!);
-    print(response);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
@@ -43,9 +43,12 @@ class DeliveryOrderDetailsControllerImp extends DeliveryOrderDetailsController {
 
   @override
   void onInit() {
-    orderid = Get.arguments['orderid'];
-    undeliveredOrders = Get.arguments['undeliveredOrder'];
-    isDelivered = Get.arguments?['isDelivered'] ?? false;
+    final args = Get.arguments;
+    if (args is Map) {
+      orderid = args['orderid']?.toString();
+      undeliveredOrders = args['undeliveredOrder'];
+      isDelivered = args['isDelivered'] ?? false;
+    }
     getOrderDetails();
     super.onInit();
   }

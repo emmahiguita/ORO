@@ -35,7 +35,6 @@ class ViewAddressControllerImp extends ViewAddressController {
         addresses.addAll(data.map(
           (e) => AddressModel.fromJson(e),
         ));
-        print("done");
       } else if (response["status"] == "failure") {}
     }
     update();

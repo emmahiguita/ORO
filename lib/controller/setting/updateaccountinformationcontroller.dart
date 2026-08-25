@@ -113,8 +113,9 @@ class UpdateAccountInformationControllerImp
             .setString('banner', '${data['user_banner'] ?? oldbanner}');
 
         final token = response['token'];
-        if (token is String && token.isNotEmpty)
+        if (token is String && token.isNotEmpty) {
           await services.setAuthToken(token);
+        }
 
         if (response['requires_verification'] == true && key == '0') {
           await services.unregisterPushToken();

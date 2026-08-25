@@ -94,7 +94,7 @@ class SearchMap extends StatelessWidget {
             );
           }
         } catch (e) {
-          print("Error getting place details: $e");
+          debugPrint("Error getting place details: $e");
         }
       },
       suggestionsCallback: (pattern) async {
@@ -109,11 +109,11 @@ class SearchMap extends StatelessWidget {
           if (response.isOkay) {
             return response.predictions;
           } else {
-            print("Places API error: ${response.errorMessage}");
+            debugPrint("Places API error: ${response.errorMessage}");
             return <Prediction>[];
           }
         } catch (e) {
-          print("Error fetching places: $e");
+          debugPrint("Error fetching places: $e");
           return <Prediction>[];
         }
       },

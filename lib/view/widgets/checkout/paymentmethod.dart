@@ -35,40 +35,41 @@ class PaymentMethod extends StatelessWidget {
               width: value == groupValue ? 1.5 : 1,
             ),
           ),
-          child: IgnorePointer(
-            child: RadioListTile(
-              dense: true,
-              controlAffinity: ListTileControlAffinity.trailing,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-              title: Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 30,
-                    margin: const EdgeInsets.only(right: 12),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(paymentImg),
-                        fit: BoxFit.contain,
-                      ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                Container(
+                  height: 32,
+                  width: 32,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(paymentImg),
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      paymentName,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                ),
+                Expanded(
+                  child: Text(
+                    paymentName,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              ),
-              value: value,
-              groupValue: groupValue,
-              onChanged: (value) {},
-              activeColor: Appcolor.deepPink,
+                ),
+                Icon(
+                  value == groupValue
+                      ? Icons.radio_button_checked
+                      : Icons.radio_button_off,
+                  color: value == groupValue
+                      ? Appcolor.deepPink
+                      : Colors.grey.shade400,
+                  size: 20,
+                ),
+              ],
             ),
           ),
         ),

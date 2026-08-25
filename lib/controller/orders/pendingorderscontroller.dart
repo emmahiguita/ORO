@@ -142,7 +142,6 @@ class PendingOrdersControllerImp extends PendingOrdersController {
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
-        print("done");
       } else if (response["status"] == "failure") {
         statusRequest = StatusRequest.failure;
       }

@@ -24,10 +24,10 @@ class AdminOrderDetailsControllerImp extends AdminOrderDetailsController {
 
   @override
   getOrderDetails() async {
+    if (orderid == null || orderid!.isEmpty) return;
     statusRequest = StatusRequest.loding;
     orderDetails.clear();
     var response = await adminData.getOrderDetails(orderid!);
-    print(response);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
@@ -46,8 +46,13 @@ class AdminOrderDetailsControllerImp extends AdminOrderDetailsController {
 
   @override
   void onInit() {
-    orderid = Get.arguments['orderid'];
-    adminDetailsModel = Get.arguments['orderDetail'];
+    final args = Get.arguments;
+    if (args is Map) {
+      orderid = args['orderid']?.toString();
+      if (args['orderDetail'] is AdminDetails) {
+        adminDetailsModel = args['orderDetail'];
+      }
+    }
     getOrderDetails();
     marker = Marker(
       markerId: const MarkerId('marker'),

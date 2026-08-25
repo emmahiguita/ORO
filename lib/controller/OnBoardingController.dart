@@ -11,20 +11,20 @@ abstract class OnBoardinggController extends GetxController {
 }
 
 class OnBoardingControllerImp extends OnBoardinggController {
-  final OnBoardingList = getOnBoardingList();
+  final onBoardingList = getOnBoardingList();
   late PageController pageController;
   int currentPage = 0;
   Services services = Get.find();
 
   @override
   next() {
-    if (currentPage >= OnBoardingList.length - 1) {
+    if (currentPage >= onBoardingList.length - 1) {
       services.sharedPreferences.setString("step", "1");
       Get.offAll(() => const Login(),
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 800));
     } else {
-      pageController.animateToPage(currentPage + 1, // Increment after using
+      pageController.animateToPage(currentPage + 1,
           duration: const Duration(milliseconds: 900),
           curve: Curves.easeIn);
     }
@@ -33,7 +33,7 @@ class OnBoardingControllerImp extends OnBoardinggController {
   @override
   onPageChanged(int index) {
     currentPage = index;
-    update(); // Notify listeners
+    update();
   }
 
   @override
@@ -43,8 +43,14 @@ class OnBoardingControllerImp extends OnBoardinggController {
   }
 
   @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
+  }
+
+  @override
   skip() {
-    pageController.animateToPage(3,
+    pageController.animateToPage(onBoardingList.length - 1,
         duration: const Duration(milliseconds: 900), curve: Curves.easeIn);
   }
 }

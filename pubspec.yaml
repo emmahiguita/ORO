@@ -52,6 +52,7 @@ dependencies:
   cloud_firestore: ^5.4.4
   shared_preferences: ^2.0.15
   path: ^1.8.0
+  path_provider: ^2.1.5
   url_launcher: ^6.1.2
   dropdown_search: ^6.0.1
   flutter_svg: ^2.0.10+1

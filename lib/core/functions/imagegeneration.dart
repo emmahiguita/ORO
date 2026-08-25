@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:oro/data/model/couponmodel.dart';
@@ -41,7 +40,7 @@ class CouponImageGenerator {
 
       return file;
     } catch (e) {
-      print('Error generating coupon image: $e');
+      debugPrint('Error generating coupon image: $e');
       return null;
     }
   }
@@ -88,7 +87,7 @@ class CouponImageGenerator {
       '${couponModel.couponDiscount ?? 0}% OFF',
       Offset(width / 2, height / 2),
       const TextStyle(
-        color: Color(0xffb3ffffff), // Colors.white70 approximation
+        color: Colors.white70,
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
@@ -101,7 +100,7 @@ class CouponImageGenerator {
       'Expires: ${controller.formatDisplayDate(couponModel.couponExpirydate)}',
       Offset(width / 2, height / 2 + 30),
       const TextStyle(
-        color: Color(0x99FFFFFF), // Colors.white60 approximation
+        color: Colors.white60,
         fontSize: 14,
       ),
       center: true,

@@ -65,11 +65,12 @@ class ShippingAddress extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
-              trailing: Radio(
-                value: isSelected,
-                groupValue: true,
-                onChanged: (value) {},
-                activeColor: Appcolor.deepPink,
+              trailing: Icon(
+                isSelected
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_off,
+                color: isSelected ? Appcolor.deepPink : Colors.grey.shade400,
+                size: 20,
               ),
             ),
           ),

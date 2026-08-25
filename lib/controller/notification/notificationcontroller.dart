@@ -51,7 +51,9 @@ class NotificationControllerImp extends NotificationController {
     if (id == null ||
         notificationID.isEmpty ||
         index < 0 ||
-        index >= allNotification.length) return;
+        index >= allNotification.length) {
+      return;
+    }
     final response =
         await notificationData.deleteNotification(id, notificationID);
     final state = handlingdata(response);

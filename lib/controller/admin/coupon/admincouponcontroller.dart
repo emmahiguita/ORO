@@ -327,7 +327,7 @@ class AdminCouponControllerImp extends AdminCouponController {
                   },
                 ),
                 const SizedBox(height: 20),
-                ColorPickerField(),
+                colorPickerField(),
                 const SizedBox(height: 32),
                 Row(
                   children: [
@@ -494,7 +494,7 @@ class AdminCouponControllerImp extends AdminCouponController {
     );
   }
 
-  Widget ColorPickerField() {
+  Widget colorPickerField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

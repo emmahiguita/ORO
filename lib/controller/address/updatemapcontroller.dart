@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -51,7 +51,7 @@ class UpdateMapControllerImp extends UpdateMapController {
       );
       update();
     }).catchError((error) {
-      print("Error getting location: $error");
+      debugPrint("Error getting location: $error");
     });
     loding = false;
     update();

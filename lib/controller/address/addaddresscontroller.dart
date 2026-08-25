@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -48,7 +48,7 @@ class AddAddressControllerImp extends AddAddressController {
       );
       update();
     }).catchError((error) {
-      print("Error getting location: $error");
+      debugPrint("Error getting location: $error");
     });
     loding = false;
     update();
@@ -76,11 +76,10 @@ class AddAddressControllerImp extends AddAddressController {
 
       if (response.isOkay && response.results.isNotEmpty) {
         placeName = response.results.first.name;
-        print("Place name: $placeName");
         update();
       }
     } catch (e) {
-      print("Error getting place name: $e");
+      debugPrint("Error getting place name: $e");
       placeName = "Unknown Location"; // Fallback name
       update();
     }
@@ -105,15 +104,22 @@ class AddAddressControllerImp extends AddAddressController {
 
   @override
   goToAddMoreDetails() async {
+    if (currentPosition == null) {
+      Get.snackbar(
+        "Selecciona ubicación",
+        "Por favor toca el mapa para marcar la dirección de entrega.",
+      );
+      return;
+    }
     isDone = true;
     update();
     await _getPlaceName(currentPosition!);
     Get.to(
       () => const AddMoreDetails(),
       arguments: {
-        "latitude": latitude,
-        "longitude": longitude,
-        "placeName": placeName,
+        "latitude": latitude ?? currentPosition?.latitude,
+        "longitude": longitude ?? currentPosition?.longitude,
+        "placeName": placeName ?? "Ubicación seleccionada",
         "markers": markers,
       },
     );

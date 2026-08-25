@@ -48,7 +48,6 @@ class UpdateCategoryControllerImp extends UpdateCategoryController {
       categoriesModel!.categoryImg!,
     );
     statusRequest = handlingdata(response);
-    print(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {
         Get.find<AdminCategoryControllerImp>().getCategories();
