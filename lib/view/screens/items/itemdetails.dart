@@ -15,7 +15,20 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ItemsDetailsControllerImp>(
+      init: ItemsDetailsControllerImp(),
       builder: (controller) {
+        if (controller.data == null) {
+          return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
         return Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           extendBodyBehindAppBar: true,

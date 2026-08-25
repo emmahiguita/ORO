@@ -49,9 +49,9 @@ class ViewRatingControllerImp extends ViewRatingController {
 
   @override
   void onInit() {
-    id = services.sharedPreferences.getString("id")!;
-    username = services.sharedPreferences.getString("username")!;
-    pfp = services.sharedPreferences.getString("pfp")!;
+    id = services.sharedPreferences.getString("id") ?? "";
+    username = services.sharedPreferences.getString("username") ?? "";
+    pfp = services.sharedPreferences.getString("pfp") ?? "default.png";
     getAllRating();
 
     super.onInit();

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/functions/handlingdata.dart';
 import 'package:oro/core/localization/changelocale.dart';
+import 'package:oro/core/services/offline_data_provider.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/data/datasource/remote/auth/logindata.dart';
 import 'package:oro/view/screens/admin/adminhome.dart';
@@ -56,6 +57,8 @@ class LogincontrollerImp extends LoginController {
           service.sharedPreferences.remove('saved_login_user');
           service.sharedPreferences.remove('saved_login_pass');
         }
+        OfflineDataProvider.isOfflineMode = false;
+        service.sharedPreferences.setBool('is_offline_mode', false);
         await saveCachedData(response);
         await service.syncPushToken();
         final role = int.tryParse('${response['data']['user_keyaccess']}') ?? 0;
@@ -206,6 +209,8 @@ class LogincontrollerImp extends LoginController {
 
   @override
   Future<void> enterOfflineDemoMode([int role = 0]) async {
+    OfflineDataProvider.isOfflineMode = true;
+    service.sharedPreferences.setBool('is_offline_mode', true);
     final demoUser = {
       'status': 'success',
       'data': {

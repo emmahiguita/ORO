@@ -44,9 +44,29 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   late StatusRequest ratingStatusRequest;
 
   @override
+  void onInit() {
+    comment = TextEditingController();
+    initiateData();
+    getRating();
+    getIsOrdered();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    comment?.dispose();
+    super.onClose();
+  }
+
+  @override
   initiateData() async {
     statusRequest = StatusRequest.loding;
-    data = Get.arguments['itemsModel'];
+    final args = Get.arguments;
+    if (args is Map && args['itemsModel'] != null) {
+      data = args['itemsModel'];
+    } else if (args != null) {
+      data = args;
+    }
     statusRequest = StatusRequest.success;
     update();
   }
@@ -87,21 +107,6 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
       counter--;
       update();
     }
-  }
-
-  @override
-  void onInit() {
-    initiateData();
-    getRating();
-    getIsOrdered();
-    comment = TextEditingController();
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    comment?.dispose();
-    super.onClose();
   }
 
   @override
@@ -311,25 +316,30 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   @override
   Future<void> shareProductWithImage() async {
     try {
-      // First download the image
+      final imgName = data?.itemImg?.toString() ?? '';
       final response = await Dio().get(
-        AppLink.itemimage + data.itemImg!,
+        AppLink.itemimage + imgName,
         options: Options(responseType: ResponseType.bytes),
       );
 
-      // Create a temporary file
       final tempDir = await getTemporaryDirectory();
       final file = await File('${tempDir.path}/product_share.jpg').create();
       await file.writeAsBytes(response.data);
 
+      final name = data?.itemName?.toString() ?? 'ORO Product';
+      final desc = data?.itemDesc?.toString() ?? '';
+      final price = data?.itemFinalPrice ?? data?.itemPrice ?? 0.0;
+      final discount = data?.itemDiscount ?? 0;
+      final avgRating = double.tryParse(data?.itemAvgRating?.toString() ?? '0') ?? 0.0;
+
       String shareText = '''
-🌟 Check out this amazing product: ${data.itemName}!
+🌟 Check out this amazing product: $name!
 
-${data.itemDesc}
+$desc
 
-💰 Price: \$${data.itemFinalPrice?.toStringAsFixed(2)} ${data.itemDiscount! > 0 ? '(Was \$${data.itemPrice?.toStringAsFixed(2)}, now ${data.itemDiscount}% off!)' : ''}
+💰 Price: \$${price.toStringAsFixed(2)} ${discount > 0 ? '(Was \$${(data?.itemPrice ?? 0.0).toStringAsFixed(2)}, now $discount% off!)' : ''}
 
-${data.itemAvgRating != null && data.itemAvgRating != "0" ? '⭐ Rating: ${double.parse(data.itemAvgRating!).toStringAsFixed(1)}/5' : ''}
+${avgRating > 0 ? '⭐ Rating: ${avgRating.toStringAsFixed(1)}/5' : ''}
 
 Don't miss out!
 ''';
@@ -337,7 +347,7 @@ Don't miss out!
       await SharePlus.instance.share(ShareParams(
         files: [XFile(file.path)],
         text: shareText,
-        subject: 'Check out ${data.itemName}',
+        subject: 'Check out $name',
       ));
     } catch (e) {
       Get.snackbar(

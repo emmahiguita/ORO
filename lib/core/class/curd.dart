@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
+import 'package:oro/apilink.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/constant/approutes.dart';
 import 'package:oro/core/functions/checkinternet.dart';
@@ -12,7 +13,7 @@ import 'package:oro/core/services/offline_data_provider.dart';
 import 'package:oro/core/services/services.dart';
 
 class Curd {
-  static const _timeout = Duration(seconds: 4);
+  static const _timeout = Duration(milliseconds: 2500);
   static final http.Client _client = http.Client();
 
   Map<String, String> _headers({bool json = false}) {
@@ -36,6 +37,9 @@ class Curd {
     }
     try {
       if (!await checkinternet()) {
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        }
         return const Left(StatusRequest.offlinefailure);
       }
       final response = await _client
@@ -50,18 +54,33 @@ class Curd {
         return const Left(StatusRequest.failure);
       }
       if (response.statusCode != 200 && response.statusCode != 201) {
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        }
         return const Left(StatusRequest.serverfailure);
       }
       final decoded = jsonDecode(response.body);
       if (decoded is! Map) {
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+        }
         return const Left(StatusRequest.serverfailure);
       }
       return Right(Map<String, dynamic>.from(decoded));
     } on SocketException {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      }
       return const Left(StatusRequest.offlinefailure);
     } on FormatException {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      }
       return const Left(StatusRequest.serverfailure);
     } catch (_) {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(linkurl, data));
+      }
       return const Left(StatusRequest.serverfailure);
     }
   }
@@ -103,7 +122,10 @@ class Curd {
     }
     try {
       if (!await checkinternet()) {
-        return Right(OfflineDataProvider.getMockResponse(url, data));
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(url, data));
+        }
+        return const Left(StatusRequest.offlinefailure);
       }
       final request = http.MultipartRequest('POST', Uri.parse(url));
       request.headers.addAll(_headers());
@@ -124,18 +146,33 @@ class Curd {
         return const Left(StatusRequest.failure);
       }
       if (response.statusCode != 200 && response.statusCode != 201) {
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(url, data));
+        }
         return const Left(StatusRequest.serverfailure);
       }
       final decoded = jsonDecode(response.body);
       if (decoded is! Map) {
+        if (!AppLink.isProductionUrlSafe) {
+          return Right(OfflineDataProvider.getMockResponse(url, data));
+        }
         return const Left(StatusRequest.serverfailure);
       }
       return Right(Map<String, dynamic>.from(decoded));
     } on SocketException {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(url, data));
+      }
       return const Left(StatusRequest.offlinefailure);
     } on FormatException {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(url, data));
+      }
       return const Left(StatusRequest.serverfailure);
     } catch (_) {
+      if (!AppLink.isProductionUrlSafe) {
+        return Right(OfflineDataProvider.getMockResponse(url, data));
+      }
       return const Left(StatusRequest.serverfailure);
     }
   }

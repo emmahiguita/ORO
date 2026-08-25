@@ -10,7 +10,9 @@ class ItemsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ItemscontrollerImp>();
+    final controller = Get.isRegistered<ItemscontrollerImp>()
+        ? Get.find<ItemscontrollerImp>()
+        : Get.put(ItemscontrollerImp());
     final FavouritesControllerImp favouritesController =
         Get.isRegistered<FavouritesControllerImp>()
             ? Get.find<FavouritesControllerImp>()

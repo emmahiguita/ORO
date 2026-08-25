@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:oro/apilink.dart';
 import 'package:oro/core/config/firebase_config.dart';
+import 'package:oro/core/services/offline_data_provider.dart';
 
 class Services extends GetxService {
   late SharedPreferences sharedPreferences;
@@ -19,6 +20,8 @@ class Services extends GetxService {
 
   Future<Services> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    OfflineDataProvider.isOfflineMode =
+        sharedPreferences.getBool('is_offline_mode') ?? false;
     try {
       authToken = await secureStorage.read(key: 'authToken');
     } catch (_) {
