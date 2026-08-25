@@ -7,6 +7,7 @@ import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
+import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});
@@ -150,106 +151,112 @@ class Search extends StatelessWidget {
                       item.itemNameEs,
                     );
 
-                    return OroPressable(
-                      onTap: () {
-                        searchControllerImp.goToItemDetails(item);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(18),
-                          border: Border.all(
-                            color: theme.colorScheme.onSurface
-                                .withValues(alpha: isDark ? 0.12 : 0.06),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(
-                                  alpha: isDark ? 0.2 : 0.04),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
+                    return OroStaggeredItem(
+                      index: index,
+                      delayBase: 40,
+                      child: OroPressable(
+                        onTap: () {
+                          searchControllerImp.goToItemDetails(item);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surface,
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(
+                              color: theme.colorScheme.onSurface
+                                  .withValues(alpha: isDark ? 0.12 : 0.06),
                             ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 80,
-                              width: 80,
-                              margin: const EdgeInsets.only(right: 14),
-                              decoration: BoxDecoration(
-                                color: isDark
-                                    ? Colors.white.withValues(alpha: 0.05)
-                                    : Appcolor.mimiPink
-                                        .withValues(alpha: 0.35),
-                                borderRadius: BorderRadius.circular(14),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(
+                                    alpha: isDark ? 0.2 : 0.04),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(14),
-                                child: Hero(
-                                  tag:
-                                      'product-${item.itemId ?? item.hashCode}',
-                                  child: Material(
-                                    type: MaterialType.transparency,
-                                    child: OroProductImage(
-                                      imageUrl: item.itemImg,
-                                      productName: name,
-                                      categoryName: item.categoryName,
-                                      fit: BoxFit.contain,
-                                      memCacheWidth: 320,
-                                      borderRadius: BorderRadius.circular(14),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 80,
+                                width: 80,
+                                margin: const EdgeInsets.only(right: 14),
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? Colors.white.withValues(alpha: 0.05)
+                                      : Appcolor.mimiPink
+                                          .withValues(alpha: 0.35),
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Hero(
+                                    tag:
+                                        'product-${item.itemId ?? item.hashCode}',
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: OroProductImage(
+                                        imageUrl: item.itemImg,
+                                        productName: name,
+                                        categoryName: item.categoryName,
+                                        fit: BoxFit.contain,
+                                        memCacheWidth: 320,
+                                        borderRadius:
+                                            BorderRadius.circular(14),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    name,
-                                    style: theme.textTheme.titleSmall?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      height: 1.25,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  if (item.categoryName != null &&
-                                      item.categoryName!.isNotEmpty)
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      item.categoryName ?? '',
-                                      style:
-                                          theme.textTheme.bodySmall?.copyWith(
-                                        color: isDark
-                                            ? Colors.grey[400]
-                                            : Colors.grey[600],
+                                      name,
+                                      style: theme.textTheme.titleSmall
+                                          ?.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.25,
                                       ),
-                                      maxLines: 1,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    '\$${price.toStringAsFixed(2)}',
-                                    style: const TextStyle(
-                                      color: Appcolor.deepPurple,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      letterSpacing: -0.3,
+                                    const SizedBox(height: 4),
+                                    if (item.categoryName != null &&
+                                        item.categoryName!.isNotEmpty)
+                                      Text(
+                                        item.categoryName ?? '',
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(
+                                          color: isDark
+                                              ? Colors.grey[400]
+                                              : Colors.grey[600],
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      '\$${price.toStringAsFixed(2)}',
+                                      style: const TextStyle(
+                                        color: Appcolor.deepPurple,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: -0.3,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 16,
-                              color: Colors.grey,
-                            ),
-                          ],
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 16,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

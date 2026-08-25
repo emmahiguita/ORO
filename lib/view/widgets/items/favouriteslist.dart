@@ -4,6 +4,7 @@ import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
+import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 
 import '../../../controller/favourites/ViewFavouritesController.dart';
 
@@ -70,10 +71,13 @@ class FavouritesList extends StatelessWidget {
                 final price = item.itemFinalPrice ?? item.itemPrice ?? 0.0;
                 final rating = double.tryParse('${item.itemAvgRating}') ?? 4.8;
 
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: isDeleting
-                      ? const SizedBox.shrink()
+                return OroStaggeredItem(
+                  index: index,
+                  delayBase: 50,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: isDeleting
+                        ? const SizedBox.shrink()
                       : OroPressable(
                           key: ValueKey(itemId),
                           onTap: () {
@@ -209,6 +213,7 @@ class FavouritesList extends StatelessWidget {
                               ),
                             ),
                           ),
+                  ),
                 );
               },
             ),

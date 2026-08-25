@@ -3,7 +3,7 @@ import 'package:oro/controller/items/itemsdetailsController.dart';
 import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
-import 'package:oro/view/widgets/items/discountbadge.dart';
+import 'package:oro/view/widgets/common/oro_discount_badge.dart';
 import 'package:oro/view/widgets/items/pricetags.dart';
 
 class ProductImageSection extends StatelessWidget {
@@ -69,8 +69,9 @@ class ProductImageSection extends StatelessWidget {
                     Positioned(
                       top: 10,
                       left: 10,
-                      child: DiscountBadge(
-                        discount: controller.data.itemDiscount!,
+                      child: OroDiscountBadge.pill(
+                        percentage:
+                            (controller.data.itemDiscount ?? 0).toDouble(),
                       ),
                     ),
                   Positioned(

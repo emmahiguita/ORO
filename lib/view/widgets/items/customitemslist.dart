@@ -6,6 +6,7 @@ import 'package:oro/controller/items/itemsController.dart';
 import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
+import 'package:oro/view/widgets/common/oro_discount_badge.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
 import 'package:oro/data/model/itemsmodel.dart';
 
@@ -101,31 +102,9 @@ class CustomItemsList extends GetView<ItemscontrollerImp> {
                   Positioned(
                     top: 10,
                     left: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFE53935), Color(0xFFD32F2F)],
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.red.withValues(alpha: 0.35),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        '${itemsModel.itemDiscount}% OFF',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.4,
-                        ),
-                      ),
+                    child: OroDiscountBadge.compact(
+                      percentage:
+                          (itemsModel.itemDiscount ?? 0).toDouble(),
                     ),
                   ),
                 Positioned(

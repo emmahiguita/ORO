@@ -17,6 +17,7 @@ import 'package:oro/view/widgets/home/hotdealsheader.dart';
 import 'package:oro/view/widgets/home/itemcard.dart';
 import 'package:oro/view/widgets/home/loadingitemstate.dart';
 import 'package:oro/view/widgets/home/serch.dart';
+import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -181,11 +182,15 @@ class Home extends StatelessWidget {
                                           ? controller.items[index]
                                           : ItemsModel.fromJson(
                                               controller.items[index]));
-                              return ItemCard(
-                                itemsModel: model,
-                                onTap: () => controller.goToItemDetails(model),
-                                colorIndex:
-                                    index % controller.gradientColors.length,
+                              return OroStaggeredItem(
+                                index: index,
+                                delayBase: 35,
+                                child: ItemCard(
+                                  itemsModel: model,
+                                  onTap: () => controller.goToItemDetails(model),
+                                  colorIndex:
+                                      index % controller.gradientColors.length,
+                                ),
                               );
                             },
                             childCount: itemCount,

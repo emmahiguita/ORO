@@ -11,6 +11,8 @@ class FeaturedReview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final userPfp = review.userPfp?.toString() ?? '';
     final userName = review.userName?.toString() ?? 'Usuario';
     final stars = double.tryParse(review.ratingStars?.toString() ?? '') ?? 5.0;
@@ -28,9 +30,13 @@ class FeaturedReview extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: isDark
+            ? theme.colorScheme.onSurface.withValues(alpha: 0.05)
+            : Colors.grey[50],
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[200]!),
+        border: Border.all(
+          color: theme.colorScheme.onSurface.withValues(alpha: isDark ? 0.1 : 0.12),
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
