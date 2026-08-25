@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oro/core/class/handlingdataview.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
 
@@ -12,240 +13,205 @@ class FavouritesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return HandlingDataView(
-        statusRequest: controller.statusRequest,
-        widget: controller.fav.isEmpty
-            ? Container(
-                margin: const EdgeInsets.only(top: 80),
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+      statusRequest: controller.statusRequest,
+      widget: controller.fav.isEmpty
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.favorite_border_rounded,
-                      size: 64,
-                      color: Appcolor.forest.withValues(alpha: 0.4),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      "Tu lista de favoritos está vacía",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                    Container(
+                      height: 96,
+                      width: 96,
+                      decoration: BoxDecoration(
+                        color: Appcolor.deepPink.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.favorite_border_rounded,
+                        size: 48,
+                        color: Appcolor.deepPink,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Tu lista de favoritos está vacía",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -0.2,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Text(
                       "Guarda los artículos que más te gusten para verlos y comprarlos luego.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
                       ),
                     ),
                   ],
                 ),
-              )
-            : ListView.builder(
-                itemCount: controller.fav.length,
-                itemBuilder: (context, index) {
-                  final itemId = controller.fav[index].itemId.toString();
-                  final isDeleting = controller.isDeleting(itemId);
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: isDeleting
-                        ? const SizedBox.shrink()
-                        : Column(
-                            key: ValueKey(itemId),
-                            children: [
-                              const Divider(endIndent: 20, indent: 20),
-                              const SizedBox(height: 10),
-                              AnimatedOpacity(
-                                opacity: isDeleting ? 0 : 1,
-                                duration: const Duration(milliseconds: 250),
-                                child: Material(
-                                  color: Theme.of(context).colorScheme.surface,
-                                  child: InkWell(
-                                    splashColor: Appcolor.accentGold
-                                        .withValues(alpha: 0.15),
-                                    onTap: () {
-                                      controller.goToItemDetails(
-                                          controller.fav[index]);
-                                    },
+              ),
+            )
+          : ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              itemCount: controller.fav.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                final item = controller.fav[index];
+                final itemId = item.itemId?.toString() ?? '$index';
+                final isDeleting = controller.isDeleting(itemId);
+                final price = item.itemFinalPrice ?? item.itemPrice ?? 0.0;
+                final rating = double.tryParse('${item.itemAvgRating}') ?? 4.8;
+
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: isDeleting
+                      ? const SizedBox.shrink()
+                      : OroPressable(
+                          key: ValueKey(itemId),
+                          onTap: () {
+                            controller.goToItemDetails(item);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.surface,
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                color: theme.colorScheme.onSurface
+                                    .withValues(alpha: isDark ? 0.12 : 0.06),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(
+                                      alpha: isDark ? 0.2 : 0.04),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              children: [
+                                Hero(
+                                  tag: 'product-${item.itemId ?? item.hashCode}',
+                                  child: Material(
+                                    type: MaterialType.transparency,
                                     child: Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 10,
-                                                      bottom: 40,
-                                                      right: 4),
-                                                  child: Text(
-                                                      (index + 1).toString(),
-                                                      style: const TextStyle(
-                                                          fontFamily: 'Sw',
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      right: 10),
-                                                  height: 84,
-                                                  width: 84,
-                                                  decoration: BoxDecoration(
-                                                    color: Appcolor.mimiPink,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
-                                                  child: Center(
-                                                    child: Hero(
-                                                      tag:
-                                                          'product-${controller.fav[index].itemId}',
-                                                      child: Material(
-                                                        type: MaterialType
-                                                            .transparency,
-                                                        child: OroProductImage(
-                                                          imageUrl: controller
-                                                              .fav[index]
-                                                              .itemImg,
-                                                          productName:
-                                                              databaseTranslation(
-                                                            controller
-                                                                .fav[index]
-                                                                .itemName,
-                                                            controller
-                                                                .fav[index]
-                                                                .itemNameAr,
-                                                            controller
-                                                                .fav[index]
-                                                                .itemNameEs,
-                                                          ),
-                                                          categoryName:
-                                                              controller
-                                                                  .fav[index]
-                                                                  .categoryName,
-                                                          fit: BoxFit.contain,
-                                                          memCacheWidth: 560,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        databaseTranslation(
-                                                          controller.fav[index]
-                                                              .itemName,
-                                                          controller.fav[index]
-                                                              .itemNameAr,
-                                                          controller.fav[index]
-                                                              .itemNameEs,
-                                                        ),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 4),
-                                                      Text(
-                                                        "\$${(controller.fav[index].itemFinalPrice ?? controller.fav[index].itemPrice ?? 0.0).toStringAsFixed(2)}",
-                                                        style: const TextStyle(
-                                                          fontFamily: "Sw",
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Appcolor
-                                                              .deepPurple,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 2),
-                                                      Row(
-                                                        children: [
-                                                          const Icon(
-                                                            Icons.star_rounded,
-                                                            color: Colors.amber,
-                                                            size: 16,
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 2),
-                                                          Text(
-                                                            (double.tryParse(
-                                                                        '${controller.fav[index].itemAvgRating}') ??
-                                                                    4.8)
-                                                                .toStringAsFixed(
-                                                                    1),
-                                                            style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: Colors
-                                                                  .grey[700],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                      height: 82,
+                                      width: 82,
+                                      decoration: BoxDecoration(
+                                        color: isDark
+                                            ? Colors.white.withValues(alpha: 0.05)
+                                            : Appcolor.mimiPink
+                                                .withValues(alpha: 0.35),
+                                        borderRadius:
+                                            BorderRadius.circular(14),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(14),
+                                        child: OroProductImage(
+                                          imageUrl: item.itemImg,
+                                          productName: databaseTranslation(
+                                            item.itemName,
+                                            item.itemNameAr,
+                                            item.itemNameEs,
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              controller
-                                                  .deleteFavourites(itemId);
-                                            },
-                                            child: Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 5),
-                                              height: 30,
-                                              width: 30,
-                                              decoration: BoxDecoration(
-                                                color: Appcolor.pink,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: const Icon(
-                                                Icons.remove,
-                                                size: 29,
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                          categoryName: item.categoryName,
+                                          fit: BoxFit.contain,
+                                          memCacheWidth: 320,
+                                          borderRadius:
+                                              BorderRadius.circular(14),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        databaseTranslation(
+                                          item.itemName,
+                                          item.itemNameAr,
+                                          item.itemNameEs,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: theme.textTheme.titleSmall
+                                            ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.25,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: Colors.amber,
+                                            size: 15,
+                                          ),
+                                          const SizedBox(width: 3),
+                                          Text(
+                                            rating.toStringAsFixed(1),
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.amber[800],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        "\$${price.toStringAsFixed(2)}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 16,
+                                          color: Appcolor.deepPurple,
+                                          letterSpacing: -0.3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.deleteFavourites(itemId);
+                                  },
+                                  style: IconButton.styleFrom(
+                                    backgroundColor:
+                                        Colors.red.withValues(alpha: 0.1),
+                                    foregroundColor: Colors.red[600],
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    padding: const EdgeInsets.all(8),
+                                  ),
+                                  icon: const Icon(
+                                    Icons.delete_outline_rounded,
+                                    size: 20,
+                                  ),
+                                ),
+                              ],
                               ),
-                              const SizedBox(height: 10),
-                              const Divider(endIndent: 20, indent: 20),
-                            ],
+                            ),
                           ),
-                  );
-                },
-              ));
+                );
+              },
+            ),
+    );
   }
 }

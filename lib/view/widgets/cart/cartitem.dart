@@ -10,30 +10,54 @@ class CartItem extends StatelessWidget {
   final String itemCount;
   final Function()? onAdd;
   final Function()? onRemove;
-  const CartItem(
-      {super.key,
-      required this.img,
-      required this.itemName,
-      required this.itemCategory,
-      required this.itemPrice,
-      required this.itemCount,
-      required this.onAdd,
-      required this.onRemove});
+
+  const CartItem({
+    super.key,
+    required this.img,
+    required this.itemName,
+    required this.itemCategory,
+    required this.itemPrice,
+    required this.itemCount,
+    required this.onAdd,
+    required this.onRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 5, right: 5),
-              height: 90,
-              width: 90,
-              decoration: BoxDecoration(
-                color: Appcolor.whitePink,
-                borderRadius: BorderRadius.circular(16),
-              ),
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: theme.colorScheme.onSurface
+              .withValues(alpha: isDark ? 0.12 : 0.06),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 84,
+            width: 84,
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.05)
+                  : Appcolor.mimiPink.withValues(alpha: 0.35),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
               child: OroProductImage(
                 imageUrl: img,
                 productName: itemName,
@@ -42,119 +66,106 @@ class CartItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            Expanded(
-              child: SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              itemName,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              itemCategory,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              itemPrice,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Appcolor.berry,
-                              ),
-                            ),
-                          ],
-                        ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  itemName,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  itemCategory,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  itemPrice,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    color: Appcolor.deepPurple,
+                    letterSpacing: -0.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Appcolor.lightPink.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: theme.colorScheme.onSurface
+                    .withValues(alpha: isDark ? 0.1 : 0.05),
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    onTap: onRemove,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: Icon(
+                        Icons.remove_rounded,
+                        size: 18,
+                        color: isDark ? Colors.white : Appcolor.berry,
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 5),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 5, left: 5),
-                            decoration: BoxDecoration(
-                              color: Appcolor.lightPink,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(5),
-                                splashColor:
-                                    Appcolor.pink.withValues(alpha: 0.1),
-                                onTap: onAdd,
-                                child: const Icon(
-                                  Icons.add_rounded,
-                                  color: Appcolor.berry,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                              margin: const EdgeInsets.only(
-                                  right: 5, left: 5, bottom: 2),
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                itemCount,
-                                style: const TextStyle(
-                                    fontFamily: "Sw",
-                                    fontWeight: FontWeight.bold,
-                                    color: Appcolor.berry),
-                              )),
-                          Container(
-                            margin: const EdgeInsets.only(right: 5, left: 5),
-                            decoration: BoxDecoration(
-                              color: Appcolor.lightPink,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(5),
-                                splashColor:
-                                    Appcolor.pink.withValues(alpha: 0.1),
-                                onTap: onRemove,
-                                child: const Icon(Icons.remove_rounded,
-                                    color: Appcolor.berry),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            )
-          ],
-        ),
-        const SizedBox(height: 3),
-        const Divider(
-          endIndent: 20,
-          indent: 20,
-        ),
-      ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    itemCount,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: isDark ? Colors.white : Appcolor.berry,
+                    ),
+                  ),
+                ),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    onTap: onAdd,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: Icon(
+                        Icons.add_rounded,
+                        size: 18,
+                        color: isDark ? Colors.white : Appcolor.berry,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
