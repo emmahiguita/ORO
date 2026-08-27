@@ -32,7 +32,7 @@ abstract class ItemsDetailsController extends GetxController {
 class ItemsDetailsControllerImp extends ItemsDetailsController {
   int counter = 1;
   dynamic data;
-  late StatusRequest statusRequest;
+  StatusRequest statusRequest = StatusRequest.none;
   CartData cartData = CartData(Get.find());
   Services services = Get.find();
   RatingData ratingData = RatingData(Get.find());
@@ -41,7 +41,7 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
   double stars = 3;
   List<RatingModel> allRating = [];
   bool isOrdered = false;
-  late StatusRequest ratingStatusRequest;
+  StatusRequest ratingStatusRequest = StatusRequest.none;
 
   @override
   void onInit() {

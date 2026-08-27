@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/controller/items/itemsController.dart';
@@ -141,26 +140,34 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 90),
-                    sliver: SliverMasonryGrid.count(
-                      crossAxisCount: columns,
-                      mainAxisSpacing: 14,
-                      crossAxisSpacing: 14,
-                      itemBuilder: (context, index) {
-                        final item = categoryModels[index];
-                        return CustomItemsList(
-                          loading: controller.isLoadingItem(item.itemId ?? -1),
-                          onAddToCart: () {
-                            if (item.itemId != null) {
-                              controller.addToCart("${item.itemId}");
-                            }
-                          },
-                          onTap: () {
-                            controller.goToItemDetails(item);
-                          },
-                          itemsModel: item,
-                        );
-                      },
-                      childCount: categoryModels.length,
+                    sliver: SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: columns,
+                        mainAxisSpacing: 14,
+                        crossAxisSpacing: 14,
+                        childAspectRatio: 0.62,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final item = categoryModels[index];
+                          return CustomItemsList(
+                            loading: controller.isLoadingItem(item.itemId ?? -1),
+                            colorIndex: index,
+                            onAddToCart: () {
+                              if (item.itemId != null) {
+                                controller.addToCart("${item.itemId}");
+                              }
+                            },
+                            onTap: () {
+                              controller.goToItemDetails(item);
+                            },
+                            itemsModel: item,
+                            heroTag:
+                                'product-cat-$categoryId-$index-${item.itemId ?? item.hashCode}',
+                          );
+                        },
+                        childCount: categoryModels.length,
+                      ),
                     ),
                   ),
                 ],

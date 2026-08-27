@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oro/core/formatters/oro_money.dart';
 import 'package:oro/core/theme/app_theme.dart';
 import 'package:oro/view/widgets/animations/animations.dart';
 
@@ -86,7 +87,7 @@ void main() {
 
       expect(find.text('¡Pedido Confirmado!'), findsOneWidget);
       expect(find.text('#8842'), findsOneWidget);
-      expect(find.text('\$450.00'), findsOneWidget);
+      expect(find.text(OroMoney.format(450.0)), findsOneWidget);
     });
 
     testWidgets('OroDeliveryStatus muestra etapa actual y progreso',

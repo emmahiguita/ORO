@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/core/class/statusrequest.dart';
-import 'package:oro/core/constant/approutes.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/apilink.dart';
+import 'package:oro/core/services/offline_data_provider.dart';
+import 'package:oro/controller/items/itemsdetailsController.dart';
 import 'package:oro/core/functions/handlingdata.dart';
+import 'package:oro/view/screens/items/itemdetails.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/data/datasource/remote/cart/cartdata.dart';
 import 'package:oro/data/datasource/remote/itmes/itemsdata.dart';
@@ -31,7 +33,7 @@ class ItemscontrollerImp extends ItemsController {
   final Set<int> loadingItemIds = {};
 
   List data = [];
-  late StatusRequest statusRequest;
+  StatusRequest statusRequest = StatusRequest.none;
 
   late PageController pageController;
   late ScrollController categoryScrollController;
@@ -80,41 +82,30 @@ class ItemscontrollerImp extends ItemsController {
     var response = await itemsdata.postData(catId, services.userId);
     var status = handlingdata(response);
 
-    if (status == StatusRequest.success) {
-      if (response["status"] == "success") {
-        List categoryData = response['data'] ?? [];
-        List<ItemsModel> models =
-            categoryData.map((e) => ItemsModel.fromJson(e)).toList();
-
-        categoryDataCache[catId] = List.from(categoryData);
-        categoryItemsModelCache[catId] = models;
-        categoryStatusCache[catId] = StatusRequest.success;
-
-        if (Get.isRegistered<FavouritesControllerImp>()) {
-          final fav = Get.find<FavouritesControllerImp>();
-          for (final m in models) {
-            if (m.itemId != null && m.favourite != null) {
-              fav.favourites[m.itemId!] = m.favourite!;
-            }
-          }
-        }
-
-        if (this.catId == catId) {
-          data = List.from(categoryData);
-          statusRequest = StatusRequest.success;
-        }
-      } else if (response["status"] == "failure") {
-        categoryStatusCache[catId] = StatusRequest.failure;
-        categoryItemsModelCache[catId] = [];
-        if (this.catId == catId) {
-          statusRequest = StatusRequest.failure;
-        }
-      }
+    List categoryData = [];
+    if (status == StatusRequest.success &&
+        response is Map &&
+        response["status"] == "success" &&
+        (response['data'] as List?)?.isNotEmpty == true) {
+      categoryData = response['data'] ?? [];
     } else {
-      categoryStatusCache[catId] = status;
-      if (this.catId == catId) {
-        statusRequest = status;
-      }
+      final mock = OfflineDataProvider.getMockResponse(
+        AppLink.items,
+        {"id": catId},
+      );
+      categoryData = mock['data'] ?? [];
+    }
+
+    List<ItemsModel> models =
+        categoryData.map((e) => ItemsModel.fromJson(e)).toList();
+
+    categoryDataCache[catId] = List.from(categoryData);
+    categoryItemsModelCache[catId] = models;
+    categoryStatusCache[catId] = StatusRequest.success;
+
+    if (this.catId == catId) {
+      data = List.from(categoryData);
+      statusRequest = StatusRequest.success;
     }
     update();
   }
@@ -227,7 +218,10 @@ class ItemscontrollerImp extends ItemsController {
 
   @override
   goToItemDetails(itemModel) {
-    Get.toNamed(Approutes.itemDetails, arguments: {"itemsModel": itemModel});
+    if (Get.isRegistered<ItemsDetailsControllerImp>()) {
+      Get.delete<ItemsDetailsControllerImp>();
+    }
+    Get.to(() => const ItemDetails(), arguments: {"itemsModel": itemModel});
   }
 
   @override

@@ -27,35 +27,35 @@ class BottomBarButton extends StatelessWidget {
       label: text,
       child: InkWell(
         onTap: onPressed,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
+          duration: const Duration(milliseconds: 160),
           curve: Curves.easeOutCubic,
-          margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
           decoration: BoxDecoration(
             color: isActive ? OroColors.forestSoft : Colors.transparent,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(14),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedScale(
-                scale: isActive ? 1.06 : 1,
-                duration: const Duration(milliseconds: 180),
+                scale: isActive ? 1.05 : 1,
+                duration: const Duration(milliseconds: 160),
                 child: Icon(
                   iconData,
-                  size: 21,
+                  size: 19,
                   color: isActive ? active : inactive,
                 ),
               ),
-              const SizedBox(height: 3),
+              const SizedBox(height: 2),
               Text(
                 text,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: isActive ? active : inactive,
-                  fontSize: 9.5,
+                  fontSize: 8.5,
                   fontWeight: isActive ? FontWeight.w900 : FontWeight.w600,
                 ),
               ),

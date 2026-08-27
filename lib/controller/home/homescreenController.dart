@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/class/statusrequest.dart';
-import 'package:oro/core/design/oro_motion.dart';
 import 'package:oro/core/functions/handlingdata.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/data/datasource/remote/notification/notificationdata.dart';
@@ -50,13 +49,6 @@ class HomeScreenControllerImp extends HomeScreenController {
   void changePage(int i) {
     if (currentpage == i) return;
     currentpage = i;
-    if (pageController.hasClients) {
-      pageController.animateToPage(
-        i,
-        duration: OroMotion.medium,
-        curve: OroMotion.standard,
-      );
-    }
     update();
   }
 
@@ -64,6 +56,9 @@ class HomeScreenControllerImp extends HomeScreenController {
   void onInit() {
     currentpage = Get.arguments?['num'] ?? 0;
     pageController = PageController(initialPage: currentpage);
+    if (!Get.isRegistered<HomeControllerImp>()) {
+      Get.put(HomeControllerImp());
+    }
     getNotificationsCount();
     super.onInit();
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:particles_flutter/particles_flutter.dart';
 import 'package:vibration/vibration.dart';
 
@@ -169,27 +170,31 @@ class MovingGradientReviewButtonState extends State<MovingGradientReviewButton>
           return Transform.scale(
             scale: _scaleAnimation.value,
             child: Container(
-              height: widget.height,
+              height: 46,
               width: widget.width,
-              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 gradient: LinearGradient(
                   colors: const [
-                    Color(0xFF0B4D36),
-                    Color(0xFF146C4D),
-                    Color(0xFFC89B3C),
+                    Color(0xFF132A3E),
+                    Color(0xFF0F573C),
+                    Color(0xFFD4AF37),
                   ],
-                  stops: const [0.0, 0.58, 1.0],
+                  stops: const [0.0, 0.50, 1.0],
                   begin: Alignment(_gradientPosition.value, 0),
                   end: Alignment(_gradientPosition.value + 1, 0),
                   tileMode: TileMode.mirror,
                 ),
+                border: Border.all(
+                  color: OroColors.accentGold.withValues(alpha: 0.60),
+                  width: 1,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF0B4D36).withValues(alpha: 0.28),
-                    blurRadius: 14,
-                    offset: const Offset(0, 5),
+                    color: OroColors.accentGold.withValues(alpha: 0.20),
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -201,25 +206,21 @@ class MovingGradientReviewButtonState extends State<MovingGradientReviewButton>
                     offset: Offset(0, _starBounce.value),
                     child: Transform.rotate(
                       angle: _starRotation.value * 2 * 3.1416,
-                      child: const Icon(Icons.star_rounded,
-                          color: Colors.white, size: 24),
+                      child: const Icon(
+                        Icons.star_rounded,
+                        color: OroColors.accentGold,
+                        size: 20,
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Text(
+                  const SizedBox(width: 8),
+                  const Text(
                     'Calificar producto',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 17,
+                      fontSize: 14,
                       fontWeight: FontWeight.w800,
-                      letterSpacing: .1,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black.withValues(alpha: 0.3),
-                          blurRadius: 4,
-                          offset: const Offset(1, 2),
-                        ),
-                      ],
+                      letterSpacing: 0.2,
                     ),
                   ),
                 ],

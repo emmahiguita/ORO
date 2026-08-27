@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
+import 'package:oro/core/design/oro_motion.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
 
 class CartItem extends StatelessWidget {
@@ -30,17 +32,24 @@ class CartItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: isDark
+            ? const Color(0xFF0F2030)
+            : Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.onSurface
-              .withValues(alpha: isDark ? 0.12 : 0.06),
+          color: OroColors.accentGold.withValues(alpha: isDark ? 0.50 : 0.65),
+          width: 1.2,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
-            blurRadius: 12,
+            color: OroColors.accentGold.withValues(alpha: isDark ? 0.12 : 0.08),
+            blurRadius: 14,
             offset: const Offset(0, 4),
+          ),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -51,10 +60,13 @@ class CartItem extends StatelessWidget {
             width: 84,
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withValues(alpha: 0.05)
-                  : theme.colorScheme.secondaryContainer
-                      .withValues(alpha: 0.52),
+                  ? Colors.black26
+                  : const Color(0xFFF9F7F2),
               borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: OroColors.accentGold.withValues(alpha: 0.25),
+                width: 1,
+              ),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
@@ -73,31 +85,37 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                if (itemCategory.trim().isNotEmpty)
+                  Text(
+                    itemCategory.toUpperCase(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: OroColors.turquoise,
+                      fontSize: 8.5,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                const SizedBox(height: 2),
                 Text(
                   itemName,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13.5,
                     height: 1.2,
+                    color: isDark ? OroColors.crystalWhite : OroColors.nightBlue,
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  itemCategory,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: .6),
-                  ),
-                ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 Text(
                   itemPrice,
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: theme.colorScheme.primary,
+                    fontSize: 15.5,
+                    fontWeight: FontWeight.w900,
+                    color: isDark ? OroColors.crystalWhite : OroColors.nightBlue,
                     letterSpacing: -0.3,
                   ),
                 ),
@@ -105,15 +123,17 @@ class CartItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
+
+          // Control de Cantidad Elegante con Oro y Esmeralda
           Container(
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
+                  ? const Color(0xFF152A3C)
+                  : const Color(0xFFF3EFE6),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: theme.colorScheme.onSurface
-                    .withValues(alpha: isDark ? 0.1 : 0.05),
+                color: OroColors.accentGold.withValues(alpha: 0.40),
+                width: 1,
               ),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -124,25 +144,28 @@ class CartItem extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
-                    onTap: onRemove,
+                    onTap: () async {
+                      await OroMotion.selectionHaptic();
+                      onRemove?.call();
+                    },
                     child: Padding(
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.remove_rounded,
-                        size: 18,
-                        color: theme.colorScheme.primary,
+                        size: 16,
+                        color: isDark ? OroColors.crystalWhite : OroColors.nightBlue,
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: Text(
                     itemCount,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: theme.colorScheme.primary,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      color: OroColors.accentGold,
                     ),
                   ),
                 ),
@@ -150,13 +173,20 @@ class CartItem extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
-                    onTap: onAdd,
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: Icon(
+                    onTap: () async {
+                      await OroMotion.selectionHaptic();
+                      onAdd?.call();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        gradient: OroColors.emeraldGradient,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
                         Icons.add_rounded,
-                        size: 18,
-                        color: theme.colorScheme.primary,
+                        size: 14,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -169,3 +199,4 @@ class CartItem extends StatelessWidget {
     );
   }
 }
+

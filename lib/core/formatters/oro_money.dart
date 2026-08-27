@@ -1,16 +1,15 @@
 import 'package:intl/intl.dart';
 
 abstract final class OroMoney {
-  static String format(num? value, {String symbol = r'$'}) {
+  static String format(num? value, {String symbol = r'$', bool withCurrencyCode = false}) {
     final amount = value?.toDouble() ?? 0;
-    final decimals = amount == amount.roundToDouble() ? 0 : 2;
+    // Formato estándar colombiano con puntos de miles: 140.600.000
+    final numFormat = NumberFormat('#,##0', 'es_CO');
+    final formattedDigits = numFormat.format(amount.round()).replaceAll(',', '.');
 
-    final formatter = NumberFormat.currency(
-      locale: 'es_CO',
-      symbol: symbol,
-      decimalDigits: decimals,
-    );
-
-    return formatter.format(amount).replaceAll('\u00A0', ' ');
+    final prefix = symbol.isNotEmpty ? '$symbol ' : '';
+    final suffix = withCurrencyCode ? ' COP' : '';
+    return '$prefix$formattedDigits$suffix';
   }
 }
+

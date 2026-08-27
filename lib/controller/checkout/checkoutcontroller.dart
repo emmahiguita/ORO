@@ -5,6 +5,8 @@ import 'package:oro/controller/checkout/couponcontroller.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/functions/handlingdata.dart';
 import 'package:oro/core/services/services.dart';
+import 'package:oro/core/design/oro_colors.dart';
+import 'package:oro/core/formatters/oro_money.dart';
 import 'package:oro/data/datasource/remote/address/addressdata.dart';
 import 'package:oro/data/datasource/remote/checkout/checkoutdata.dart';
 import 'package:oro/data/model/addressmodel.dart';
@@ -110,16 +112,7 @@ class CheckoutControllerImp extends CheckoutController {
   }
 
   String formatMoney(num value) {
-    final rounded = value.round();
-    final negative = rounded < 0;
-    final digits = rounded.abs().toString();
-    final parts = <String>[];
-    for (int end = digits.length; end > 0; end -= 3) {
-      final start = (end - 3).clamp(0, digits.length).toInt();
-      parts.insert(0, digits.substring(start, end));
-    }
-    final formatted = parts.join('.');
-    return '${negative ? '-' : ''}\$ $formatted $currency';
+    return OroMoney.format(value);
   }
 
   void _message(String title, String body) =>
@@ -157,28 +150,96 @@ class CheckoutControllerImp extends CheckoutController {
       update();
       Get.offAll(() => const HomeScreen());
       Get.dialog(
-        AlertDialog(
-          title: const Text('Pedido confirmado'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                  height: 110,
-                  child: Lottie.asset('lottie/orederplaced.json',
-                      fit: BoxFit.contain)),
-              const SizedBox(height: 12),
-              Text('Pedido #${orderId ?? '-'} creado correctamente.'),
-              const SizedBox(height: 8),
-              Text(
-                  'Total confirmado: ${formatMoney(num.tryParse('$total') ?? 0)}'),
-              const SizedBox(height: 8),
-              const Text(
-                  'El pago se realizará contra entrega o al recoger el pedido.'),
-            ],
+        Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
           ),
-          actions: [
-            TextButton(onPressed: Get.back, child: const Text('Continuar'))
-          ],
+          backgroundColor: const Color(0xFF101E2B),
+          child: Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: OroColors.accentGold.withValues(alpha: 0.40),
+                width: 1.2,
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 110,
+                  child: Lottie.asset(
+                    'lottie/orederplaced.json',
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, __, ___) => const Icon(
+                      Icons.check_circle_rounded,
+                      color: OroColors.emerald,
+                      size: 60,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  '¡Pedido Confirmado!',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: OroColors.crystalWhite,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Pedido #${orderId ?? '-'} creado con éxito.',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: OroColors.turquoise,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Total confirmado: ${formatMoney(num.tryParse('$total') ?? 0)}',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                    color: OroColors.accentGold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'El pago se realizará de forma segura contra entrega o al recoger tu pedido.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: OroColors.accentGoldSoft,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 46,
+                  child: ElevatedButton(
+                    onPressed: Get.back,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: OroColors.accentGold,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    child: const Text(
+                      'Continuar Comprando',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       );
       return;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:oro/controller/admin/orders/AdminOrderDetailsController.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/functions/format_relative_date.dart';
 
 class OrderSummaryCard extends StatelessWidget {
   final AdminOrderDetailsControllerImp controller;
@@ -9,6 +9,11 @@ class OrderSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = controller.adminDetailsModel.orderStatus ?? 0;
+    final type = controller.adminDetailsModel.orderType ?? 0;
+    final paymentType = controller.adminDetailsModel.orderPaymenttype ?? 0;
+    final dtStr = controller.adminDetailsModel.orderDatetime;
+
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -32,9 +37,7 @@ class OrderSummaryCard extends StatelessWidget {
                     border: Border.all(color: Appcolor.berry),
                   ),
                   child: Text(
-                    controller.getStatusText(
-                        controller.adminDetailsModel.orderStatus!,
-                        controller.adminDetailsModel.orderType!),
+                    controller.getStatusText(status, type),
                     style: const TextStyle(
                       color: Appcolor.berry,
                       fontWeight: FontWeight.w500,
@@ -49,8 +52,8 @@ class OrderSummaryCard extends StatelessWidget {
               children: [
                 Text('Order Date', style: TextStyle(color: Colors.grey[600])),
                 Text(
-                    Jiffy.parse(controller.adminDetailsModel.orderDatetime!)
-                        .format(pattern: 'dd MMM yyyy, hh:mm a'),
+                    formatDisplayDate(dtStr,
+                        pattern: 'dd MMM yyyy, hh:mm a', fallback: 'N/A'),
                     style: TextStyle(color: Colors.grey[800])),
               ],
             ),
@@ -61,8 +64,7 @@ class OrderSummaryCard extends StatelessWidget {
                 Text('Método de pago',
                     style: TextStyle(color: Colors.grey[600])),
                 Text(
-                    controller.getPaymentType(
-                        controller.adminDetailsModel.orderPaymenttype!),
+                    controller.getPaymentType(paymentType),
                     style: TextStyle(color: Colors.grey[800])),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/formatters/oro_money.dart';
 
 class FinalPriceTag extends StatelessWidget {
   final double price;
@@ -26,7 +27,7 @@ class FinalPriceTag extends StatelessWidget {
         ],
       ),
       child: Text(
-        "\$${price.toStringAsFixed(2)}",
+        OroMoney.format(price),
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: theme.brightness == Brightness.dark
                   ? theme.colorScheme.onPrimary

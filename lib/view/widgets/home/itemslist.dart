@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/class/statusrequest.dart';
@@ -29,15 +28,18 @@ class ItemsList extends StatelessWidget {
                     : width >= 720
                         ? 3
                         : 2;
-                return MasonryGridView.count(
+                return GridView.builder(
                   itemCount: controller.statusRequest == StatusRequest.loding
                       ? columns * 3
                       : controller.items.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: columns,
-                  mainAxisSpacing: 14,
-                  crossAxisSpacing: 14,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    mainAxisSpacing: 14,
+                    crossAxisSpacing: 14,
+                    childAspectRatio: 0.62,
+                  ),
                   itemBuilder: (context, index) {
                     if (controller.statusRequest == StatusRequest.loding) {
                       return const LoadingItemState();
@@ -47,6 +49,9 @@ class ItemsList extends StatelessWidget {
                       itemsModel: model,
                       onTap: () => controller.goToItemDetails(model),
                       colorIndex: index % controller.gradientColors.length,
+                      heroTag:
+                          'product-grid-$index-${model.itemId ?? model.hashCode}',
+                      enableInteractive360: true,
                     );
                   },
                 );

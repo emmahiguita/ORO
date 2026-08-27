@@ -12,7 +12,7 @@ class RatingStars extends StatelessWidget {
     return Row(
       children: [
         RatingBarIndicator(
-          rating: double.parse(stars),
+          rating: double.tryParse(stars) ?? 0.0,
           itemBuilder: (context, index) => const Icon(
             Icons.star_rounded,
             color: Appcolor.amaranthpink,

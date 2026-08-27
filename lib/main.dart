@@ -10,10 +10,20 @@ import 'package:oro/core/localization/translation.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/core/theme/app_theme.dart';
 import 'package:oro/routes.dart';
+import 'package:oro/view/widgets/common/oro_error_boundary.dart';
 import 'package:oro/view/widgets/main/draggableverificationprompt.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Eliminate red screen errors globally with luxury branded fallback
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+  };
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return OroErrorFallback(details: details);
+  };
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
@@ -47,14 +57,20 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 320),
       builder: (context, child) {
-        return Stack(
-          children: [
-            child ?? const SizedBox.shrink(),
-            GetBuilder<Localecontroller>(builder: (services) {
-              return services.geIsVerified()
-                  ? const DraggableVerificationPrompt()
-                  : const SizedBox.shrink();
-            }),
+        return Overlay(
+          initialEntries: [
+            OverlayEntry(
+              builder: (ctx) => Stack(
+                children: [
+                  child ?? const SizedBox.shrink(),
+                  GetBuilder<Localecontroller>(builder: (services) {
+                    return services.geIsVerified()
+                        ? const DraggableVerificationPrompt()
+                        : const SizedBox.shrink();
+                  }),
+                ],
+              ),
+            ),
           ],
         );
       },

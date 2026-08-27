@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:oro/controller/delivery/deliveredcontroller.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/functions/format_relative_date.dart';
 import 'package:oro/view/widgets/delivery/infoitemwidget.dart';
 
 class DeliveryCard extends StatelessWidget {
@@ -14,8 +14,8 @@ class DeliveryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final delivery = controller.delivered[index];
-    final deliveryTime = Jiffy.parse(delivery.deliveryDatetime!).fromNow();
-    final paymentType = controller.getPaymentType(delivery.orderPaymenttype!);
+    final deliveryTime = formatRelativeDate(delivery.deliveryDatetime, fallback: 'Reciente');
+    final paymentType = controller.getPaymentType(delivery.orderPaymenttype ?? 0);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),

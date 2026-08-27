@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/formatters/oro_money.dart';
 import 'package:oro/view/widgets/animations/oro_animated_button.dart';
 import 'package:oro/view/widgets/animations/oro_animation_assets.dart';
 import 'package:oro/view/widgets/animations/oro_lottie_view.dart';
@@ -136,7 +137,7 @@ class OroOrderSuccess extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '\$${totalPrice!.toStringAsFixed(2)}',
+                          OroMoney.format(totalPrice),
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w800,
                             color: Appcolor.oxblood,

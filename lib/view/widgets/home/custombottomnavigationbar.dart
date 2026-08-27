@@ -18,25 +18,26 @@ class CustomBottomNavigationBar extends StatelessWidget {
       builder: (controller) {
         return SafeArea(
           top: false,
-          minimum: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+          minimum: const EdgeInsets.fromLTRB(10, 0, 10, 6),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(26),
+            borderRadius: BorderRadius.circular(22),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
               child: Container(
-                height: 72,
+                height: 60,
                 decoration: BoxDecoration(
                   color: (dark ? OroColors.surfaceDark : Colors.white)
                       .withValues(alpha: .94),
-                  borderRadius: BorderRadius.circular(26),
+                  borderRadius: BorderRadius.circular(22),
                   border: Border.all(
-                    color: theme.colorScheme.outline.withValues(alpha: .72),
+                    color: theme.colorScheme.outline.withValues(alpha: .60),
+                    width: 0.8,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: dark ? .26 : .08),
-                      blurRadius: 28,
-                      offset: const Offset(0, 12),
+                      color: Colors.black.withValues(alpha: dark ? .26 : .06),
+                      blurRadius: 20,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),
@@ -44,7 +45,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   children: List.generate(
                     controller.listpages.length + 1,
                     (index) {
-                      if (index == 2) return const SizedBox(width: 70);
+                      if (index == 2) return const SizedBox(width: 58);
                       final pageIndex = index > 2 ? index - 1 : index;
                       return Expanded(
                         child: BottomBarButton(

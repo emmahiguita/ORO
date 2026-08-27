@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class QuantityButton extends StatelessWidget {
   final IconData icon;
@@ -13,15 +14,15 @@ class QuantityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 36,
-      height: 36,
+      width: 34,
+      height: 34,
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: OroColors.goldGradient,
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 4,
+            color: OroColors.accentGold.withValues(alpha: 0.35),
+            blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
@@ -30,9 +31,9 @@ class QuantityButton extends StatelessWidget {
         color: Colors.transparent,
         shape: const CircleBorder(),
         child: InkWell(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(17),
           onTap: onTap,
-          child: Icon(icon, size: 20, color: Colors.grey[700]),
+          child: Icon(icon, size: 18, color: const Color(0xFF091622)),
         ),
       ),
     );

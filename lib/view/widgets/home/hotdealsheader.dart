@@ -7,7 +7,6 @@ class HotDealsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: 1),
       duration: const Duration(milliseconds: 500),
@@ -25,9 +24,23 @@ class HotDealsHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('featured'.tr, style: theme.textTheme.headlineSmall),
+                Text(
+                  'featured'.tr,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    letterSpacing: -0.4,
+                  ),
+                ),
                 const SizedBox(height: 2),
-                Text('featured_subtitle'.tr, style: theme.textTheme.bodySmall),
+                Text(
+                  'featured_subtitle'.tr,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white.withValues(alpha: 0.75),
+                  ),
+                ),
               ],
             ),
           ),

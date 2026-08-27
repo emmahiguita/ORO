@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:oro/apilink.dart';
 import 'package:oro/core/constant/color.dart';
 
+import 'package:oro/core/design/oro_colors.dart';
+
 class ProductCard extends StatelessWidget {
   final dynamic item;
   final VoidCallback onEdit;
@@ -24,6 +26,10 @@ class ProductCard extends StatelessWidget {
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: OroColors.accentGold.withValues(alpha: 0.65),
+          width: 1.2,
+        ),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),

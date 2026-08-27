@@ -17,7 +17,8 @@ void main() {
       expect(JsonParser.asInt('invalid'), isNull);
     });
 
-    test('asDouble parses double, num, String with comma/dot, and null safely', () {
+    test('asDouble parses double, num, String with comma/dot, and null safely',
+        () {
       expect(JsonParser.asDouble(10.5), 10.5);
       expect(JsonParser.asDouble(10), 10.0);
       expect(JsonParser.asDouble('149.99'), 149.99);

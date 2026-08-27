@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class SpecRow extends StatelessWidget {
   final String label;
@@ -8,7 +9,8 @@ class SpecRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -17,8 +19,9 @@ class SpecRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: theme.colorScheme.onSurface.withValues(alpha: .62),
-              fontSize: 15,
+              color: isDark ? OroColors.turquoise : OroColors.waterBlue,
+              fontSize: 13.5,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(width: 16),
@@ -27,9 +30,9 @@ class SpecRow extends StatelessWidget {
               value,
               textAlign: TextAlign.end,
               style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: theme.colorScheme.onSurface,
+                fontWeight: FontWeight.w800,
+                fontSize: 13.5,
+                color: isDark ? OroColors.crystalWhite : OroColors.nightBlue,
               ),
             ),
           ),

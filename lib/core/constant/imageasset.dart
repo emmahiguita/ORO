@@ -15,6 +15,9 @@ class AppImage {
   static const String e404 = "${routeLottie}404.json";
   static const String loading = "${routeLottie}loading.json";
   static const String nodata = "${routeLottie}nodata.json";
-//home
+//home & promo cards
   static const String card = "${route}HomeCard.png";
+  static const String promoBanner1 = "${route}promo_banner_1.jpg";
+  static const String promoBanner2 = "${route}promo_banner_2.jpg";
+  static const String promoBanner3 = "${route}promo_banner_3.jpg";
 }

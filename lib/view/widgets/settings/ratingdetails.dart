@@ -10,15 +10,21 @@ class RatingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final itemName = rating.itemName?.toString() ?? '';
+    final ratingStars = (rating.ratingStars is num)
+        ? rating.ratingStars as num
+        : (double.tryParse(rating.ratingStars?.toString() ?? '0') ?? 0);
+    final comment = rating.ratingComment?.toString() ?? '';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ItemName(name: rating.itemName!),
+        if (itemName.isNotEmpty) ItemName(name: itemName),
         const SizedBox(height: 12),
-        RatingStars(stars: rating.ratingStars!),
-        if (rating.ratingComment!.isNotEmpty) ...[
+        RatingStars(stars: ratingStars.toString()),
+        if (comment.trim().isNotEmpty) ...[
           const SizedBox(height: 16),
-          RatingComment(comment: rating.ratingComment!),
+          RatingComment(comment: comment),
         ],
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:oro/controller/delivery/deliveryrequestscontroller.dart';
+import 'package:oro/core/functions/format_relative_date.dart';
 import 'package:oro/view/widgets/delivery/paymenttypebadge.dart';
 
 class OrderRequestHeader extends StatelessWidget {
@@ -23,7 +23,7 @@ class OrderRequestHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Order #${order.orderId}',
+                'Order #${order.orderId ?? ''}',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class OrderRequestHeader extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                Jiffy.parse(order.orderDatetime ?? '').fromNow(),
+                formatRelativeDate(order.orderDatetime, fallback: 'Reciente'),
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey[600],
@@ -42,7 +42,7 @@ class OrderRequestHeader extends StatelessWidget {
           ),
         ),
         PaymentTypeBadge(
-          paymentType: controller.getPaymentType(order.orderPaymenttype!),
+          paymentType: controller.getPaymentType(order.orderPaymenttype ?? 0),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class ProductDescription extends StatelessWidget {
   final String description;
@@ -9,12 +10,12 @@ class ProductDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       description,
-      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color:
-                Theme.of(context).colorScheme.onSurface.withValues(alpha: .7),
-            height: 1.6,
-            fontSize: 16,
-          ),
+      style: TextStyle(
+        color: OroColors.crystalWhite.withValues(alpha: 0.85),
+        height: 1.55,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
     );
   }
 }

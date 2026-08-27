@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:oro/apilink.dart';
 import 'package:oro/controller/admin/orders/manageorderscontroller.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/functions/format_relative_date.dart';
 import 'package:oro/view/widgets/admin/ActionButtons.dart';
 
 class OrderCard extends StatelessWidget {
@@ -163,7 +163,7 @@ class OrderCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              "Placed ${Jiffy.parse(order.orderDatetime!).fromNow()}",
+                              "Placed ${formatRelativeDate(order.orderDatetime, fallback: 'recently')}",
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: Colors.grey[600],
                               ),

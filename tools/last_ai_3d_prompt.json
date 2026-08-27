@@ -1,0 +1,21 @@
+{
+  "product_name": "Lingote de Oro ORO",
+  "category": "jewelry",
+  "mode": "single_image",
+  "images": [
+    "images/logo.png"
+  ],
+  "prompt": "Generate a production-ready 3D e-commerce product model from this reference. Preserve the exact silhouette, proportions, colors, logo placement, seams, materials and all visible details. Create complete front, back, sides, top and bottom geometry; do not invent text, brands, accessories or patterns. Use physically based rendering materials: realistic base color, normal, roughness, metallic and ambient-occlusion maps. Center the model, use a bottom-center pivot, clean UVs, clean topology, no floating fragments, no background plane, no mannequin, no human body. Optimize for Android mobile real-time rendering, export as GLB, with 2K PBR textures.",
+  "export_format": "glb",
+  "pbr_textures": [
+    "base_color",
+    "metallic",
+    "roughness",
+    "normal",
+    "occlusion"
+  ],
+  "texture_resolution": 2048,
+  "target_polycount": 25000,
+  "auto_center_pivot": "bottom_center",
+  "remove_background": true
+}

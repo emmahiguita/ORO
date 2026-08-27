@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oro/apilink.dart';
+import 'package:oro/controller/items/itemsdetailsController.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/functions/handlingdata.dart';
+import 'package:oro/core/services/offline_data_provider.dart';
 import 'package:oro/core/services/services.dart';
 import 'package:oro/data/datasource/remote/home/homedata.dart';
 import 'package:oro/data/model/itemsmodel.dart';
@@ -48,8 +51,10 @@ class HomeControllerImp extends HomeController {
     intiialiData();
     if (_cachedHomeData != null) {
       _applyData(_cachedHomeData!);
-      statusRequest = StatusRequest.success;
+    } else {
+      _applyData(OfflineDataProvider.getMockResponse(AppLink.home, {}));
     }
+    statusRequest = StatusRequest.success;
     getData();
     super.onInit();
   }
@@ -89,16 +94,17 @@ class HomeControllerImp extends HomeController {
       update();
     }
     final response = await homeData.postData();
-    statusRequest = handlingdata(response);
-    if (statusRequest == StatusRequest.success) {
-      if (response['status'] == 'success') {
-        _cachedHomeData = response;
-        _applyData(response);
-      } else if (response['status'] == 'failure') {
-        if (!hasCachedData) {
-          statusRequest = StatusRequest.failure;
-        }
-      }
+    var status = handlingdata(response);
+    if (status == StatusRequest.success &&
+        response is Map &&
+        response['status'] == 'success') {
+      _cachedHomeData = response;
+      _applyData(response);
+      statusRequest = StatusRequest.success;
+    } else {
+      final mock = OfflineDataProvider.getMockResponse(AppLink.home, {});
+      _applyData(mock);
+      statusRequest = StatusRequest.success;
     }
     update();
   }
@@ -129,6 +135,9 @@ class HomeControllerImp extends HomeController {
 
   @override
   goToItemDetails(model) {
+    if (Get.isRegistered<ItemsDetailsControllerImp>()) {
+      Get.delete<ItemsDetailsControllerImp>();
+    }
     Get.to(
       () => const ItemDetails(),
       transition: Transition.rightToLeftWithFade,

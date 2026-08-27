@@ -24,8 +24,16 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final order = controller.acceptedOrders[index];
     final formattedDate = order.orderDatetime != null
-        ? DateFormat('MMM dd, yyyy - hh:mm a')
-            .format(DateTime.parse(order.orderDatetime!))
+        ? () {
+            try {
+              final dt = DateTime.tryParse(order.orderDatetime!);
+              return dt != null
+                  ? DateFormat('MMM dd, yyyy - hh:mm a').format(dt)
+                  : (order.orderDatetime ?? 'N/A');
+            } catch (_) {
+              return order.orderDatetime ?? 'N/A';
+            }
+          }()
         : 'N/A';
 
     return Container(
@@ -61,7 +69,7 @@ class OrderCard extends StatelessWidget {
             CustomerInfoSection(order: order),
             const SizedBox(height: 16),
             OrderSummarySection(
-              paymentType: controller.getPaymentType(order.orderPaymenttype!),
+              paymentType: controller.getPaymentType(order.orderPaymenttype ?? 0),
               totalAmount:
                   '\$${order.orderTotalprice?.toStringAsFixed(2) ?? '0.00'}',
             ),

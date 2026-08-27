@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oro/controller/items/itemsdetailsController.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/items/ratingbadge.dart';
 
@@ -20,16 +21,26 @@ class ProductTitleWithRating extends StatelessWidget {
               controller.data.itemNameAr,
               controller.data.itemNameEs,
             ),
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  height: 1.2,
-                ),
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              color: OroColors.crystalWhite,
+              height: 1.22,
+              letterSpacing: -0.3,
+            ),
           ),
         ),
-        if (controller.data.itemAvgRating != null &&
-            controller.data.itemAvgRating != "0")
-          RatingBadge(rating: controller.data.itemAvgRating!),
+        const SizedBox(width: 10),
+        Builder(
+          builder: (context) {
+            final ratingStr = controller.data.itemAvgRating?.toString();
+            final ratingVal = double.tryParse(ratingStr ?? '0') ?? 0.0;
+            if (ratingVal > 0) {
+              return RatingBadge(rating: ratingStr ?? '0');
+            }
+            return const SizedBox.shrink();
+          },
+        ),
       ],
     );
   }

@@ -36,6 +36,12 @@ class FavouritesList extends StatelessWidget {
                   item.itemNameEs,
                 );
 
+                final category = databaseTranslation(
+                  item.categoryName,
+                  item.categoryNameAr,
+                  item.categoryNameEs,
+                );
+
                 return AnimatedOpacity(
                   duration: const Duration(milliseconds: 180),
                   opacity: controller.isDeleting(id) ? 0 : 1,
@@ -46,31 +52,58 @@ class FavouritesList extends StatelessWidget {
                     child: InkWell(
                       onTap: () => controller.goToItemDetails(item),
                       child: Ink(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? OroColors.surfaceDark
+                              : Theme.of(context).colorScheme.surface,
                           border: Border.all(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .outline
-                                .withValues(alpha: .75),
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? OroColors.borderDark
+                                    : OroColors.borderLight,
+                            width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(
+                                alpha: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? .18
+                                    : .04,
+                              ),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Row(
                           children: [
                             Hero(
-                              tag: 'product-${item.itemId ?? item.hashCode}',
+                              tag:
+                                  'product-fav-$index-${item.itemId ?? item.hashCode}',
                               child: Material(
                                 color: Colors.transparent,
                                 child: Container(
-                                  width: 96,
-                                  height: 96,
+                                  width: 92,
+                                  height: 92,
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surfaceContainerHighest,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? OroColors.surfaceDarkElevated
+                                        : const Color(0xFFF3F2EC),
                                     borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? OroColors.borderDark
+                                              .withValues(alpha: .5)
+                                          : OroColors.borderLight
+                                              .withValues(alpha: .6),
+                                      width: 0.8,
+                                    ),
                                   ),
                                   child: OroProductImage(
                                     imageUrl: item.itemImg,
@@ -88,6 +121,23 @@ class FavouritesList extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  if (category.trim().isNotEmpty)
+                                    Text(
+                                      category.toUpperCase(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? OroColors.accentGold
+                                            : OroColors.forest,
+                                        fontSize: 9,
+                                        letterSpacing: .7,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  if (category.trim().isNotEmpty)
+                                    const SizedBox(height: 3),
                                   Text(
                                     name,
                                     maxLines: 2,
@@ -97,37 +147,45 @@ class FavouritesList extends StatelessWidget {
                                         .titleSmall
                                         ?.copyWith(
                                           fontWeight: FontWeight.w800,
-                                          height: 1.22,
+                                          fontSize: 13.5,
+                                          height: 1.20,
                                         ),
                                   ),
                                   if (rating > 0) ...[
-                                    const SizedBox(height: 7),
+                                    const SizedBox(height: 5),
                                     Row(
                                       children: [
                                         const Icon(
                                           Icons.star_rounded,
-                                          size: 15,
+                                          size: 14,
                                           color: OroColors.accentGold,
                                         ),
-                                        const SizedBox(width: 4),
+                                        const SizedBox(width: 3),
                                         Text(
                                           rating.toStringAsFixed(1),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .labelSmall,
+                                              .labelSmall
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 11,
+                                              ),
                                         ),
                                       ],
                                     ),
                                   ],
-                                  const SizedBox(height: 8),
+                                  const SizedBox(height: 6),
                                   Text(
                                     OroMoney.format(price),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w900,
-                                        ),
+                                    style: TextStyle(
+                                      fontSize: 15.5,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: -.3,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? OroColors.textPrimaryDark
+                                          : OroColors.textPrimaryLight,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -137,14 +195,14 @@ class FavouritesList extends StatelessWidget {
                               tooltip: 'Quitar de favoritos',
                               onPressed: () => controller.deleteFavourites(id),
                               style: IconButton.styleFrom(
-                                minimumSize: const Size(48, 48),
+                                minimumSize: const Size(44, 44),
                                 backgroundColor:
                                     OroColors.error.withValues(alpha: .08),
                                 foregroundColor: OroColors.error,
                               ),
                               icon: const Icon(
                                 Icons.favorite_rounded,
-                                size: 21,
+                                size: 20,
                               ),
                             ),
                           ],
