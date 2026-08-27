@@ -205,7 +205,8 @@ class ViewRating extends StatelessWidget {
                                                       },
                                                       child: Container(
                                                         padding:
-                                                            const EdgeInsets.symmetric(
+                                                            const EdgeInsets
+                                                                .symmetric(
                                                                 horizontal: 6,
                                                                 vertical: 5),
                                                         decoration:

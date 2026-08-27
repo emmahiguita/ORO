@@ -82,9 +82,8 @@ class TrackOrderControllerImp extends TrackOrderController {
           if (event.exists) {
             final rawLat = event.data()?['lat'];
             final rawLong = event.data()?['long'];
-            deliveryLatitude = rawLat is num
-                ? rawLat.toDouble()
-                : double.tryParse('$rawLat');
+            deliveryLatitude =
+                rawLat is num ? rawLat.toDouble() : double.tryParse('$rawLat');
             deliveryLongitude = rawLong is num
                 ? rawLong.toDouble()
                 : double.tryParse('$rawLong');

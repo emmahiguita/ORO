@@ -8,9 +8,8 @@ class RatingSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final avgRating = double.tryParse(
-            controller.data.itemAvgRating?.toString() ?? '') ??
-        5.0;
+    final avgRating =
+        double.tryParse(controller.data.itemAvgRating?.toString() ?? '') ?? 5.0;
 
     return Container(
       padding: const EdgeInsets.all(16),

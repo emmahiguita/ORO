@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/class/statusrequest.dart';
-import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/categoriesmodel.dart';
 import 'package:oro/view/widgets/common/oro_category_icon.dart';
-import 'package:oro/view/widgets/home/loadingstate.dart';
 
 class Categorieslist extends StatelessWidget {
   const Categorieslist({super.key});
@@ -15,25 +13,34 @@ class Categorieslist extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeControllerImp>(
       builder: (controller) {
+        final loading = controller.statusRequest == StatusRequest.loding;
+
         return SizedBox(
-          height: 44,
+          height: 92,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: controller.statusRequest == StatusRequest.loding
-                ? 6
-                : controller.categories.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
-            itemBuilder: (context, index) {
-              return controller.statusRequest == StatusRequest.loding
-                  ? const LoadingState()
-                  : Categories(
-                      selected: index,
-                      categoriesmodel: CategoriesModel.fromJson(
-                        controller.categories[index],
-                      ),
-                    );
-            },
             scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: loading ? 5 : controller.categories.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              if (loading) return const _CategorySkeleton();
+
+              final model = CategoriesModel.fromJson(
+                Map<String, dynamic>.from(controller.categories[index]),
+              );
+
+              return _CategoryTile(
+                model: model,
+                onTap: () {
+                  controller.goToItem(
+                    controller.categories,
+                    index,
+                    model.categoryId?.toString() ?? '',
+                  );
+                },
+              );
+            },
           ),
         );
       },
@@ -41,93 +48,91 @@ class Categorieslist extends StatelessWidget {
   }
 }
 
-class Categories extends GetView<HomeControllerImp> {
-  final CategoriesModel categoriesmodel;
-  final int selected;
+class _CategoryTile extends StatelessWidget {
+  const _CategoryTile({required this.model, required this.onTap});
 
-  const Categories({
-    super.key,
-    required this.categoriesmodel,
-    required this.selected,
-  });
+  final CategoriesModel model;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final name = databaseTranslation(
+      model.categoryName,
+      model.categoryNameAr,
+      model.categoryNameEs,
+    );
+
     return SizedBox(
-      width: 104,
-      child: OroPressable(
-        onTap: () {
-          controller.goToItem(
-            controller.categories,
-            selected,
-            categoriesmodel.categoryId.toString(),
-          );
-        },
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(14),
-            child: Ink(
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withValues(alpha: .74),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: theme.colorScheme.outline.withValues(alpha: .38),
+      width: 86,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(18),
+          child: Column(
+            children: [
+              Container(
+                width: 58,
+                height: 58,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surface,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: theme.colorScheme.outline),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: .05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 9),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 26,
-                      width: 26,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withValues(alpha: .12),
-                        shape: BoxShape.circle,
-                      ),
-                      child: OroCategoryIcon(
-                        categoryImg: categoriesmodel.categoryImg,
-                        categoryName: databaseTranslation(
-                          categoriesmodel.categoryName,
-                          categoriesmodel.categoryNameAr,
-                          categoriesmodel.categoryNameEs,
-                        ),
-                        size: 16,
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        databaseTranslation(
-                          categoriesmodel.categoryName,
-                          categoriesmodel.categoryNameAr,
-                          categoriesmodel.categoryNameEs,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurface,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -.1,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: OroCategoryIcon(
+                  categoryImg: model.categoryImg,
+                  categoryName: name,
+                  size: 28,
                 ),
               ),
-            ),
+              const SizedBox(height: 8),
+              Text(
+                name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CategorySkeleton extends StatelessWidget {
+  const _CategorySkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 86,
+      child: Column(
+        children: [
+          Container(
+            width: 58,
+            height: 58,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            width: 52,
+            height: 8,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ],
       ),
     );
   }

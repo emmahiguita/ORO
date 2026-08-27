@@ -127,8 +127,7 @@ class _OroIntroVideoScreenState extends State<OroIntroVideoScreen>
       return;
     }
 
-    final services =
-        Get.isRegistered<Services>() ? Get.find<Services>() : null;
+    final services = Get.isRegistered<Services>() ? Get.find<Services>() : null;
     final step = services?.sharedPreferences.getString('step');
 
     switch (step) {

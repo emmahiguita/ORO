@@ -45,7 +45,8 @@ class SettingsTile extends StatelessWidget {
         type: MaterialType.transparency,
         child: ListTile(
           splashColor: Appcolor.amaranthpink.withValues(alpha: 0.1),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           leading: Container(

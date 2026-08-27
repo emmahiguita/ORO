@@ -75,7 +75,8 @@ class PendingOrders extends StatelessWidget {
                                 ),
                                 Text(
                                   () {
-                                    final dt = controller.pendingOrders[index].orderDatetime;
+                                    final dt = controller
+                                        .pendingOrders[index].orderDatetime;
                                     if (dt == null || dt.isEmpty) return '';
                                     try {
                                       return Jiffy.parse(dt).fromNow();
@@ -113,13 +114,15 @@ class PendingOrders extends StatelessWidget {
                               isTotal: false,
                               label: 'Payment Type:',
                               value: controller.getPaymentType(controller
-                                  .pendingOrders[index].orderPaymenttype ?? 0),
+                                      .pendingOrders[index].orderPaymenttype ??
+                                  0),
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Type:',
                               value: controller.getOrderType(
-                                  controller.pendingOrders[index].orderType ?? 0),
+                                  controller.pendingOrders[index].orderType ??
+                                      0),
                             ),
 
                             const SizedBox(height: 12),
@@ -132,7 +135,8 @@ class PendingOrders extends StatelessWidget {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      final orderId = controller.pendingOrders[index].orderId;
+                                      final orderId = controller
+                                          .pendingOrders[index].orderId;
                                       if (orderId == null) return;
                                       controller.getOrderDetails(
                                         orderId.toString(),
@@ -172,7 +176,8 @@ class PendingOrders extends StatelessWidget {
                                       2)
                                     ElevatedButton(
                                       onPressed: () {
-                                        final orderId = controller.pendingOrders[index].orderId;
+                                        final orderId = controller
+                                            .pendingOrders[index].orderId;
                                         if (orderId == null) return;
                                         controller.goToTrackOrder(
                                           orderId.toString(),

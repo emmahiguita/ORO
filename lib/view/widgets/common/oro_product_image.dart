@@ -121,13 +121,13 @@ class OroProductImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-          decoration: BoxDecoration(
-            color: isDark ? OroColors.surfaceDarkElevated : const Color(0xFFF3EFE6),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
+      decoration: BoxDecoration(
+        color: isDark ? OroColors.surfaceDarkElevated : const Color(0xFFF3EFE6),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,14 +170,14 @@ class OroProductImage extends StatelessWidget {
             ],
           ),
           Positioned(
-          bottom: 6,
-          right: 6,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-            decoration: BoxDecoration(
-              color: OroColors.accentGold,
-              borderRadius: BorderRadius.circular(6),
-            ),
+            bottom: 6,
+            right: 6,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+              decoration: BoxDecoration(
+                color: OroColors.accentGold,
+                borderRadius: BorderRadius.circular(6),
+              ),
               child: const Text(
                 'ORO',
                 style: TextStyle(

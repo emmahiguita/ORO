@@ -28,8 +28,7 @@ class FavouritesControllerImp extends FavouritesController {
   @override
   addFavourites(String itemId) async {
     statusRequest = StatusRequest.loding;
-    var response =
-        await favouritesData.favouritesAdd(services.userId, itemId);
+    var response = await favouritesData.favouritesAdd(services.userId, itemId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

@@ -35,7 +35,8 @@ class FeaturedReview extends StatelessWidget {
             : Colors.grey[50],
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: theme.colorScheme.onSurface.withValues(alpha: isDark ? 0.1 : 0.12),
+          color: theme.colorScheme.onSurface
+              .withValues(alpha: isDark ? 0.1 : 0.12),
         ),
       ),
       child: Row(

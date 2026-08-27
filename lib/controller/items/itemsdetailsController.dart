@@ -330,7 +330,8 @@ class ItemsDetailsControllerImp extends ItemsDetailsController {
       final desc = data?.itemDesc?.toString() ?? '';
       final price = data?.itemFinalPrice ?? data?.itemPrice ?? 0.0;
       final discount = data?.itemDiscount ?? 0;
-      final avgRating = double.tryParse(data?.itemAvgRating?.toString() ?? '0') ?? 0.0;
+      final avgRating =
+          double.tryParse(data?.itemAvgRating?.toString() ?? '0') ?? 0.0;
 
       String shareText = '''
 🌟 Check out this amazing product: $name!

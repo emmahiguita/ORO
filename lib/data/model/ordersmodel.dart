@@ -33,7 +33,8 @@ class OrdersModel {
     orderAddressid = JsonParser.asInt(json['order_addressid']);
     orderType = JsonParser.asInt(json['order_type']) ?? 0;
     orderPrice = JsonParser.asDouble(json['order_price']) ?? 0.0;
-    orderPricedelivery = JsonParser.asDouble(json['order_pricedelivery']) ?? 0.0;
+    orderPricedelivery =
+        JsonParser.asDouble(json['order_pricedelivery']) ?? 0.0;
     orderTotalprice = JsonParser.asDouble(json['order_totalprice']) ?? 0.0;
     orderPaymenttype = JsonParser.asInt(json['order_paymenttype']) ?? 0;
     orderCoupon = JsonParser.asInt(json['order_coupon']) ?? 0;

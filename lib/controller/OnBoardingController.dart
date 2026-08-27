@@ -25,8 +25,7 @@ class OnBoardingControllerImp extends OnBoardinggController {
           duration: const Duration(milliseconds: 800));
     } else {
       pageController.animateToPage(currentPage + 1,
-          duration: const Duration(milliseconds: 900),
-          curve: Curves.easeIn);
+          duration: const Duration(milliseconds: 900), curve: Curves.easeIn);
     }
   }
 

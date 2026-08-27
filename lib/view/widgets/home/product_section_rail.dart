@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/categoriesmodel.dart';
 import 'package:oro/data/model/itemsmodel.dart';
-import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 import 'package:oro/view/widgets/home/itemcard.dart';
 
 class ProductSectionRail extends StatelessWidget {
@@ -41,29 +40,28 @@ class ProductSectionRail extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w900,
                     letterSpacing: -.45,
                   ),
                 ),
               ),
-              TextButton.icon(
+              TextButton(
                 onPressed: onShowAll,
-                iconAlignment: IconAlignment.end,
-                icon: const Icon(Icons.arrow_forward_rounded, size: 16),
-                label: const Text('Ver todo'),
-                style: TextButton.styleFrom(
-                  foregroundColor: theme.colorScheme.primary,
-                  textStyle: theme.textTheme.labelMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Ver todo'),
+                    SizedBox(width: 6),
+                    Icon(Icons.arrow_forward_rounded, size: 17),
+                  ],
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         SizedBox(
-          height: 232,
+          height: 300,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
@@ -72,16 +70,12 @@ class ProductSectionRail extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final product = products[index];
-              return OroStaggeredItem(
-                index: index,
-                delayBase: 55,
-                child: SizedBox(
-                  width: 174,
-                  child: ItemCard(
-                    itemsModel: product,
-                    onTap: () => onProductTap(product),
-                    colorIndex: index,
-                  ),
+              return SizedBox(
+                width: 184,
+                child: ItemCard(
+                  itemsModel: product,
+                  onTap: () => onProductTap(product),
+                  colorIndex: index,
                 ),
               );
             },

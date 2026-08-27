@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/apilink.dart';
 import 'package:oro/controller/home/homescreenController.dart';
-import 'package:oro/core/constant/color.dart';
-import 'package:oro/core/constant/imageasset.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/view/screens/notification/viewnotification.dart';
 
 class Greeting extends StatelessWidget {
@@ -21,109 +18,51 @@ class Greeting extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeScreenControllerImp>();
     final theme = Theme.of(context);
-    final safeName = _displayName(name);
-    final hasImage = img != null && img!.trim().isNotEmpty;
+    final displayName = _displayName(name);
 
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 46,
-          width: 46,
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: theme.colorScheme.secondary.withValues(alpha: .7),
-            ),
-          ),
-          child: ClipOval(
-            child: hasImage
-                ? CachedNetworkImage(
-                    imageUrl: '${AppLink.pfpimage}$img',
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) => Container(
-                      color: theme.colorScheme.surface,
-                    ),
-                    errorWidget: (_, __, ___) => _avatarFallback(context),
-                  )
-                : _avatarFallback(context),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${'hello'.tr}, $safeName',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -.35,
-                ),
-              ),
-              const SizedBox(height: 1),
-              Text(
-                'home_subtitle'.tr,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodySmall,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 8),
-        Material(
-          color: theme.colorScheme.surface.withValues(alpha: .82),
-          shape: const CircleBorder(),
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              Get.to(
-                () => const ViewNotification(),
-                transition: Transition.rightToLeftWithFade,
-                duration: const Duration(milliseconds: 300),
-              );
-            },
-            child: SizedBox(
-              height: 46,
-              width: 46,
-              child: Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  Icon(Icons.notifications_none_rounded,
-                      color: theme.colorScheme.onSurface),
-                  if (controller.getUnreadCount() > 0)
-                    Positioned(
-                      right: 7,
-                      top: 7,
-                      child: Container(
-                        height: 16,
-                        constraints: const BoxConstraints(minWidth: 16),
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          color: Appcolor.oxblood,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          controller.getUnreadCount() > 99
-                              ? '99+'
-                              : '${controller.getUnreadCount()}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+        Row(
+          children: [
+            Text(
+              'ORO',
+              style: theme.textTheme.headlineMedium?.copyWith(
+                color: OroColors.accentGoldDark,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 3.4,
               ),
             ),
+            const Spacer(),
+            _NotificationAction(
+              count: controller.getUnreadCount(),
+              onTap: () {
+                Get.to(
+                  () => const ViewNotification(),
+                  transition: Transition.rightToLeftWithFade,
+                  duration: const Duration(milliseconds: 280),
+                );
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 18),
+        Text(
+          'Hola, $displayName',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w800,
+            letterSpacing: -.4,
+          ),
+        ),
+        const SizedBox(height: 3),
+        Text(
+          'Encuentra algo que realmente quieras conservar.',
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onSurface.withValues(alpha: .58),
           ),
         ),
       ],
@@ -137,16 +76,66 @@ class Greeting extends StatelessWidget {
     return (modeIndex == -1 ? normalized : normalized.substring(0, modeIndex))
         .trim();
   }
+}
 
-  Widget _avatarFallback(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.surface,
-      alignment: Alignment.center,
-      padding: const EdgeInsets.all(4),
-      child: Image.asset(
-        AppImage.authLogo,
-        fit: BoxFit.contain,
-      ),
+class _NotificationAction extends StatelessWidget {
+  const _NotificationAction({
+    required this.count,
+    required this.onTap,
+  });
+
+  final int count;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Tooltip(
+          message: 'Notificaciones',
+          child: Material(
+            color: Theme.of(context).colorScheme.surface,
+            shape: const CircleBorder(),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: onTap,
+              child: const SizedBox(
+                width: 44,
+                height: 44,
+                child: Icon(Icons.notifications_none_rounded, size: 22),
+              ),
+            ),
+          ),
+        ),
+        if (count > 0)
+          Positioned(
+            right: -2,
+            top: -2,
+            child: Container(
+              height: 18,
+              constraints: const BoxConstraints(minWidth: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: OroColors.error,
+                borderRadius: BorderRadius.circular(9),
+                border: Border.all(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  width: 2,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                count > 99 ? '99+' : '$count',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

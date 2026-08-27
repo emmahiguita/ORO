@@ -16,23 +16,23 @@ void main() {
       expect(OroBreakpoints.gridColumns(1199), 4);
       expect(OroBreakpoints.gridColumns(1200), 5);
 
-      expect(OroBreakpoints.productAspectRatio(360), 0.56);
-      expect(OroBreakpoints.productAspectRatio(700), 0.58);
-      expect(OroBreakpoints.productAspectRatio(900), 0.62);
-      expect(OroBreakpoints.productAspectRatio(1300), 0.66);
+      expect(OroBreakpoints.productAspectRatio(360), 1.02);
+      expect(OroBreakpoints.productAspectRatio(700), 1.08);
+      expect(OroBreakpoints.productAspectRatio(900), 1.12);
+      expect(OroBreakpoints.productAspectRatio(1300), 1.18);
     });
 
     test('OroColors primary tokens integrity', () {
-      expect(OroColors.ink, const Color(0xFF07120E));
-      expect(OroColors.forest, const Color(0xFF0B4D36));
-      expect(OroColors.accentGold, const Color(0xFFC89B3C));
-      expect(OroColors.canvas, const Color(0xFFF7F5EF));
-      expect(OroColors.surface, const Color(0xFFFFFDF8));
+      expect(OroColors.ink, const Color(0xFF101411));
+      expect(OroColors.forest, const Color(0xFF0C513A));
+      expect(OroColors.accentGold, const Color(0xFFB88931));
+      expect(OroColors.canvas, const Color(0xFFF7F6F2));
+      expect(OroColors.surface, const Color(0xFFFFFFFF));
     });
 
     test('OroMotion durations and curves', () {
-      expect(OroMotion.fast, const Duration(milliseconds: 160));
-      expect(OroMotion.medium, const Duration(milliseconds: 240));
+      expect(OroMotion.fast, const Duration(milliseconds: 140));
+      expect(OroMotion.medium, const Duration(milliseconds: 220));
       expect(OroMotion.hero, const Duration(milliseconds: 520));
       expect(OroMotion.standard, Curves.easeOutCubic);
     });

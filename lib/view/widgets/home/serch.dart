@@ -18,56 +18,51 @@ class SerchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: .12),
-              blurRadius: 28,
-              offset: const Offset(0, 12),
-            ),
-          ],
-        ),
-        child: TextFormField(
-          controller: controller,
-          textInputAction: TextInputAction.search,
-          onFieldSubmitted: (value) {
-            Get.to(
-              const Search(),
-              transition: Transition.cupertino,
-              duration: const Duration(milliseconds: 300),
-              arguments: {'input': value},
-            );
-          },
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: theme.brightness == Brightness.dark
-                ? OroColors.surfaceDarkElevated
-                : Colors.white,
-            prefixIcon: IconButton(
-              tooltip: 'search_products'.tr,
-              onPressed: onPressed,
-              icon: const Icon(Icons.search_rounded),
-              color: OroColors.accentGold,
-            ),
-            suffixIcon: Container(
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: OroColors.accentGold.withValues(alpha: .12),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: OroColors.accentGold.withValues(alpha: .26),
+      child: TextFormField(
+        controller: controller,
+        textInputAction: TextInputAction.search,
+        onFieldSubmitted: _openSearch,
+        decoration: InputDecoration(
+          hintText: hint,
+          prefixIcon: IconButton(
+            tooltip: 'search_products'.tr,
+            onPressed: onPressed,
+            icon: const Icon(Icons.search_rounded),
+          ),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.all(7),
+            child: Material(
+              color: theme.colorScheme.primary.withValues(alpha: .08),
+              borderRadius: BorderRadius.circular(13),
+              child: InkWell(
+                onTap: onPressed,
+                borderRadius: BorderRadius.circular(13),
+                child: const SizedBox(
+                  width: 42,
+                  height: 42,
+                  child: Icon(
+                    Icons.tune_rounded,
+                    color: OroColors.forest,
+                    size: 20,
+                  ),
                 ),
               ),
-              child: const Icon(Icons.tune_rounded, size: 19),
             ),
-            hintText: hint,
           ),
         ),
       ),
+    );
+  }
+
+  void _openSearch(String value) {
+    Get.to(
+      const Search(),
+      transition: Transition.cupertino,
+      duration: const Duration(milliseconds: 280),
+      arguments: {'input': value},
     );
   }
 }

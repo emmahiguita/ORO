@@ -74,7 +74,8 @@ class ArchivedOrders extends StatelessWidget {
                                 ),
                                 Text(
                                   () {
-                                    final dt = controller.archivedOrders[index].orderDatetime;
+                                    final dt = controller
+                                        .archivedOrders[index].orderDatetime;
                                     if (dt == null || dt.isEmpty) return '';
                                     try {
                                       return Jiffy.parse(dt).fromNow();
@@ -112,13 +113,15 @@ class ArchivedOrders extends StatelessWidget {
                               isTotal: false,
                               label: 'Payment Type:',
                               value: controller.getPaymentType(controller
-                                  .archivedOrders[index].orderPaymenttype ?? 0),
+                                      .archivedOrders[index].orderPaymenttype ??
+                                  0),
                             ),
                             DetailRow(
                               isTotal: false,
                               label: 'Order Type:',
                               value: controller.getOrderType(
-                                  controller.archivedOrders[index].orderType ?? 0),
+                                  controller.archivedOrders[index].orderType ??
+                                      0),
                             ),
 
                             const SizedBox(height: 12),
@@ -128,9 +131,11 @@ class ArchivedOrders extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  final orderId = controller.archivedOrders[index].orderId;
+                                  final orderId =
+                                      controller.archivedOrders[index].orderId;
                                   if (orderId == null) return;
-                                  controller.getOrderDetails(orderId.toString());
+                                  controller
+                                      .getOrderDetails(orderId.toString());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Appcolor.amaranthpink,

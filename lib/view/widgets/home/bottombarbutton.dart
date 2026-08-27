@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class BottomBarButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -17,8 +18,8 @@ class BottomBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final active = theme.colorScheme.primary;
-    final inactive = theme.colorScheme.onSurface.withValues(alpha: .52);
+    final active = OroColors.forest;
+    final inactive = theme.colorScheme.onSurface.withValues(alpha: .46);
 
     return Semantics(
       selected: isActive,
@@ -26,42 +27,36 @@ class BottomBarButton extends StatelessWidget {
       label: text,
       child: InkWell(
         onTap: onPressed,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(16),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
+          duration: const Duration(milliseconds: 180),
           curve: Curves.easeOutCubic,
-          margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
           decoration: BoxDecoration(
-            color: isActive
-                ? theme.colorScheme.secondary.withValues(alpha: .13)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(16),
+            color: isActive ? OroColors.forestSoft : Colors.transparent,
+            borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedScale(
-                scale: isActive ? 1.05 : 1,
-                duration: const Duration(milliseconds: 220),
+                scale: isActive ? 1.06 : 1,
+                duration: const Duration(milliseconds: 180),
                 child: Icon(
                   iconData,
-                  size: 20,
+                  size: 21,
                   color: isActive ? active : inactive,
                 ),
               ),
-              const SizedBox(height: 1),
-              Flexible(
-                child: Text(
-                  text,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: isActive ? active : inactive,
-                    fontWeight: isActive ? FontWeight.w800 : FontWeight.w600,
-                    fontSize: 10,
-                  ),
+              const SizedBox(height: 3),
+              Text(
+                text,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: isActive ? active : inactive,
+                  fontSize: 9.5,
+                  fontWeight: isActive ? FontWeight.w900 : FontWeight.w600,
                 ),
               ),
             ],

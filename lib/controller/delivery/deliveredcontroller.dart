@@ -25,8 +25,7 @@ class DeliveredControllerImp extends DeliveredController {
     statusRequest = StatusRequest.loding;
     update();
     delivered.clear();
-    var response =
-        await deliveryData.getDeliveredOrders(services.userId);
+    var response = await deliveryData.getDeliveredOrders(services.userId);
     statusRequest = handlingdata(response);
     if (statusRequest == StatusRequest.success) {
       if (response["status"] == "success") {

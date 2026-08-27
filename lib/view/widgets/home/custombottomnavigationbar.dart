@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/home/homescreenController.dart';
@@ -11,31 +12,39 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final dark = theme.brightness == Brightness.dark;
 
     return GetBuilder<HomeScreenControllerImp>(
       builder: (controller) {
-        return ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-            child: BottomAppBar(
-              height: 82,
-              elevation: 0,
-              notchMargin: 10,
-              shape: const CircularNotchedRectangle(),
-              color: (isDark ? OroColors.surfaceDark : OroColors.surface)
-                  .withValues(alpha: .92),
-              surfaceTintColor: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6),
+        return SafeArea(
+          top: false,
+          minimum: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(26),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+              child: Container(
+                height: 72,
+                decoration: BoxDecoration(
+                  color: (dark ? OroColors.surfaceDark : Colors.white)
+                      .withValues(alpha: .94),
+                  borderRadius: BorderRadius.circular(26),
+                  border: Border.all(
+                    color: theme.colorScheme.outline.withValues(alpha: .72),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: dark ? .26 : .08),
+                      blurRadius: 28,
+                      offset: const Offset(0, 12),
+                    ),
+                  ],
+                ),
                 child: Row(
                   children: List.generate(
                     controller.listpages.length + 1,
                     (index) {
-                      if (index == 2) {
-                        return const SizedBox(width: 76);
-                      }
+                      if (index == 2) return const SizedBox(width: 70);
                       final pageIndex = index > 2 ? index - 1 : index;
                       return Expanded(
                         child: BottomBarButton(

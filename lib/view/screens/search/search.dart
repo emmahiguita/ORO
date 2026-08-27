@@ -169,8 +169,8 @@ class Search extends StatelessWidget {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withValues(
-                                    alpha: isDark ? 0.2 : 0.04),
+                                color: Colors.black
+                                    .withValues(alpha: isDark ? 0.2 : 0.04),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -202,8 +202,7 @@ class Search extends StatelessWidget {
                                         categoryName: item.categoryName,
                                         fit: BoxFit.contain,
                                         memCacheWidth: 320,
-                                        borderRadius:
-                                            BorderRadius.circular(14),
+                                        borderRadius: BorderRadius.circular(14),
                                       ),
                                     ),
                                   ),
@@ -215,8 +214,8 @@ class Search extends StatelessWidget {
                                   children: [
                                     Text(
                                       name,
-                                      style: theme.textTheme.titleSmall
-                                          ?.copyWith(
+                                      style:
+                                          theme.textTheme.titleSmall?.copyWith(
                                         fontWeight: FontWeight.w700,
                                         height: 1.25,
                                       ),
@@ -228,8 +227,8 @@ class Search extends StatelessWidget {
                                         item.categoryName!.isNotEmpty)
                                       Text(
                                         item.categoryName ?? '',
-                                        style: theme.textTheme.bodySmall
-                                            ?.copyWith(
+                                        style:
+                                            theme.textTheme.bodySmall?.copyWith(
                                           color: isDark
                                               ? Colors.grey[400]
                                               : Colors.grey[600],
