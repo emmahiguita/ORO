@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oro/controller/items/itemsdetailsController.dart';
-import 'package:oro/core/constant/color.dart';
 
 class BottomBar extends StatelessWidget {
   final ItemsDetailsControllerImp controller;
@@ -16,15 +15,15 @@ class BottomBar extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, -10),
+            color: Colors.black.withValues(alpha: 0.12),
+            blurRadius: 18,
+            offset: const Offset(0, -6),
           ),
         ],
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
           child: Row(
             children: [
               const SizedBox(width: 12),
@@ -34,8 +33,8 @@ class BottomBar extends StatelessWidget {
                   height: 56,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Appcolor.amaranthpink,
-                      foregroundColor: Colors.white,
+                      backgroundColor: theme.colorScheme.primary,
+                      foregroundColor: theme.colorScheme.onPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -49,13 +48,9 @@ class BottomBar extends StatelessWidget {
                       children: [
                         Icon(Icons.shopping_cart_outlined, size: 20),
                         SizedBox(width: 8),
-                        Text(
-                          "Agregar al carrito",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        Text("Agregar al carrito",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w700)),
                       ],
                     ),
                   ),

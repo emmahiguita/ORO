@@ -3,8 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/favourites/favouritesController.dart';
 import 'package:oro/controller/items/itemsController.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/design/oro_breakpoints.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/view/widgets/items/customitemslist.dart';
 
 class CategoryPageContent extends GetView<ItemscontrollerImp> {
@@ -28,6 +28,7 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
             controller.categories[categoryIndex]['category_id'].toString();
         final categoryModels = controller.getCategoryItemsModels(categoryId);
         final isLoading = controller.isCategoryLoading(categoryId);
+        final isDark = Theme.of(context).brightness == Brightness.dark;
 
         if (isLoading) {
           return const Center(
@@ -35,14 +36,14 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularProgressIndicator(
-                  color: Appcolor.berry,
+                  color: Color(0xFFD4AF37),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Cargando productos exclusivos...',
+                  'Preparando la colección...',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: Appcolor.berry,
+                    color: OroColors.accentGold,
                   ),
                 ),
               ],
@@ -63,31 +64,32 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
                       Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: Colors.grey[100],
+                          color: isDark
+                              ? OroColors.surfaceDarkElevated
+                              : OroColors.surface,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.shopping_bag_outlined,
                           size: 64,
-                          color: Colors.grey[400],
+                          color: isDark ? Colors.grey[600] : Colors.grey[400],
                         ),
                       ),
                       const SizedBox(height: 24),
                       Text(
                         'No se encontraron productos',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
+                        style: TextStyle(
+                          color: isDark ? Colors.grey[300] : Colors.grey[700],
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Desliza hacia abajo para actualizar el catálogo',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.grey[500],
-                            ),
+                        style: TextStyle(
+                          color: isDark ? Colors.grey[500] : Colors.grey[500],
+                        ),
                       ),
                     ],
                   ),
@@ -110,18 +112,35 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
                 slivers: [
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-                      child: Text(
-                        '${categoryModels.length} productos disponibles',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.grey[600],
-                              fontWeight: FontWeight.w600,
+                      padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: OroColors.accentGold,
                             ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${categoryModels.length} piezas seleccionadas',
+                            style: TextStyle(
+                              color: isDark
+                                  ? const Color(0xFF9E9EA8)
+                                  : Colors.grey[700],
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                              letterSpacing: 0.2,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 90),
                     sliver: SliverMasonryGrid.count(
                       crossAxisCount: columns,
                       mainAxisSpacing: 14,
@@ -130,10 +149,13 @@ class CategoryPageContent extends GetView<ItemscontrollerImp> {
                         final item = categoryModels[index];
                         return CustomItemsList(
                           loading: controller.isLoadingItem(item.itemId ?? -1),
-                          onTap: () {
+                          onAddToCart: () {
                             if (item.itemId != null) {
                               controller.addToCart("${item.itemId}");
                             }
+                          },
+                          onTap: () {
+                            controller.goToItemDetails(item);
                           },
                           itemsModel: item,
                         );

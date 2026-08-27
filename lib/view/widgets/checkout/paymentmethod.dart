@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:oro/core/constant/color.dart';
 
 class PaymentMethod extends StatelessWidget {
   final String paymentName;
@@ -19,19 +18,20 @@ class PaymentMethod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Material(
-      borderRadius: BorderRadius.circular(8),
-      color: Appcolor.white,
+      borderRadius: BorderRadius.circular(18),
+      color: theme.colorScheme.surface,
       child: InkWell(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(18),
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: value == groupValue
-                  ? Appcolor.deepPink
-                  : Colors.grey.shade300,
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.outline,
               width: value == groupValue ? 1.5 : 1,
             ),
           ),
@@ -65,8 +65,8 @@ class PaymentMethod extends StatelessWidget {
                       ? Icons.radio_button_checked
                       : Icons.radio_button_off,
                   color: value == groupValue
-                      ? Appcolor.deepPink
-                      : Colors.grey.shade400,
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.onSurface.withValues(alpha: .35),
                   size: 20,
                 ),
               ],

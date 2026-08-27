@@ -9,12 +9,14 @@ class QuantityControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: theme.colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Colors.grey[200]!),
+        border:
+            Border.all(color: theme.colorScheme.outline.withValues(alpha: .7)),
       ),
       child: Row(
         children: [
@@ -28,9 +30,10 @@ class QuantityControls extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               "${controller.counter}",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
+                color: theme.colorScheme.onSurface,
               ),
             ),
           ),

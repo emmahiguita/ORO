@@ -22,7 +22,7 @@ class ProductTitleWithRating extends StatelessWidget {
             ),
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Theme.of(context).colorScheme.onSurface,
                   height: 1.2,
                 ),
           ),

@@ -10,7 +10,8 @@ class ProductDescription extends StatelessWidget {
     return Text(
       description,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Colors.grey[700],
+            color:
+                Theme.of(context).colorScheme.onSurface.withValues(alpha: .7),
             height: 1.6,
             fontSize: 16,
           ),

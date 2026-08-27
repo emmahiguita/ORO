@@ -8,14 +8,17 @@ class ShareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.7),
+        color: theme.colorScheme.surface.withValues(alpha: .88),
         shape: BoxShape.circle,
+        border:
+            Border.all(color: theme.colorScheme.outline.withValues(alpha: .7)),
       ),
       child: IconButton(
-        icon: const Icon(Icons.share_outlined, color: Colors.white),
+        icon: Icon(Icons.share_outlined, color: theme.colorScheme.onSurface),
         onPressed: () {
           controller.shareProductWithImage();
         },

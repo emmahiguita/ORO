@@ -15,10 +15,10 @@ abstract final class OroBreakpoints {
 
   /// Returns optimal child aspect ratio for product cards on different screen sizes.
   static double productAspectRatio(double width) {
-    if (width >= large) return 0.66;
-    if (width >= expanded) return 0.62;
-    if (width >= medium) return 0.58;
-    return 0.56;
+    if (width >= large) return 1.18;
+    if (width >= expanded) return 1.12;
+    if (width >= medium) return 1.08;
+    return 1.02;
   }
 
   /// Returns optimal horizontal container padding.

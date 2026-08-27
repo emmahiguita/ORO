@@ -39,27 +39,51 @@ class ProductImageSection extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  SizedBox(
+                  Container(
                     height: imageHeight,
                     width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(28),
+                      gradient: RadialGradient(
+                        center: const Alignment(0, -0.15),
+                        radius: 1.05,
+                        colors: [
+                          isDark
+                              ? OroColors.surfaceDarkElevated
+                              : const Color(0xFFF1EBDD),
+                          isDark ? OroColors.ink : Colors.white,
+                        ],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black
+                              .withValues(alpha: isDark ? .25 : .08),
+                          blurRadius: 28,
+                          offset: const Offset(0, 14),
+                        ),
+                      ],
+                    ),
                     child: Center(
-                      child: Hero(
-                        tag:
-                            'product-${controller.data.itemId ?? controller.data.hashCode}',
-                        child: Material(
-                          type: MaterialType.transparency,
-                          child: OroProductImage(
-                            imageUrl: controller.data.itemImg,
-                            productName: databaseTranslation(
-                              controller.data.itemName,
-                              controller.data.itemNameAr,
-                              controller.data.itemNameEs,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Hero(
+                          tag:
+                              'product-${controller.data.itemId ?? controller.data.hashCode}',
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: OroProductImage(
+                              imageUrl: controller.data.itemImg,
+                              productName: databaseTranslation(
+                                controller.data.itemName,
+                                controller.data.itemNameAr,
+                                controller.data.itemNameEs,
+                              ),
+                              categoryName: controller.data.categoryName,
+                              fit: BoxFit.contain,
+                              height: imageHeight * 0.82,
+                              memCacheWidth: 1080,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            categoryName: controller.data.categoryName,
-                            fit: BoxFit.contain,
-                            height: imageHeight * 0.9,
-                            memCacheWidth: 1080,
-                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
@@ -67,16 +91,16 @@ class ProductImageSection extends StatelessWidget {
                   ),
                   if ((controller.data.itemDiscount ?? 0) > 0)
                     Positioned(
-                      top: 10,
-                      left: 10,
+                      top: 14,
+                      left: 14,
                       child: OroDiscountBadge.pill(
                         percentage:
                             (controller.data.itemDiscount ?? 0).toDouble(),
                       ),
                     ),
                   Positioned(
-                    bottom: 10,
-                    right: 10,
+                    bottom: 14,
+                    right: 14,
                     child: PriceTags(controller: controller),
                   ),
                 ],

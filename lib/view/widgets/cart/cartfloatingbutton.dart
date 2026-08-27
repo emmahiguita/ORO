@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oro/core/class/statusrequest.dart';
-import 'package:oro/core/constant/color.dart';
 
 class CartFloatingButton extends StatelessWidget {
   final double price;
@@ -20,19 +19,22 @@ class CartFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Stack(
       children: [
         // Main content
         Container(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: Appcolor.dustyPink,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: const [
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: .7)),
+            boxShadow: [
               BoxShadow(
-                color: Appcolor.blackShadow,
-                blurRadius: 10,
-                offset: Offset(0, -5),
+                color: Colors.black.withValues(alpha: .14),
+                blurRadius: 22,
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -41,14 +43,11 @@ class CartFloatingButton extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Subtotal"),
+                  Text("Subtotal", style: theme.textTheme.bodyMedium),
                   Text(
                     "\$${price.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontFamily: "Sw",
-                      color: Appcolor.black,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
@@ -56,36 +55,31 @@ class CartFloatingButton extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Costo de Envío"),
+                  Text("Costo de envío", style: theme.textTheme.bodyMedium),
                   Text(
                     "\$$shippingPrice",
-                    style: const TextStyle(
-                      fontFamily: "Sw",
-                      color: Appcolor.black,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
-              const Divider(
-                color: Appcolor.black,
-                height: 20,
-              ),
+              const SizedBox(height: 12),
+              Divider(color: theme.colorScheme.outlineVariant),
+              const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Total a Pagar",
-                    style: TextStyle(
+                    style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "\$${(price + shippingPrice).toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontFamily: "Sw",
-                      color: Appcolor.berry,
-                      fontWeight: FontWeight.bold,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ],
@@ -93,24 +87,25 @@ class CartFloatingButton extends StatelessWidget {
               const SizedBox(height: 10),
               Material(
                 color: isDisabled
-                    ? Appcolor.berry.withValues(alpha: 0.4)
-                    : Appcolor.berry,
-                borderRadius: BorderRadius.circular(10),
+                    ? theme.colorScheme.primary.withValues(alpha: 0.38)
+                    : theme.colorScheme.primary,
+                borderRadius: BorderRadius.circular(16),
                 child: IgnorePointer(
                   ignoring: isDisabled,
                   child: InkWell(
                     onTap: onTap,
-                    borderRadius: BorderRadius.circular(10),
-                    splashColor: Appcolor.shadowWhite,
+                    borderRadius: BorderRadius.circular(16),
+                    splashColor:
+                        theme.colorScheme.onPrimary.withValues(alpha: .16),
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       alignment: Alignment.center,
-                      child: const Text(
-                        "Continuar con el Pedido",
+                      child: Text(
+                        "Continuar con el pedido",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.onPrimary,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
@@ -127,7 +122,7 @@ class CartFloatingButton extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.black.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(24),
               ),
               child: const Center(
                 child: CircularProgressIndicator(

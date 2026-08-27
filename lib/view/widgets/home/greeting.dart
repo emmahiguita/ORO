@@ -21,7 +21,7 @@ class Greeting extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeScreenControllerImp>();
     final theme = Theme.of(context);
-    final safeName = name.trim().isEmpty ? 'bienvenido' : name.trim();
+    final safeName = _displayName(name);
     final hasImage = img != null && img!.trim().isNotEmpty;
 
     return Row(
@@ -58,7 +58,10 @@ class Greeting extends StatelessWidget {
                 '${'hello'.tr}, $safeName',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.titleLarge,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -.35,
+                ),
               ),
               const SizedBox(height: 1),
               Text(
@@ -72,8 +75,9 @@ class Greeting extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         Material(
-          color: theme.colorScheme.surface,
+          color: theme.colorScheme.surface.withValues(alpha: .82),
           shape: const CircleBorder(),
+          clipBehavior: Clip.antiAlias,
           child: InkWell(
             customBorder: const CircleBorder(),
             onTap: () {
@@ -90,10 +94,8 @@ class Greeting extends StatelessWidget {
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
                 children: [
-                  Icon(
-                    Icons.notifications_none_rounded,
-                    color: theme.colorScheme.onSurface,
-                  ),
+                  Icon(Icons.notifications_none_rounded,
+                      color: theme.colorScheme.onSurface),
                   if (controller.getUnreadCount() > 0)
                     Positioned(
                       right: 7,
@@ -126,6 +128,14 @@ class Greeting extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _displayName(String value) {
+    final normalized = value.trim();
+    if (normalized.isEmpty) return 'bienvenido';
+    final modeIndex = normalized.toLowerCase().indexOf('(modo');
+    return (modeIndex == -1 ? normalized : normalized.substring(0, modeIndex))
+        .trim();
   }
 
   Widget _avatarFallback(BuildContext context) {

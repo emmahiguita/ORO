@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/core/constant/color.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class Discountcard extends StatelessWidget {
   final String title;
@@ -27,49 +28,46 @@ class Discountcard extends StatelessWidget {
           child: child,
         ),
         child: Container(
-          height: 220,
+          height: 260,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Appcolor.ink,
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(32),
+            border: Border.all(
+              color: OroColors.accentGold.withValues(alpha: .72),
+            ),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x24000000),
-                blurRadius: 28,
-                offset: Offset(0, 14),
+                color: Color(0x34000000),
+                blurRadius: 36,
+                offset: Offset(0, 18),
               ),
             ],
           ),
           child: Stack(
             fit: StackFit.expand,
             children: [
-              if (image != null)
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: image!, fit: BoxFit.cover),
-                  ),
-                )
-              else
-                const DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFF17171A), Color(0xFF362C24)],
-                    ),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: image ??
+                        const AssetImage('images/oro_luxury_hero_3d.png'),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerRight,
                   ),
                 ),
+              ),
               const DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Color(0xE6000000),
-                      Color(0x52000000),
-                      Color(0x08000000)
+                      Color(0xF007120E),
+                      Color(0xA007120E),
+                      Color(0x2607120E),
                     ],
-                    stops: [0, .58, 1],
+                    stops: [0, .55, 1],
                   ),
                 ),
               ),
@@ -84,9 +82,9 @@ class Discountcard extends StatelessWidget {
                           horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: Colors.white.withValues(alpha: .28)),
+                            color: Colors.white.withValues(alpha: .26)),
                         borderRadius: BorderRadius.circular(999),
-                        color: Colors.black.withValues(alpha: .16),
+                        color: Colors.black.withValues(alpha: .18),
                       ),
                       child: Text(
                         'premium_selection'.tr,
@@ -111,32 +109,46 @@ class Discountcard extends StatelessWidget {
                     ),
                     const SizedBox(height: 7),
                     ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 340),
+                      constraints: const BoxConstraints(maxWidth: 230),
                       child: Text(
                         content,
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.white.withValues(alpha: .76),
+                              color: Colors.white.withValues(alpha: .80),
+                              fontWeight: FontWeight.w500,
                             ),
                       ),
                     ),
                     const SizedBox(height: 13),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'explore_collection'.tr,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800,
-                          ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(
+                          color: OroColors.accentGold.withValues(alpha: .34),
                         ),
-                        const SizedBox(width: 6),
-                        const Icon(Icons.arrow_forward_rounded,
-                            color: Appcolor.accentGold, size: 17),
-                      ],
+                        color: Colors.white.withValues(alpha: .06),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'explore_collection'.tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Icon(Icons.arrow_forward_rounded,
+                              color: Appcolor.accentGold, size: 17),
+                        ],
+                      ),
                     ),
                   ],
                 ),

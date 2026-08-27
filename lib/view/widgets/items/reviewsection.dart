@@ -18,18 +18,13 @@ class ReviewSection extends StatelessWidget {
       return const ReviewSectionSkeleton();
     } else if (controller.allRating.isEmpty) {
       return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 15,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+              color: theme.colorScheme.outline.withValues(alpha: .65)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +36,7 @@ class ReviewSection extends StatelessWidget {
                 "Este producto aún no tiene reseñas.",
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.grey[600],
+                  color: theme.colorScheme.onSurface.withValues(alpha: .65),
                   fontWeight: FontWeight.w500,
                 ),
                 maxLines: 2,
@@ -54,18 +49,13 @@ class ReviewSection extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(20),
+        border:
+            Border.all(color: theme.colorScheme.outline.withValues(alpha: .65)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

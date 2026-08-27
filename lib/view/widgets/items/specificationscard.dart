@@ -14,18 +14,13 @@ class SpecificationsCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 15,
-                offset: const Offset(0, 8),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: .65)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,8 +28,8 @@ class SpecificationsCard extends StatelessWidget {
               Text(
                 "Información del Producto",
                 style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 16),
               SpecRow(

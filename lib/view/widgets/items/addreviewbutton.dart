@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:particles_flutter/particles_flutter.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:vibration/vibration.dart';
 
 class MovingGradientReviewButton extends StatefulWidget {
@@ -42,7 +41,7 @@ class MovingGradientReviewButtonState extends State<MovingGradientReviewButton>
     _gradientController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
-    )..repeat();
+    );
 
     _tapController = AnimationController(
       vsync: this,
@@ -177,22 +176,20 @@ class MovingGradientReviewButtonState extends State<MovingGradientReviewButton>
                 borderRadius: BorderRadius.circular(16),
                 gradient: LinearGradient(
                   colors: const [
-                    Color(0xffC94C77),
-                    Color(0xffB44568),
-                    Color(0xff9E3A5B),
-                    Color(0xff7A2E45),
+                    Color(0xFF0B4D36),
+                    Color(0xFF146C4D),
+                    Color(0xFFC89B3C),
                   ],
-                  stops: const [0.0, 0.4, 0.7, 1.0],
+                  stops: const [0.0, 0.58, 1.0],
                   begin: Alignment(_gradientPosition.value, 0),
                   end: Alignment(_gradientPosition.value + 1, 0),
                   tileMode: TileMode.mirror,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Appcolor.berry.withValues(alpha: 0.8),
-                    blurRadius: 20,
-                    spreadRadius: 1,
-                    offset: const Offset(0, 6),
+                    color: const Color(0xFF0B4D36).withValues(alpha: 0.28),
+                    blurRadius: 14,
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),
@@ -210,12 +207,12 @@ class MovingGradientReviewButtonState extends State<MovingGradientReviewButton>
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Add Review',
+                    'Calificar producto',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.w800,
-                      letterSpacing: 1,
+                      letterSpacing: .1,
                       shadows: [
                         Shadow(
                           color: Colors.black.withValues(alpha: 0.3),

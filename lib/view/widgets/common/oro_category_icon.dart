@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:oro/core/constant/color.dart';
 
 class OroCategoryIcon extends StatelessWidget {
   final String? categoryImg;
@@ -78,7 +77,7 @@ class OroCategoryIcon extends StatelessWidget {
     return Icon(
       iconData,
       size: size,
-      color: Appcolor.berry,
+      color: theme.colorScheme.primary,
     );
   }
 }

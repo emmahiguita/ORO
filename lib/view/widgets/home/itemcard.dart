@@ -33,16 +33,20 @@ class ItemCard extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
+          color: theme.colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: theme.colorScheme.onSurface.withValues(alpha: .07),
+            color: theme.brightness == Brightness.dark
+                ? Colors.white.withValues(alpha: .28)
+                : theme.colorScheme.outline.withValues(alpha: .7),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: .04),
-              blurRadius: 16,
-              offset: const Offset(0, 8),
+              color: Colors.black.withValues(
+                alpha: theme.brightness == Brightness.dark ? .34 : .10,
+              ),
+              blurRadius: 22,
+              offset: const Offset(0, 10),
             ),
           ],
         ),

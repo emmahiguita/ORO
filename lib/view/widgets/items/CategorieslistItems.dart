@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/items/itemsController.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/categoriesmodel.dart';
 
@@ -11,12 +10,12 @@ class CategorieslistItems extends GetView<ItemscontrollerImp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      height: 56,
+      margin: const EdgeInsets.only(bottom: 6),
       child: ListView.separated(
         controller: controller.categoryScrollController,
         itemCount: controller.categories.length,
-        separatorBuilder: (context, index) => const SizedBox(width: 12),
+        separatorBuilder: (context, index) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           return Categories(
             selected: index,
@@ -25,7 +24,7 @@ class CategorieslistItems extends GetView<ItemscontrollerImp> {
           );
         },
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       ),
     );
   }
@@ -42,10 +41,12 @@ class Categories extends GetView<ItemscontrollerImp> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return GetBuilder<ItemscontrollerImp>(builder: (controller) {
       final isSelected = controller.selected == selected;
       return AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
         child: Material(
           color: Colors.transparent,
@@ -54,51 +55,65 @@ class Categories extends GetView<ItemscontrollerImp> {
               controller.changeCategory(
                   selected, (categoriesmodel.categoryId?.toString() ?? ''));
             },
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(20),
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 250),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               decoration: BoxDecoration(
                 gradient: isSelected
                     ? const LinearGradient(
                         colors: [
-                          Appcolor.rosePompadour,
-                          Appcolor.deepPurple,
+                          Color(0xFFD4AF37),
+                          Color(0xFFA87928),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       )
                     : null,
-                color: isSelected ? null : Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: isSelected
-                        ? Appcolor.rosePompadour.withValues(alpha: 0.3)
-                        : Colors.black.withValues(alpha: 0.05),
-                    blurRadius: isSelected ? 8 : 4,
-                    offset: Offset(0, isSelected ? 4 : 2),
-                  ),
-                ],
-                border: isSelected
+                color: isSelected
                     ? null
-                    : Border.all(color: Colors.grey[300]!, width: 1),
+                    : (isDark
+                        ? const Color(0xFF1E1E24)
+                        : const Color(0xFFF3F1EC)),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color:
+                              const Color(0xFFD4AF37).withValues(alpha: 0.35),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : [
+                        BoxShadow(
+                          color: Colors.black
+                              .withValues(alpha: isDark ? 0.2 : 0.03),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                border: Border.all(
+                  color: isSelected
+                      ? const Color(0xFFFFDF73)
+                      : (isDark
+                          ? const Color(0xFF2E2E38)
+                          : const Color(0xFFE2DED6)),
+                  width: isSelected ? 1.2 : 1.0,
+                ),
               ),
               child: AnimatedDefaultTextStyle(
-                duration: const Duration(milliseconds: 300),
-                style: isSelected
-                    ? (Theme.of(context).textTheme.bodyMedium ??
-                            const TextStyle())
-                        .copyWith(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold)
-                    : (Theme.of(context).textTheme.bodyMedium ??
-                            const TextStyle())
-                        .copyWith(
-                            color: Colors.grey[700],
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                duration: const Duration(milliseconds: 250),
+                style: TextStyle(
+                  color: isSelected
+                      ? Colors.black
+                      : (isDark
+                          ? const Color(0xFFE0DFE6)
+                          : const Color(0xFF4A4852)),
+                  fontSize: 13.5,
+                  fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                  letterSpacing: 0.2,
+                ),
                 child: Text(
                   databaseTranslation(
                       categoriesmodel.categoryName,

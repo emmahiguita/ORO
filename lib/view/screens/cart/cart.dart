@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/cart/cartController.dart';
 import 'package:oro/core/constant/approutes.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/view/widgets/animations/animations.dart';
 import 'package:oro/view/widgets/cart/cartfloatingbutton.dart';
@@ -13,11 +12,12 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Appcolor.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text("Carrito"),
-        backgroundColor: Appcolor.white,
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: GetBuilder<CartControllerImp>(
         init: CartControllerImp(),

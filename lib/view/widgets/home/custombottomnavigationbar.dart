@@ -28,13 +28,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   .withValues(alpha: .92),
               surfaceTintColor: Colors.transparent,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: Row(
                   children: List.generate(
                     controller.listpages.length + 1,
                     (index) {
                       if (index == 2) {
-                        return const SizedBox(width: 72);
+                        return const SizedBox(width: 76);
                       }
                       final pageIndex = index > 2 ? index - 1 : index;
                       return Expanded(

@@ -8,6 +8,7 @@ class SpecRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -16,7 +17,7 @@ class SpecRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: Colors.grey[600],
+              color: theme.colorScheme.onSurface.withValues(alpha: .62),
               fontSize: 15,
             ),
           ),
@@ -25,9 +26,10 @@ class SpecRow extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.end,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
+                color: theme.colorScheme.onSurface,
               ),
             ),
           ),

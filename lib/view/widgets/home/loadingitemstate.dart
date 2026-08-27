@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:oro/core/design/oro_colors.dart';
 
 class LoadingItemState extends StatelessWidget {
   const LoadingItemState({super.key});
@@ -7,21 +8,19 @@ class LoadingItemState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+      baseColor: OroColors.surfaceDarkElevated,
+      highlightColor: Colors.white.withValues(alpha: .16),
       child: Container(
-        // margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         width: double.infinity,
-        height: 250,
+        height: 340,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          color: OroColors.surfaceDark,
+          borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.1),
-              spreadRadius: 1,
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+              color: Colors.black.withValues(alpha: .14),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
             ),
           ],
         ),

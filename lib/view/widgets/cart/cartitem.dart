@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/view/widgets/common/oro_product_image.dart';
 
 class CartItem extends StatelessWidget {
@@ -53,7 +52,8 @@ class CartItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.05)
-                  : Appcolor.mimiPink.withValues(alpha: 0.35),
+                  : theme.colorScheme.secondaryContainer
+                      .withValues(alpha: 0.52),
               borderRadius: BorderRadius.circular(16),
             ),
             child: ClipRRect(
@@ -88,16 +88,16 @@ class CartItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    color: theme.colorScheme.onSurface.withValues(alpha: .6),
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   itemPrice,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
-                    color: Appcolor.deepPurple,
+                    color: theme.colorScheme.primary,
                     letterSpacing: -0.3,
                   ),
                 ),
@@ -109,7 +109,7 @@ class CartItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.08)
-                  : Appcolor.lightPink.withValues(alpha: 0.5),
+                  : theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
                 color: theme.colorScheme.onSurface
@@ -130,7 +130,7 @@ class CartItem extends StatelessWidget {
                       child: Icon(
                         Icons.remove_rounded,
                         size: 18,
-                        color: isDark ? Colors.white : Appcolor.berry,
+                        color: theme.colorScheme.primary,
                       ),
                     ),
                   ),
@@ -142,7 +142,7 @@ class CartItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
-                      color: isDark ? Colors.white : Appcolor.berry,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
                 ),
@@ -156,7 +156,7 @@ class CartItem extends StatelessWidget {
                       child: Icon(
                         Icons.add_rounded,
                         size: 18,
-                        color: isDark ? Colors.white : Appcolor.berry,
+                        color: theme.colorScheme.primary,
                       ),
                     ),
                   ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oro/controller/home/homeController.dart';
+import 'package:oro/controller/cart/cartController.dart';
+import 'package:oro/controller/favourites/favouritesController.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/itemsmodel.dart';
-import 'package:oro/view/widgets/common/oro_product_image.dart';
 import 'package:oro/view/widgets/common/oro_discount_badge.dart';
-import 'package:oro/view/widgets/home/pricesection.dart';
+import 'package:oro/view/widgets/common/oro_product_image.dart';
 
 class ItemCardContent extends StatelessWidget {
   final ItemsModel itemsModel;
@@ -21,104 +22,191 @@ class ItemCardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final accent = Get.find<HomeControllerImp>().gradientColors[colorIndex];
+    final productName = databaseTranslation(
+      itemsModel.itemName,
+      itemsModel.itemNameAr,
+      itemsModel.itemNameEs,
+    );
+    final price = itemsModel.itemFinalPrice?.toString().trim();
+    final originalPrice = itemsModel.itemPrice?.toString().trim();
+    final displayPrice = price == null || price.isEmpty ? originalPrice : price;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+    return Stack(
+      fit: StackFit.expand,
       children: [
-        Stack(
-          children: [
-            Container(
-              height: 140,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    accent.withValues(alpha: .11),
-                    theme.colorScheme.surface,
-                  ],
-                ),
-              ),
+        Hero(
+          tag: 'product-${itemsModel.itemId ?? itemsModel.hashCode}',
+          child: Material(
+            type: MaterialType.transparency,
+            child: OroProductImage(
+              imageUrl: itemsModel.itemImg,
+              productName: productName,
+              categoryName: itemsModel.categoryName,
+              fit: BoxFit.cover,
+              memCacheWidth: 560,
+              showFallbackLabel: false,
             ),
-            SizedBox(
-              height: 140,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: Hero(
-                  tag: 'product-${itemsModel.itemId ?? itemsModel.hashCode}',
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: OroProductImage(
-                      imageUrl: itemsModel.itemImg,
-                      productName: databaseTranslation(
-                        itemsModel.itemName,
-                        itemsModel.itemNameAr,
-                        itemsModel.itemNameEs,
-                      ),
-                      categoryName: itemsModel.categoryName,
-                      fit: BoxFit.contain,
-                      memCacheWidth: 560,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            if (discountPercentage > 0)
-              Positioned(
-                top: 12,
-                left: 12,
-                child: OroDiscountBadge.compact(
-                  percentage: discountPercentage,
-                ),
-              ),
-            Positioned(
-              top: 12,
-              right: 12,
-              child: Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surface.withValues(alpha: .86),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: theme.colorScheme.onSurface.withValues(alpha: .06),
-                  ),
-                ),
-                child: const Icon(Icons.arrow_outward_rounded, size: 17),
-              ),
-            ),
-          ],
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(14, 14, 14, 16),
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0x08000000), Color(0x24000000), Color(0xE9000000)],
+              stops: [0, .38, 1],
+            ),
+          ),
+        ),
+        if (discountPercentage > 0)
+          Positioned(
+            top: 10,
+            left: 10,
+            child: OroDiscountBadge.compact(percentage: discountPercentage),
+          ),
+        Positioned(
+          top: 11,
+          right: 11,
+          child: _FavouriteCardAction(itemId: itemsModel.itemId),
+        ),
+        Positioned(
+          right: 10,
+          bottom: 10,
+          child: _CartCardAction(itemId: itemsModel.itemId),
+        ),
+        Positioned(
+          left: 12,
+          right: 60,
+          bottom: 14,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                databaseTranslation(
-                  itemsModel.itemName,
-                  itemsModel.itemNameAr,
-                  itemsModel.itemNameEs,
-                ),
-                style: theme.textTheme.titleMedium?.copyWith(
-                  height: 1.2,
-                  letterSpacing: -.15,
-                ),
+                productName,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Colors.white,
+                  height: 1.14,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -.2,
+                  shadows: const [Shadow(color: Colors.black, blurRadius: 7)],
+                ),
               ),
-              const SizedBox(height: 10),
-              PriceSection(itemsModel: itemsModel, colorIndex: colorIndex),
+              const SizedBox(height: 5),
+              Text(
+                '\$${displayPrice ?? '0'}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: OroColors.accentGoldSoft,
+                  fontWeight: FontWeight.w800,
+                  shadows: const [Shadow(color: Colors.black, blurRadius: 7)],
+                ),
+              ),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _FavouriteCardAction extends StatelessWidget {
+  const _FavouriteCardAction({required this.itemId});
+
+  final int? itemId;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<FavouritesControllerImp>(
+      init: Get.isRegistered<FavouritesControllerImp>()
+          ? Get.find<FavouritesControllerImp>()
+          : Get.put(FavouritesControllerImp()),
+      builder: (controller) {
+        final isFavourite =
+            itemId != null && controller.favourites[itemId] == 1;
+        return _CardActionButton(
+          tooltip: isFavourite ? 'Quitar de favoritos' : 'Añadir a favoritos',
+          icon: isFavourite
+              ? Icons.favorite_rounded
+              : Icons.favorite_border_rounded,
+          iconColor: isFavourite ? const Color(0xFFFF6B6B) : Colors.white,
+          onTap: itemId == null
+              ? null
+              : () {
+                  controller.setFavourites(itemId!, isFavourite ? 0 : 1);
+                  if (isFavourite) {
+                    controller.deleteFavourites('$itemId');
+                  } else {
+                    controller.addFavourites('$itemId');
+                  }
+                },
+        );
+      },
+    );
+  }
+}
+
+class _CartCardAction extends StatelessWidget {
+  const _CartCardAction({required this.itemId});
+
+  final int? itemId;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<CartControllerImp>(
+      init: Get.isRegistered<CartControllerImp>()
+          ? Get.find<CartControllerImp>()
+          : Get.put(CartControllerImp()),
+      builder: (controller) => _CardActionButton(
+        tooltip: 'Agregar al carrito',
+        icon: Icons.shopping_bag_outlined,
+        iconColor: OroColors.accentGoldSoft,
+        filled: true,
+        onTap: itemId == null ? null : () => controller.addCart('$itemId'),
+      ),
+    );
+  }
+}
+
+class _CardActionButton extends StatelessWidget {
+  const _CardActionButton({
+    required this.tooltip,
+    required this.icon,
+    required this.iconColor,
+    required this.onTap,
+    this.filled = false,
+  });
+
+  final String tooltip;
+  final IconData icon;
+  final Color iconColor;
+  final VoidCallback? onTap;
+  final bool filled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(14),
+          child: Ink(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: filled ? const Color(0xD9141715) : const Color(0x70000000),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: Colors.white.withValues(alpha: .35)),
+            ),
+            child: Icon(icon, color: iconColor, size: 21),
+          ),
+        ),
+      ),
     );
   }
 }

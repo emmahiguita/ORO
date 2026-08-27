@@ -13,6 +13,7 @@ class OroProductImage extends StatelessWidget {
   final BorderRadius? borderRadius;
   final int? memCacheWidth;
   final int? memCacheHeight;
+  final bool showFallbackLabel;
 
   const OroProductImage({
     super.key,
@@ -25,6 +26,7 @@ class OroProductImage extends StatelessWidget {
     this.borderRadius,
     this.memCacheWidth = 560,
     this.memCacheHeight,
+    this.showFallbackLabel = true,
   });
 
   String _formatUrl(String? raw) {
@@ -79,9 +81,9 @@ class OroProductImage extends StatelessWidget {
         fit: fit,
         memCacheWidth: memCacheWidth,
         memCacheHeight: memCacheHeight,
-        fadeInDuration: const Duration(milliseconds: 100),
+        fadeInDuration: const Duration(milliseconds: 220),
         fadeOutDuration: Duration.zero,
-        filterQuality: FilterQuality.medium,
+        filterQuality: FilterQuality.high,
         placeholder: (context, url) => Container(
           width: width,
           height: height,
@@ -119,12 +121,13 @@ class OroProductImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
-        color: isDark ? OroColors.surfaceDarkElevated : const Color(0xFFF3EFE6),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
+          decoration: BoxDecoration(
+            color: isDark ? OroColors.surfaceDarkElevated : const Color(0xFFF3EFE6),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,34 +148,36 @@ class OroProductImage extends StatelessWidget {
                   color: OroColors.forest,
                 ),
               ),
-              const SizedBox(height: 6),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: isDark
-                        ? OroColors.textPrimaryDark
-                        : OroColors.textPrimaryLight,
+              if (showFallbackLabel) ...[
+                const SizedBox(height: 6),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: isDark
+                          ? OroColors.textPrimaryDark
+                          : OroColors.textPrimaryLight,
+                    ),
                   ),
                 ),
-              ),
+              ],
             ],
           ),
           Positioned(
-            bottom: 6,
-            right: 6,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-              decoration: BoxDecoration(
-                color: OroColors.accentGold,
-                borderRadius: BorderRadius.circular(4),
-              ),
+          bottom: 6,
+          right: 6,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+            decoration: BoxDecoration(
+              color: OroColors.accentGold,
+              borderRadius: BorderRadius.circular(6),
+            ),
               child: const Text(
                 'ORO',
                 style: TextStyle(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oro/controller/favourites/ViewFavouritesController.dart';
-import 'package:oro/core/constant/color.dart';
 import 'package:oro/view/widgets/items/favouriteslist.dart';
 
 class ViewFavourite extends StatelessWidget {
@@ -9,15 +8,15 @@ class ViewFavourite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Appcolor.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Appcolor.white,
-        title: const Text(
+        backgroundColor: theme.scaffoldBackgroundColor,
+        title: Text(
           "Favoritos",
-          style: TextStyle(
+          style: theme.textTheme.titleLarge?.copyWith(
             fontSize: 20,
-            color: Appcolor.black,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
           ),

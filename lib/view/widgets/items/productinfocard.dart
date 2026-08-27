@@ -14,18 +14,13 @@ class ProductInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(24),
+        border:
+            Border.all(color: theme.colorScheme.outline.withValues(alpha: .65)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +34,7 @@ class ProductInfoCard extends StatelessWidget {
               controller.data.itemDescEs,
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
           ActionRow(controller: controller),
         ],
       ),

@@ -10,7 +10,8 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return GetBuilder<FavouritesControllerImp>(
       init: Get.isRegistered<FavouritesControllerImp>()
@@ -22,7 +23,7 @@ class FavoriteButton extends StatelessWidget {
 
         return Container(
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF2A2830) : Colors.white,
+            color: theme.colorScheme.surfaceContainerHighest,
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
@@ -52,9 +53,14 @@ class FavoriteButton extends StatelessWidget {
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
                   child: Icon(
-                    isFav ? Icons.favorite_rounded : Icons.favorite_outline_rounded,
+                    isFav
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_outline_rounded,
                     key: ValueKey(isFav),
-                    color: isFav ? Colors.red[400] : (isDark ? Colors.white70 : Colors.grey[600]),
+                    color: isFav
+                        ? theme.colorScheme.error
+                        : theme.colorScheme.onSurface
+                            .withValues(alpha: isDark ? .72 : .62),
                     size: 24,
                   ),
                 ),
