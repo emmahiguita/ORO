@@ -105,6 +105,7 @@ class Home extends StatelessWidget {
                                     : CachedNetworkImageProvider(
                                         '${AppLink.homeimage}$promoImage',
                                       ),
+                                onTap: controller.goToSearch,
                               ),
                       ),
                       const SliverToBoxAdapter(child: SizedBox(height: 26)),

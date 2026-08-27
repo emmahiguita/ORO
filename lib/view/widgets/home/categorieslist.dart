@@ -16,13 +16,13 @@ class Categorieslist extends StatelessWidget {
     return GetBuilder<HomeControllerImp>(
       builder: (controller) {
         return SizedBox(
-          height: 52,
+          height: 44,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: controller.statusRequest == StatusRequest.loding
                 ? 6
                 : controller.categories.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
               return controller.statusRequest == StatusRequest.loding
                   ? const LoadingState()
@@ -55,7 +55,7 @@ class Categories extends GetView<HomeControllerImp> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      width: 118,
+      width: 104,
       child: OroPressable(
         onTap: () {
           controller.goToItem(
@@ -67,11 +67,11 @@ class Categories extends GetView<HomeControllerImp> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
             child: Ink(
               decoration: BoxDecoration(
                 color: theme.colorScheme.surface.withValues(alpha: .74),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: theme.colorScheme.outline.withValues(alpha: .38),
                 ),
@@ -79,7 +79,7 @@ class Categories extends GetView<HomeControllerImp> {
                   BoxShadow(
                     color: Colors.black.withValues(alpha: .05),
                     blurRadius: 10,
-                    offset: const Offset(0, 4),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -88,9 +88,9 @@ class Categories extends GetView<HomeControllerImp> {
                 child: Row(
                   children: [
                     Container(
-                      height: 30,
-                      width: 30,
-                      padding: const EdgeInsets.all(6),
+                      height: 26,
+                      width: 26,
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.primary.withValues(alpha: .12),
                         shape: BoxShape.circle,
@@ -102,10 +102,10 @@ class Categories extends GetView<HomeControllerImp> {
                           categoriesmodel.categoryNameAr,
                           categoriesmodel.categoryNameEs,
                         ),
-                        size: 18,
+                        size: 16,
                       ),
                     ),
-                    const SizedBox(width: 7),
+                    const SizedBox(width: 6),
                     Expanded(
                       child: Text(
                         databaseTranslation(
