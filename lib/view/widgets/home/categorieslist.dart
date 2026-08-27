@@ -16,7 +16,7 @@ class Categorieslist extends StatelessWidget {
     return GetBuilder<HomeControllerImp>(
       builder: (controller) {
         return SizedBox(
-          height: 68,
+          height: 52,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: controller.statusRequest == StatusRequest.loding
@@ -55,7 +55,7 @@ class Categories extends GetView<HomeControllerImp> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      width: 148,
+      width: 118,
       child: OroPressable(
         onTap: () {
           controller.goToItem(
@@ -67,30 +67,30 @@ class Categories extends GetView<HomeControllerImp> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            borderRadius: BorderRadius.circular(22),
+            borderRadius: BorderRadius.circular(16),
             child: Ink(
               decoration: BoxDecoration(
-                color: theme.colorScheme.surface.withValues(alpha: .86),
-                borderRadius: BorderRadius.circular(22),
+                color: theme.colorScheme.surface.withValues(alpha: .74),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: theme.colorScheme.outline.withValues(alpha: .62),
+                  color: theme.colorScheme.outline.withValues(alpha: .38),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: .10),
-                    blurRadius: 18,
-                    offset: const Offset(0, 7),
+                    color: Colors.black.withValues(alpha: .05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: Row(
                   children: [
                     Container(
-                      height: 38,
-                      width: 38,
-                      padding: const EdgeInsets.all(8),
+                      height: 30,
+                      width: 30,
+                      padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.primary.withValues(alpha: .12),
                         shape: BoxShape.circle,
@@ -102,10 +102,10 @@ class Categories extends GetView<HomeControllerImp> {
                           categoriesmodel.categoryNameAr,
                           categoriesmodel.categoryNameEs,
                         ),
-                        size: 22,
+                        size: 18,
                       ),
                     ),
-                    const SizedBox(width: 9),
+                    const SizedBox(width: 7),
                     Expanded(
                       child: Text(
                         databaseTranslation(
@@ -115,9 +115,10 @@ class Categories extends GetView<HomeControllerImp> {
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelMedium?.copyWith(
+                        style: theme.textTheme.labelSmall?.copyWith(
                           color: theme.colorScheme.onSurface,
                           fontWeight: FontWeight.w700,
+                          letterSpacing: -.1,
                         ),
                       ),
                     ),

@@ -7,18 +7,17 @@ import 'package:oro/apilink.dart';
 import 'package:oro/controller/home/homeController.dart';
 import 'package:oro/core/class/statusrequest.dart';
 import 'package:oro/core/constant/color.dart';
-import 'package:oro/core/design/oro_breakpoints.dart';
 import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/itemsmodel.dart';
+import 'package:oro/data/model/categoriesmodel.dart';
 import 'package:oro/view/widgets/home/categorieslist.dart';
 import 'package:oro/view/widgets/home/discountcard.dart';
 import 'package:oro/view/widgets/home/greeting.dart';
 import 'package:oro/view/widgets/home/hotdealsheader.dart';
-import 'package:oro/view/widgets/home/itemcard.dart';
 import 'package:oro/view/widgets/home/loadingitemstate.dart';
+import 'package:oro/view/widgets/home/product_section_rail.dart';
 import 'package:oro/view/widgets/home/serch.dart';
-import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -100,15 +99,7 @@ class Home extends StatelessWidget {
                                       ),
                               ),
                       ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 20)),
-                      SliverToBoxAdapter(
-                        child: SerchBar(
-                          controller: controller.textEditingController,
-                          onPressed: controller.goToSearch,
-                          hint: 'search_products'.tr,
-                        ),
-                      ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 28)),
+                      const SliverToBoxAdapter(child: SizedBox(height: 26)),
                       SliverToBoxAdapter(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -119,12 +110,10 @@ class Home extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'categories'.tr,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall,
-                                    ),
+                                    Text('Compra por categoría',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall),
                                     const SizedBox(height: 2),
                                     Text(
                                       'categories_subtitle'.tr,
@@ -134,77 +123,38 @@ class Home extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const Icon(
-                                Icons.arrow_forward_rounded,
-                                size: 20,
-                                color: Appcolor.accentGold,
-                              ),
+                              const Icon(Icons.grid_view_rounded,
+                                  size: 20, color: Appcolor.accentGold),
                             ],
                           ),
                         ),
                       ),
                       const SliverToBoxAdapter(child: SizedBox(height: 14)),
                       const SliverToBoxAdapter(child: Categorieslist()),
-                      const SliverToBoxAdapter(child: SizedBox(height: 24)),
-                      const SliverToBoxAdapter(
+                      const SliverToBoxAdapter(child: SizedBox(height: 30)),
+                      ..._productRails(controller),
+                      const SliverToBoxAdapter(child: SizedBox(height: 30)),
+                      SliverToBoxAdapter(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: HotDealsHeader(),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            '¿Buscas algo específico?',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: -.35,
+                                ),
+                          ),
                         ),
                       ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 14)),
-                      SliverPadding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        sliver: SliverLayoutBuilder(
-                          builder: (context, constraints) {
-                            final width = constraints.crossAxisExtent;
-                            final columns = OroBreakpoints.gridColumns(width);
-                            final aspectRatio =
-                                OroBreakpoints.productAspectRatio(width);
-                            final isLoading = controller.statusRequest ==
-                                StatusRequest.loding;
-                            final itemCount = isLoading
-                                ? columns * 3
-                                : (controller.itemsList.isNotEmpty
-                                    ? controller.itemsList.length
-                                    : controller.items.length);
-
-                            return SliverGrid(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: columns,
-                                mainAxisSpacing: 14,
-                                crossAxisSpacing: 14,
-                                childAspectRatio: aspectRatio,
-                              ),
-                              delegate: SliverChildBuilderDelegate(
-                                (context, index) {
-                                  if (isLoading) {
-                                    return const LoadingItemState();
-                                  }
-                                  final ItemsModel model = controller
-                                          .itemsList.isNotEmpty
-                                      ? controller.itemsList[index]
-                                      : (controller.items[index] is ItemsModel
-                                          ? controller.items[index]
-                                          : ItemsModel.fromJson(
-                                              controller.items[index]));
-                                  return OroStaggeredItem(
-                                    index: index,
-                                    delayBase: 35,
-                                    child: ItemCard(
-                                      itemsModel: model,
-                                      onTap: () =>
-                                          controller.goToItemDetails(model),
-                                      colorIndex: index %
-                                          controller.gradientColors.length,
-                                    ),
-                                  );
-                                },
-                                childCount: itemCount,
-                              ),
-                            );
-                          },
+                      const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                      SliverToBoxAdapter(
+                        child: SerchBar(
+                          controller: controller.textEditingController,
+                          onPressed: controller.goToSearch,
+                          hint: 'search_products'.tr,
                         ),
                       ),
                       const SliverToBoxAdapter(child: SizedBox(height: 128)),
@@ -229,14 +179,14 @@ class _HomeAmbientGlow extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 108,
-            right: -132,
+            top: 190,
+            right: -200,
             child: _glow(const Color(0x242A8D58)),
           ),
           Positioned(
-            bottom: 72,
-            left: -150,
-            child: _glow(OroColors.accentGold.withValues(alpha: .10)),
+            bottom: 220,
+            left: -220,
+            child: _glow(OroColors.accentGold.withValues(alpha: .055)),
           ),
         ],
       ),
@@ -245,15 +195,84 @@ class _HomeAmbientGlow extends StatelessWidget {
 
   Widget _glow(Color color) {
     return Container(
-      width: 280,
-      height: 280,
+      width: 250,
+      height: 250,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
         boxShadow: [
-          BoxShadow(color: color, blurRadius: 100, spreadRadius: 46),
+          BoxShadow(color: color, blurRadius: 82, spreadRadius: 34),
         ],
       ),
     );
   }
+}
+
+List<Widget> _productRails(HomeControllerImp controller) {
+  if (controller.statusRequest == StatusRequest.loding) {
+    return const [
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: HotDealsHeader(),
+        ),
+      ),
+      SliverToBoxAdapter(child: SizedBox(height: 14)),
+      SliverToBoxAdapter(
+        child: SizedBox(height: 216, child: LoadingItemState()),
+      ),
+    ];
+  }
+
+  final categories = controller.categories
+      .map((raw) => CategoriesModel.fromJson(Map<String, dynamic>.from(raw)))
+      .toList();
+  final products = controller.itemsList.isNotEmpty
+      ? controller.itemsList
+      : controller.items
+          .map((raw) => raw is ItemsModel
+              ? raw
+              : ItemsModel.fromJson(Map<String, dynamic>.from(raw)))
+          .toList();
+  final rails = <Widget>[];
+
+  for (var index = 0; index < categories.length && rails.length < 3; index++) {
+    final category = categories[index];
+    final categoryProducts = products
+        .where((product) =>
+            product.itemCat == category.categoryId ||
+            product.categoryId == category.categoryId)
+        .take(8)
+        .toList();
+    if (categoryProducts.isEmpty) continue;
+    rails.add(
+      SliverToBoxAdapter(
+        child: ProductSectionRail(
+          category: category,
+          products: categoryProducts,
+          onShowAll: () => controller.goToItem(
+            controller.categories,
+            index,
+            category.categoryId.toString(),
+          ),
+          onProductTap: controller.goToItemDetails,
+        ),
+      ),
+    );
+    rails.add(const SliverToBoxAdapter(child: SizedBox(height: 28)));
+  }
+
+  if (rails.isEmpty && products.isNotEmpty) {
+    rails.add(
+      SliverToBoxAdapter(
+        child: ProductSectionRail(
+          category: CategoriesModel(categoryName: 'Selección ORO'),
+          products: products.take(8).toList(),
+          onShowAll: controller.goToSearch,
+          onProductTap: controller.goToItemDetails,
+        ),
+      ),
+    );
+  }
+  return rails;
 }
