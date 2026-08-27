@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oro/core/design/oro_colors.dart';
 import 'package:oro/core/design/oro_pressable.dart';
 import 'package:oro/data/model/itemsmodel.dart';
 import 'package:oro/view/widgets/home/itemcardcontent.dart';
@@ -27,8 +28,15 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final accents = [
+      OroColors.accentGold,
+      const Color(0xFF82C7A5),
+      const Color(0xFFD1AF76),
+    ];
+    final accent = accents[colorIndex % accents.length];
 
     return OroPressable(
+      pressedScale: .972,
       onTap: onTap,
       child: Container(
         clipBehavior: Clip.antiAlias,
@@ -37,13 +45,21 @@ class ItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withValues(alpha: .28)
+                ? Colors.white.withValues(alpha: .20)
                 : theme.colorScheme.outline.withValues(alpha: .7),
           ),
           boxShadow: [
             BoxShadow(
+              color: accent.withValues(
+                alpha: theme.brightness == Brightness.dark ? .10 : .05,
+              ),
+              blurRadius: 26,
+              spreadRadius: -8,
+              offset: const Offset(0, 13),
+            ),
+            BoxShadow(
               color: Colors.black.withValues(
-                alpha: theme.brightness == Brightness.dark ? .34 : .10,
+                alpha: theme.brightness == Brightness.dark ? .30 : .08,
               ),
               blurRadius: 22,
               offset: const Offset(0, 10),

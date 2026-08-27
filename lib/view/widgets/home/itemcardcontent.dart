@@ -53,8 +53,8 @@ class ItemCardContent extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0x08000000), Color(0x24000000), Color(0xE9000000)],
-              stops: [0, .38, 1],
+              colors: [Color(0x05000000), Color(0x1F000000), Color(0xF0000000)],
+              stops: [0, .33, 1],
             ),
           ),
         ),
@@ -70,14 +70,27 @@ class ItemCardContent extends StatelessWidget {
           child: _FavouriteCardAction(itemId: itemsModel.itemId),
         ),
         Positioned(
+          left: 8,
+          right: 8,
+          bottom: 8,
+          height: 78,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: const Color(0xA8121714),
+              borderRadius: BorderRadius.circular(17),
+              border: Border.all(color: Colors.white.withValues(alpha: .16)),
+            ),
+          ),
+        ),
+        Positioned(
           right: 10,
           bottom: 10,
           child: _CartCardAction(itemId: itemsModel.itemId),
         ),
         Positioned(
-          left: 12,
-          right: 60,
-          bottom: 14,
+          left: 18,
+          right: 62,
+          bottom: 18,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

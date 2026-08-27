@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oro/core/functions/databasetranslation.dart';
 import 'package:oro/data/model/categoriesmodel.dart';
 import 'package:oro/data/model/itemsmodel.dart';
+import 'package:oro/view/widgets/common/oro_staggered_item.dart';
 import 'package:oro/view/widgets/home/itemcard.dart';
 
 class ProductSectionRail extends StatelessWidget {
@@ -62,7 +63,7 @@ class ProductSectionRail extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 216,
+          height: 232,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
@@ -71,12 +72,16 @@ class ProductSectionRail extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final product = products[index];
-              return SizedBox(
-                width: 168,
-                child: ItemCard(
-                  itemsModel: product,
-                  onTap: () => onProductTap(product),
-                  colorIndex: index,
+              return OroStaggeredItem(
+                index: index,
+                delayBase: 55,
+                child: SizedBox(
+                  width: 174,
+                  child: ItemCard(
+                    itemsModel: product,
+                    onTap: () => onProductTap(product),
+                    colorIndex: index,
+                  ),
                 ),
               );
             },

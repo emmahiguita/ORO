@@ -59,6 +59,14 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                      SliverToBoxAdapter(
+                        child: SerchBar(
+                          controller: controller.textEditingController,
+                          onPressed: controller.goToSearch,
+                          hint: 'search_products'.tr,
+                        ),
+                      ),
                       const SliverToBoxAdapter(child: SizedBox(height: 22)),
                       SliverToBoxAdapter(
                         child: controller.statusRequest == StatusRequest.loding
@@ -133,30 +141,6 @@ class Home extends StatelessWidget {
                       const SliverToBoxAdapter(child: Categorieslist()),
                       const SliverToBoxAdapter(child: SizedBox(height: 30)),
                       ..._productRails(controller),
-                      const SliverToBoxAdapter(child: SizedBox(height: 30)),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            '¿Buscas algo específico?',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: -.35,
-                                ),
-                          ),
-                        ),
-                      ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                      SliverToBoxAdapter(
-                        child: SerchBar(
-                          controller: controller.textEditingController,
-                          onPressed: controller.goToSearch,
-                          hint: 'search_products'.tr,
-                        ),
-                      ),
                       const SliverToBoxAdapter(child: SizedBox(height: 128)),
                     ],
                   );
@@ -219,7 +203,7 @@ List<Widget> _productRails(HomeControllerImp controller) {
       ),
       SliverToBoxAdapter(child: SizedBox(height: 14)),
       SliverToBoxAdapter(
-        child: SizedBox(height: 216, child: LoadingItemState()),
+        child: SizedBox(height: 232, child: LoadingItemState()),
       ),
     ];
   }
